@@ -1,0 +1,117 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="modal-content" style="overflow-y: initial !important">
+      <form [formGroup]="form" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar Vehículos</h4>
+          <button class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 65vh; overflow-y: auto;">
+          <ba-card cardTitle="Información Vehículos">
+            <div class="form-group row" [ngClass]="{'has-error': (!marcaAC.valid && marcaAC.touched), 'has-success': (marcaAC.valid && marcaAC.touched)}">
+              <label for="inputmarcaAC" class="col-sm-3 form-control-label">Marca</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="marca" [formControl]="marcaAC" type="text" maxlength='20' class="form-control" id="inputmarcaAC" placeholder="Marca" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!modeloAC.valid && modeloAC.touched), 'has-success': (modeloAC.valid && modeloAC.touched)}">
+              <label for="inputmodeloAC" class="col-sm-3 form-control-label">Modelo</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="modelo" [formControl]="modeloAC" type="text" maxlength='20' class="form-control" id="inputmodeloAC" placeholder="Modelo" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!anioAC.valid && anioAC.touched), 'has-success': (anioAC.valid && anioAC.touched)}">
+              <label for="inputanioAC" class="col-sm-3 form-control-label">Año</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="anio" [formControl]="anioAC" type="number" maxlength='11' class="form-control" id="inputanioAC" placeholder="Año" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!serieAC.valid && serieAC.touched), 'has-success': (serieAC.valid && serieAC.touched)}">
+              <label for="inputserieAC" class="col-sm-3 form-control-label">Serie</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="serie" [formControl]="serieAC" type="text" maxlength='30' class="form-control" id="inputserieAC" placeholder="Serie" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!serieMotorAC.valid && serieMotorAC.touched), 'has-success': (serieMotorAC.valid && serieMotorAC.touched)}">
+              <label for="inputserieMotorAC" class="col-sm-3 form-control-label">Serie Motor</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="serieMotor" [formControl]="serieMotorAC" type="text" maxlength='40' class="form-control" id="inputserieMotorAC" placeholder="Serie Motor" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!placaAC.valid && placaAC.touched), 'has-success': (placaAC.valid && placaAC.touched)}">
+              <label for="inputplacaAC" class="col-sm-3 form-control-label">Placa</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="placa" [formControl]="placaAC" type="text" maxlength='10' class="form-control" id="inputplacaAC" placeholder="Placa" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!kilometrajeAC.valid && kilometrajeAC.touched), 'has-success': (kilometrajeAC.valid && kilometrajeAC.touched)}">
+              <label for="inputkilometrajeAC" class="col-sm-3 form-control-label">Kilometraje</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="kilometraje" [formControl]="kilometrajeAC" type="number" maxlength='11' class="form-control" id="inputkilometrajeAC" placeholder="Kilometraje" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!estado_idestadoAC.valid && estado_idestadoAC.touched), 'has-success': (estado_idestadoAC.valid && estado_idestadoAC.touched)}">
+              <label for="inputestado_idestadoAC" class="col-sm-3 form-control-label">Estado</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="estado_idestado" [formControl]="estado_idestadoAC" class="form-control" id="inputestado_idestadoAC" required>
+                 <option value="{{item.idestado}}" *ngFor="let item of _estado">{{item.nombre}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='estadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!polizaAC.valid && polizaAC.touched), 'has-success': (polizaAC.valid && polizaAC.touched)}">
+              <label for="inputpolizaAC" class="col-sm-3 form-control-label">Póliza</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="poliza" [formControl]="polizaAC" type="text" maxlength='15' class="form-control" id="inputpolizaAC" placeholder="Póliza" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!polizaTipoAC.valid && polizaTipoAC.touched), 'has-success': (polizaTipoAC.valid && polizaTipoAC.touched)}">
+              <label for="inputpolizaTipoAC" class="col-sm-3 form-control-label">Póliza Tipo</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="polizaTipo" [formControl]="polizaTipoAC" type="text" maxlength='15' class="form-control" id="inputpolizaTipoAC" placeholder="Póliza Tipo" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!condActualAC.valid && condActualAC.touched), 'has-success': (condActualAC.valid && condActualAC.touched)}">
+              <label for="inputcondActualAC" class="col-sm-3 form-control-label">Condición Actual</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="condActual" [formControl]="condActualAC" type="text" maxlength='150' class="form-control" id="inputcondActualAC" placeholder="Condición Actual" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!condInicialAC.valid && condInicialAC.touched), 'has-success': (condInicialAC.valid && condInicialAC.touched)}">
+              <label for="inputcondInicialAC" class="col-sm-3 form-control-label">Condición Inicial</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="condInicial" [formControl]="condInicialAC" type="text" maxlength='150' class="form-control" id="inputcondInicialAC" placeholder="Condición Inicial" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!colorAC.valid && colorAC.touched), 'has-success': (colorAC.valid && colorAC.touched)}">
+              <label for="inputcolorAC" class="col-sm-3 form-control-label">Color</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="color" [formControl]="colorAC" type="text" maxlength='20' class="form-control" id="inputcolorAC" placeholder="Color" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!propietarioAC.valid && propietarioAC.touched), 'has-success': (propietarioAC.valid && propietarioAC.touched)}">
+              <label for="inputpropietarioAC" class="col-sm-3 form-control-label">Propietario</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="propietario" [formControl]="propietarioAC" class="form-control" id="inputpropietarioAC" required>
+                 <option value="{{item.idpersona}}" *ngFor="let item of _persona">{{item.nombre}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='personaAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
+          </ba-card>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form.value)">Aceptar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

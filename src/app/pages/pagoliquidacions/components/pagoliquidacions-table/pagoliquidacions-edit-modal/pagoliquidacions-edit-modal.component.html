@@ -1,0 +1,69 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="modal-content" style="overflow-y: initial !important">
+      <form [formGroup]="form" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Pago de Liquidaciones</h4>
+          <button class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 65vh; overflow-y: auto;">
+          <ba-card cardTitle="Información Pago de Liquidaciones">
+            <div class="form-group row" [ngClass]="{'has-error': (!saldoanteriorAC.valid && saldoanteriorAC.touched), 'has-success': (saldoanteriorAC.valid && saldoanteriorAC.touched)}">
+              <label for="inputsaldoanteriorAC" class="col-sm-3 form-control-label">Saldo Anterior</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="saldoanterior" [formControl]="saldoanteriorAC" type="number"  class="form-control" id="inputsaldoanteriorAC" placeholder="Saldo Anterior" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!montopagadoAC.valid && montopagadoAC.touched), 'has-success': (montopagadoAC.valid && montopagadoAC.touched)}">
+              <label for="inputmontopagadoAC" class="col-sm-3 form-control-label">Monto Pagado</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="montopagado" [formControl]="montopagadoAC" type="number"  class="form-control" id="inputmontopagadoAC" placeholder="Monto Pagado" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!saldoactualAC.valid && saldoactualAC.touched), 'has-success': (saldoactualAC.valid && saldoactualAC.touched)}">
+              <label for="inputsaldoactualAC" class="col-sm-3 form-control-label">Saldo Actual</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="saldoactual" [formControl]="saldoactualAC" type="number"  class="form-control" id="inputsaldoactualAC" placeholder="Saldo Actual" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!pago_idpagoAC.valid && pago_idpagoAC.touched), 'has-success': (pago_idpagoAC.valid && pago_idpagoAC.touched)}">
+              <label for="inputpago_idpagoAC" class="col-sm-3 form-control-label">Pago</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="pago_idpago" [formControl]="pago_idpagoAC" class="form-control" id="inputpago_idpagoAC" required>
+                 <option value="{{item.idpago}}" *ngFor="let item of _pago">{{item.folio}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='pagoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!liquidacion_idliquidacionAC.valid && liquidacion_idliquidacionAC.touched), 'has-success': (liquidacion_idliquidacionAC.valid && liquidacion_idliquidacionAC.touched)}">
+              <label for="inputliquidacion_idliquidacionAC" class="col-sm-3 form-control-label">Liquidación</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="liquidacion_idliquidacion" [formControl]="liquidacion_idliquidacionAC" type="number" maxlength='11' class="form-control" id="inputliquidacion_idliquidacionAC" placeholder="Liquidación" required>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!chofer_idchoferAC.valid && chofer_idchoferAC.touched), 'has-success': (chofer_idchoferAC.valid && chofer_idchoferAC.touched)}">
+              <label for="inputchofer_idchoferAC" class="col-sm-3 form-control-label">Chofer</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="chofer_idchofer" [formControl]="chofer_idchoferAC" class="form-control" id="inputchofer_idchoferAC" required>
+                 <option value="{{item.idchofer}}" *ngFor="let item of _chofer">{{item.persona_chofer}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='choferAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
+          </ba-card>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form.value)">Aceptar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

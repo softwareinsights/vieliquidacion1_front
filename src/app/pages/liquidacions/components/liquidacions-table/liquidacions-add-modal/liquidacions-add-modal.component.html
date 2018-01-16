@@ -1,0 +1,80 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="modal-content" style="overflow-y: initial !important">
+      <form [formGroup]="form" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar Liquidaciones</h4>
+          <button class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 65vh; overflow-y: auto;">
+          <ba-card cardTitle="Información Liquidaciones">
+            <div class="form-group row" [ngClass]="{'has-error': (!fechaAC.valid && fechaAC.touched), 'has-success': (fechaAC.valid && fechaAC.touched)}">
+              <label for="inputfechaAC" class="col-sm-3 form-control-label">Fecha</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="fecha" [formControl]="fechaAC" type="date"  class="form-control" id="inputfechaAC" placeholder="Fecha" required>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!montoapagarAC.valid && montoapagarAC.touched), 'has-success': (montoapagarAC.valid && montoapagarAC.touched)}">
+              <label for="inputmontoapagarAC" class="col-sm-3 form-control-label">Monto a Pagar</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="montoapagar" [formControl]="montoapagarAC" type="number"  class="form-control" id="inputmontoapagarAC" placeholder="Monto a Pagar" required>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!h_corteAC.valid && h_corteAC.touched), 'has-success': (h_corteAC.valid && h_corteAC.touched)}">
+              <label for="inputh_corteAC" class="col-sm-3 form-control-label">Hora de Corte</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="h_corte" [formControl]="h_corteAC" type="time"  class="form-control" id="inputh_corteAC" placeholder="Hora de Corte" required>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!saldoactualAC.valid && saldoactualAC.touched), 'has-success': (saldoactualAC.valid && saldoactualAC.touched)}">
+              <label for="inputsaldoactualAC" class="col-sm-3 form-control-label">Saldo Actual</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="saldoactual" [formControl]="saldoactualAC" type="number"  class="form-control" id="inputsaldoactualAC" placeholder="Saldo Actual" required>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched), 'has-success': (permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched)}">
+              <label for="inputpermisotaxiasignado_idpermisotaxiasignadoAC" class="col-sm-3 form-control-label">Permiso</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="permisotaxiasignado_idpermisotaxiasignado" [formControl]="permisotaxiasignado_idpermisotaxiasignadoAC" class="form-control" id="inputpermisotaxiasignado_idpermisotaxiasignadoAC" required>
+                 <option value="{{item.idpermisotaxiasignado}}" *ngFor="let item of _permisotaxiasignado">{{item.permisotaxi_permisotaxi_idpermisotaxi}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='permisotaxiasignadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!chofer_idchoferAC.valid && chofer_idchoferAC.touched), 'has-success': (chofer_idchoferAC.valid && chofer_idchoferAC.touched)}">
+              <label for="inputchofer_idchoferAC" class="col-sm-3 form-control-label">Chofer</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="chofer_idchofer" [formControl]="chofer_idchoferAC" class="form-control" id="inputchofer_idchoferAC" required>
+                 <option value="{{item.idchofer}}" *ngFor="let item of _chofer">{{item.persona_chofer}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='choferAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!estado_idestadoAC.valid && estado_idestadoAC.touched), 'has-success': (estado_idestadoAC.valid && estado_idestadoAC.touched)}">
+              <label for="inputestado_idestadoAC" class="col-sm-3 form-control-label">Estado</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="estado_idestado" [formControl]="estado_idestadoAC" class="form-control" id="inputestado_idestadoAC" required>
+                 <option value="{{item.idestado}}" *ngFor="let item of _estado">{{item.nombre}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='estadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
+          </ba-card>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form.value)">Aceptar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="modal-content" style="overflow-y: initial !important">
+      <form [formGroup]="form" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar Corralones</h4>
+          <button class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 65vh; overflow-y: auto;">
+          <ba-card cardTitle="Información Corralones">
+            <div class="form-group row" [ngClass]="{'has-error': (!fechaAC.valid && fechaAC.touched), 'has-success': (fechaAC.valid && fechaAC.touched)}">
+              <label for="inputfechaAC" class="col-sm-3 form-control-label">Fecha de Ingreso</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="fecha" [formControl]="fechaAC" type="date"  class="form-control" id="inputfechaAC" placeholder="Fecha de Ingreso" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!horaAC.valid && horaAC.touched), 'has-success': (horaAC.valid && horaAC.touched)}">
+              <label for="inputhoraAC" class="col-sm-3 form-control-label">Hora de Ingreso</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="hora" [formControl]="horaAC" type="time"  class="form-control" id="inputhoraAC" placeholder="Hora de Ingreso" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!fechaSalidaAC.valid && fechaSalidaAC.touched), 'has-success': (fechaSalidaAC.valid && fechaSalidaAC.touched)}">
+              <label for="inputfechaSalidaAC" class="col-sm-3 form-control-label">Fecha de Salida</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="fechaSalida" [formControl]="fechaSalidaAC" type="date"  class="form-control" id="inputfechaSalidaAC" placeholder="Fecha de Salida" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!horaSalidaAC.valid && horaSalidaAC.touched), 'has-success': (horaSalidaAC.valid && horaSalidaAC.touched)}">
+              <label for="inputhoraSalidaAC" class="col-sm-3 form-control-label">Hora de Salida</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="horaSalida" [formControl]="horaSalidaAC" type="time"  class="form-control" id="inputhoraSalidaAC" placeholder="Hora de Salida" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!infraccionNumeroAC.valid && infraccionNumeroAC.touched), 'has-success': (infraccionNumeroAC.valid && infraccionNumeroAC.touched)}">
+              <label for="inputinfraccionNumeroAC" class="col-sm-3 form-control-label">No. Infracción</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="infraccionNumero" [formControl]="infraccionNumeroAC" type="number" maxlength='11' class="form-control" id="inputinfraccionNumeroAC" placeholder="No. Infracción" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!corralonNombreAC.valid && corralonNombreAC.touched), 'has-success': (corralonNombreAC.valid && corralonNombreAC.touched)}">
+              <label for="inputcorralonNombreAC" class="col-sm-3 form-control-label">Nombre Corralon</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="corralonNombre" [formControl]="corralonNombreAC" type="text" maxlength='45' class="form-control" id="inputcorralonNombreAC" placeholder="Nombre Corralon" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!motivoAC.valid && motivoAC.touched), 'has-success': (motivoAC.valid && motivoAC.touched)}">
+              <label for="inputmotivoAC" class="col-sm-3 form-control-label">Motivo</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="motivo" [formControl]="motivoAC" type="text" maxlength='150' class="form-control" id="inputmotivoAC" placeholder="Motivo" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!estado_idestadoAC.valid && estado_idestadoAC.touched), 'has-success': (estado_idestadoAC.valid && estado_idestadoAC.touched)}">
+              <label for="inputestado_idestadoAC" class="col-sm-3 form-control-label">Estado</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="estado_idestado" [formControl]="estado_idestadoAC" class="form-control" id="inputestado_idestadoAC" required>
+                 <option value="{{item.idestado}}" *ngFor="let item of _estado">{{item.nombre}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='estadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched), 'has-success': (permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched)}">
+              <label for="inputpermisotaxiasignado_idpermisotaxiasignadoAC" class="col-sm-3 form-control-label">Permiso Taxi Asignado</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="permisotaxiasignado_idpermisotaxiasignado" [formControl]="permisotaxiasignado_idpermisotaxiasignadoAC" class="form-control" id="inputpermisotaxiasignado_idpermisotaxiasignadoAC" required>
+                 <option value="{{item.idpermisotaxiasignado}}" *ngFor="let item of _permisotaxiasignado">{{item.permisotaxi_permisotaxi_idpermisotaxi}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='permisotaxiasignadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
+          </ba-card>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form.value)">Aceptar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

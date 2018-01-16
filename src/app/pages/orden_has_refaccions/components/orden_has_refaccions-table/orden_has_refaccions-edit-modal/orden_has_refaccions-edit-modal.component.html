@@ -1,0 +1,57 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="modal-content" style="overflow-y: initial !important">
+      <form [formGroup]="form" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Refacciones de ordenes</h4>
+          <button class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 65vh; overflow-y: auto;">
+          <ba-card cardTitle="Información Refacciones de ordenes">
+            <div class="form-group row" [ngClass]="{'has-error': (!idorden_has_refaccionAC.valid && idorden_has_refaccionAC.touched), 'has-success': (idorden_has_refaccionAC.valid && idorden_has_refaccionAC.touched)}">
+              <label for="inputidorden_has_refaccionAC" class="col-sm-3 form-control-label">Idorden_has_refaccion</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="idorden_has_refaccion" [formControl]="idorden_has_refaccionAC" type="number" maxlength='11' class="form-control" id="inputidorden_has_refaccionAC" placeholder="Idorden_has_refaccion" required>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!orden_idordenAC.valid && orden_idordenAC.touched), 'has-success': (orden_idordenAC.valid && orden_idordenAC.touched)}">
+              <label for="inputorden_idordenAC" class="col-sm-3 form-control-label">Orden</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="orden_idorden" [formControl]="orden_idordenAC" class="form-control" id="inputorden_idordenAC" required>
+                 <option value="{{item.idorden}}" *ngFor="let item of _orden">{{item.idorden}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='ordenAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!refaccion_idrefaccionAC.valid && refaccion_idrefaccionAC.touched), 'has-success': (refaccion_idrefaccionAC.valid && refaccion_idrefaccionAC.touched)}">
+              <label for="inputrefaccion_idrefaccionAC" class="col-sm-3 form-control-label">Refacción</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="refaccion_idrefaccion" [formControl]="refaccion_idrefaccionAC" class="form-control" id="inputrefaccion_idrefaccionAC" required>
+                 <option value="{{item.idrefaccion}}" *ngFor="let item of _refaccion">{{item.nombre}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='refaccionAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!cantidadAC.valid && cantidadAC.touched), 'has-success': (cantidadAC.valid && cantidadAC.touched)}">
+              <label for="inputcantidadAC" class="col-sm-3 form-control-label">Cantidad</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="cantidad" [formControl]="cantidadAC" type="number" maxlength='11' class="form-control" id="inputcantidadAC" placeholder="Cantidad" >
+              </div>
+            </div>
+          </ba-card>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form.value)">Aceptar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

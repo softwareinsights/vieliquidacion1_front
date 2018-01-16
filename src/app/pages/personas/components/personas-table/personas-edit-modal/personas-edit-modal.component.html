@@ -1,0 +1,59 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="modal-content" style="overflow-y: initial !important">
+      <form [formGroup]="form" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Personas</h4>
+          <button class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 65vh; overflow-y: auto;">
+          <ba-card cardTitle="Información Personas">
+            <div class="form-group row" [ngClass]="{'has-error': (!nombreAC.valid && nombreAC.touched), 'has-success': (nombreAC.valid && nombreAC.touched)}">
+              <label for="inputnombreAC" class="col-sm-3 form-control-label">Nombre</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="nombre" [formControl]="nombreAC" type="text" maxlength='45' class="form-control" id="inputnombreAC" placeholder="Nombre" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!edadAC.valid && edadAC.touched), 'has-success': (edadAC.valid && edadAC.touched)}">
+              <label for="inputedadAC" class="col-sm-3 form-control-label">Edad</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="edad" [formControl]="edadAC" type="number" maxlength='11' class="form-control" id="inputedadAC" placeholder="Edad" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!sexoAC.valid && sexoAC.touched), 'has-success': (sexoAC.valid && sexoAC.touched)}">
+              <label for="inputsexoAC" class="col-sm-3 form-control-label">Sexo</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="sexo" [formControl]="sexoAC" type="text" maxlength='15' class="form-control" id="inputsexoAC" placeholder="Sexo" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!rfcAC.valid && rfcAC.touched), 'has-success': (rfcAC.valid && rfcAC.touched)}">
+              <label for="inputrfcAC" class="col-sm-3 form-control-label">RFC</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="rfc" [formControl]="rfcAC" type="text" maxlength='45' class="form-control" id="inputrfcAC" placeholder="RFC" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!telefonoAC.valid && telefonoAC.touched), 'has-success': (telefonoAC.valid && telefonoAC.touched)}">
+              <label for="inputtelefonoAC" class="col-sm-3 form-control-label">Télefono</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="telefono" [formControl]="telefonoAC" type="number" maxlength='11' class="form-control" id="inputtelefonoAC" placeholder="Télefono" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!domicilioAC.valid && domicilioAC.touched), 'has-success': (domicilioAC.valid && domicilioAC.touched)}">
+              <label for="inputdomicilioAC" class="col-sm-3 form-control-label">Domicilio</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="domicilio" [formControl]="domicilioAC" type="text" maxlength='60' class="form-control" id="inputdomicilioAC" placeholder="Domicilio" >
+              </div>
+            </div>
+          </ba-card>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form.value)">Aceptar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

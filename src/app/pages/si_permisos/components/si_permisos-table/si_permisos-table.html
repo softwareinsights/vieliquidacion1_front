@@ -1,0 +1,85 @@
+<div class='widgets'>
+    <div class='row'>
+        <ba-card title='Listado' baCardClass='with-scroll' class='data-table-container'>
+            <div class='panel panel-default'>
+                <table class='table table-striped' [mfData]='data | modulo_Modulo_idsi_moduloDataFilter : filterQuery1' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
+                    <thead>
+                        <tr>
+                            <th colspan='12' class='text-left'>
+                                Filtrar por Módulo:
+                                <input class='form-control' [(ngModel)]='filterQuery1' />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style='width: 20%'></th>
+                            <th style='width: 7%'>
+                                <mfDefaultSorter by='acceso'>Acceso</mfDefaultSorter>
+                            </th>
+                            <th style='width: 7%'>
+                                <mfDefaultSorter by='si_rol_Rol_idsi_rol'>Rol</mfDefaultSorter>
+                            </th>
+                            <th style='width: 7%'>
+                                <mfDefaultSorter by='si_modulo_Modulo_idsi_modulo'>Módulo</mfDefaultSorter>
+                            </th>
+                            <th style='width: 7%'>
+                                <mfDefaultSorter by='readable'>Lectura</mfDefaultSorter>
+                            </th>
+                            <th style='width: 7%'>
+                                <mfDefaultSorter by='writeable'>Escritura</mfDefaultSorter>
+                            </th>
+                            <th style='width: 7%'>
+                                <mfDefaultSorter by='updateable'>Edición</mfDefaultSorter>
+                            </th>
+                            <th style='width: 7%'>
+                                <mfDefaultSorter by='deleteable'>Eliminación</mfDefaultSorter>
+                            </th>
+                            <th style='width: 7%'>
+                                <mfDefaultSorter by='read_own'>Leer Propios</mfDefaultSorter>
+                            </th>
+                            <th style='width: 7%'>
+                                <mfDefaultSorter by='write_own'>Escribir Propios</mfDefaultSorter>
+                            </th>
+                            <th style='width: 7%'>
+                                <mfDefaultSorter by='update_own'>Editar Propios</mfDefaultSorter>
+                            </th>
+                            <th style='width: 7%'>
+                                <mfDefaultSorter by='delete_own'>Eliminar Propios</mfDefaultSorter>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let item of mf.data;  let i = index'>
+                            <td>
+                                <button title='Editar Registro' (click)='editModalShow(item)' class='btn btn-sm btn-info'><i class='fa fa-edit'></i></button>
+                                <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
+                            </td>
+                            <td>{{ item.acceso ? 'Si' : 'No' }}</td>
+                            <td>{{ item.si_rol_Rol_idsi_rol }}</td>
+                            <td>{{ item.si_modulo_Modulo_idsi_modulo }}</td>
+                            <td>{{ item.readable ? 'Si' : 'No' }}</td>
+                            <td>{{ item.writeable ? 'Si' : 'No' }}</td>
+                            <td>{{ item.updateable ? 'Si' : 'No' }}</td>
+                            <td>{{ item.deleteable ? 'Si' : 'No' }}</td>
+                            <td>{{ item.read_own ? 'Si' : 'No' }}</td>
+                            <td>{{ item.write_own ? 'Si' : 'No' }}</td>
+                            <td>{{ item.update_own ? 'Si' : 'No' }}</td>
+                            <td>{{ item.delete_own ? 'Si' : 'No' }}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan='5'>
+                                <mfBootstrapPaginator [rowsOnPageSet]='[5,10,15]'></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </ba-card>
+    </div>
+    <div class='row'>
+        <div class='col-sm-6'>
+            <button (click)='addModalShow()' class='btn btn-success'><i class='fa fa-plus'></i> Agregar</button>
+        </div>
+    </div>
+</div>
