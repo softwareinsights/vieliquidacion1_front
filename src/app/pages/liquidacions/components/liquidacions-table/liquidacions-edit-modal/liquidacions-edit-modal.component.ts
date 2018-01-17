@@ -23,9 +23,11 @@ export class LiquidacionsEditModalComponent extends DialogComponent<Liquidacions
 
   idliquidacion: number;
   fecha: string;
-  montoapagar: string;
-  h_corte: string;
+  saldoanterior: string;
   saldoactual: string;
+  montopagado: string;
+  bonificado: string;
+  h_corte: string;
   permisotaxiasignado_idpermisotaxiasignado: number;
   chofer_idchofer: number;
   estado_idestado: number;
@@ -36,9 +38,11 @@ export class LiquidacionsEditModalComponent extends DialogComponent<Liquidacions
   submitted: boolean = false;
 
   fechaAC: AbstractControl;
-  montoapagarAC: AbstractControl;
-  h_corteAC: AbstractControl;
+  saldoanteriorAC: AbstractControl;
   saldoactualAC: AbstractControl;
+  montopagadoAC: AbstractControl;
+  bonificadoAC: AbstractControl;
+  h_corteAC: AbstractControl;
   permisotaxiasignado_idpermisotaxiasignadoAC: AbstractControl;
   chofer_idchoferAC: AbstractControl;
   estado_idestadoAC: AbstractControl;
@@ -55,17 +59,21 @@ export class LiquidacionsEditModalComponent extends DialogComponent<Liquidacions
   super(dialogService);
   this.form = fb.group({
     'fechaAC' : [''],
-    'montoapagarAC' : [''],
-    'h_corteAC' : [''],
+    'saldoanteriorAC' : [''],
     'saldoactualAC' : [''],
+    'montopagadoAC' : [''],
+    'bonificadoAC' : [''],
+    'h_corteAC' : [''],
     'permisotaxiasignado_idpermisotaxiasignadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
   });
   this.fechaAC = this.form.controls['fechaAC'];
-  this.montoapagarAC = this.form.controls['montoapagarAC'];
-  this.h_corteAC = this.form.controls['h_corteAC'];
+  this.saldoanteriorAC = this.form.controls['saldoanteriorAC'];
   this.saldoactualAC = this.form.controls['saldoactualAC'];
+  this.montopagadoAC = this.form.controls['montopagadoAC'];
+  this.bonificadoAC = this.form.controls['bonificadoAC'];
+  this.h_corteAC = this.form.controls['h_corteAC'];
   this.permisotaxiasignado_idpermisotaxiasignadoAC = this.form.controls['permisotaxiasignado_idpermisotaxiasignadoAC'];
   this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
   this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
@@ -156,9 +164,11 @@ export class LiquidacionsEditModalComponent extends DialogComponent<Liquidacions
               .update({
                   idliquidacion: this.idliquidacion,
                   fecha: this.fecha,
-                  montoapagar: this.montoapagar,
-                  h_corte: this.h_corte,
+                  saldoanterior: this.saldoanterior,
                   saldoactual: this.saldoactual,
+                  montopagado: this.montopagado,
+                  bonificado: this.bonificado,
+                  h_corte: this.h_corte,
                   permisotaxiasignado_idpermisotaxiasignado: this.permisotaxiasignado_idpermisotaxiasignado,
                   chofer_idchofer: this.chofer_idchofer,
                   estado_idestado: this.estado_idestado,

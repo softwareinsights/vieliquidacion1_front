@@ -25,6 +25,18 @@ export class BonificacionsTableComponent implements OnInit {
     ngOnInit() {
         this.getAll();
     }
+
+
+    applyBonification(bonificacions: BonificacionsInterface) {
+      this.service.applyBonification(bonificacions)
+          .subscribe(
+              (data) => this.showToast(data),
+              error => console.log(error),
+              () => console.log('Delete completed')
+          );
+    }
+
+
     addModalShow() {
       const disposable = this.dialogService.addDialog(BonificacionsAddModalComponent)
       .subscribe( data => {

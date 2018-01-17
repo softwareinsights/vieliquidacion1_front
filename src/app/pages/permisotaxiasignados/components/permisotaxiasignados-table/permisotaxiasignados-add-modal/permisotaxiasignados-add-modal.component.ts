@@ -36,7 +36,6 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
   data: any;
   form: FormGroup;
   submitted: boolean = false;
-  estado_idestadoAC: AbstractControl;
   fechaAC: AbstractControl;
   horaAC: AbstractControl;
   chofer_idchoferAC: AbstractControl;
@@ -56,14 +55,12 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
   ) {
     super(dialogService);
     this.form = fb.group({
-    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'fechaAC' : [''],
     'horaAC' : [''],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'vehiculo_idvehiculoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'permisotaxi_idpermisotaxiAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     });
-    this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
     this.fechaAC = this.form.controls['fechaAC'];
     this.horaAC = this.form.controls['horaAC'];
     this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];

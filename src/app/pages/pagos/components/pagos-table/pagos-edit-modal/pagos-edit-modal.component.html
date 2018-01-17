@@ -11,6 +11,17 @@
         </div>
         <div class="modal-body" style="height: 65vh; overflow-y: auto;">
           <ba-card cardTitle="Información Pagos">
+            <div class="form-group row" [ngClass]="{'has-error': (!chofer_idchoferAC.valid && chofer_idchoferAC.touched), 'has-success': (chofer_idchoferAC.valid && chofer_idchoferAC.touched)}">
+              <label for="inputchofer_idchoferAC" class="col-sm-3 form-control-label">Chofer</label>
+              <div class="col-sm-7">
+               <select [(ngModel)]="chofer_idchofer" [formControl]="chofer_idchoferAC" class="form-control" id="inputchofer_idchoferAC" required>
+                 <option value="{{item.idchofer}}" *ngFor="let item of _chofer">{{item.persona_chofer}}</option>
+               </select>
+              </div>
+              <div class='col-sm-2'>
+                <button (click)='choferAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+              </div>
+            </div>
             <div class="form-group row" [ngClass]="{'has-error': (!cantidadRecibidaAC.valid && cantidadRecibidaAC.touched), 'has-success': (cantidadRecibidaAC.valid && cantidadRecibidaAC.touched)}">
               <label for="inputcantidadRecibidaAC" class="col-sm-3 form-control-label">Cantidad Recibida</label>
               <div class="col-sm-9">
@@ -64,12 +75,6 @@
                 <button (click)='estadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
               </div>
             </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!bonificadoAC.valid && bonificadoAC.touched), 'has-success': (bonificadoAC.valid && bonificadoAC.touched)}">
-              <label for="inputbonificadoAC" class="col-sm-3 form-control-label">Bonificado</label>
-              <div class="col-sm-9">
-                <input [(ngModel)]="bonificado" [formControl]="bonificadoAC" type="number" maxlength='11' class="form-control" id="inputbonificadoAC" placeholder="Bonificado" required>
-              </div>
-            </div>
             <div class="form-group row" [ngClass]="{'has-error': (!descripcionAC.valid && descripcionAC.touched), 'has-success': (descripcionAC.valid && descripcionAC.touched)}">
               <label for="inputdescripcionAC" class="col-sm-3 form-control-label">Descripción</label>
               <div class="col-sm-9">
@@ -77,32 +82,27 @@
               </div>
             </div>
             <div class="form-group row" [ngClass]="{'has-error': (!folioAC.valid && folioAC.touched), 'has-success': (folioAC.valid && folioAC.touched)}">
-              <label for="inputfolioAC" class="col-sm-3 form-control-label">Folio</label>
+              <label for="inputfolioAC" class="col-sm-3 form-control-label">Folio Liquidación</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="folio" [formControl]="folioAC" type="text" maxlength='30' class="form-control" id="inputfolioAC" placeholder="Folio" required>
-              </div>
-            </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!fianzaAC.valid && fianzaAC.touched), 'has-success': (fianzaAC.valid && fianzaAC.touched)}">
-              <label for="inputfianzaAC" class="col-sm-3 form-control-label">Fianza</label>
-              <div class="col-sm-9">
-                <input [(ngModel)]="fianza" [formControl]="fianzaAC" type="number"  class="form-control" id="inputfianzaAC" placeholder="Fianza" >
+                <input [(ngModel)]="folio" [formControl]="folioAC" type="text" maxlength='30' class="form-control" id="inputfolioAC" placeholder="Folio Liquidación" required>
               </div>
             </div>
             <div class="form-group row" [ngClass]="{'has-error': (!liquidacionAC.valid && liquidacionAC.touched), 'has-success': (liquidacionAC.valid && liquidacionAC.touched)}">
-              <label for="inputliquidacionAC" class="col-sm-3 form-control-label">Liquidación</label>
+              <label for="inputliquidacionAC" class="col-sm-3 form-control-label">Pago a Liquidación</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="liquidacion" [formControl]="liquidacionAC" type="number"  class="form-control" id="inputliquidacionAC" placeholder="Liquidación" required>
+                <input [(ngModel)]="liquidacion" [formControl]="liquidacionAC" type="number"  class="form-control" id="inputliquidacionAC" placeholder="Deuda Liquidación" required>
               </div>
             </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!chofer_idchoferAC.valid && chofer_idchoferAC.touched), 'has-success': (chofer_idchoferAC.valid && chofer_idchoferAC.touched)}">
-              <label for="inputchofer_idchoferAC" class="col-sm-3 form-control-label">Chofer</label>
-              <div class="col-sm-7">
-               <select [(ngModel)]="chofer_idchofer" [formControl]="chofer_idchoferAC" class="form-control" id="inputchofer_idchoferAC" required>
-                 <option value="{{item.idchofer}}" *ngFor="let item of _chofer">{{item.persona_chofer}}</option>
-               </select>
+            <div class="form-group row" [ngClass]="{'has-error': (!foliofianzaAC.valid && foliofianzaAC.touched), 'has-success': (foliofianzaAC.valid && foliofianzaAC.touched)}">
+              <label for="inputfoliofianzaAC" class="col-sm-3 form-control-label">Folio Fianza</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="foliofianza" [formControl]="foliofianzaAC" type="text" maxlength='30' class="form-control" id="inputfoliofianzaAC" placeholder="Folio Fianza" >
               </div>
-              <div class='col-sm-2'>
-                <button (click)='choferAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!fianzaAC.valid && fianzaAC.touched), 'has-success': (fianzaAC.valid && fianzaAC.touched)}">
+              <label for="inputfianzaAC" class="col-sm-3 form-control-label">Pago a Fianza</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="fianza" [formControl]="fianzaAC" type="number"  class="form-control" id="inputfianzaAC" placeholder="Deuda Fianza" >
               </div>
             </div>
           </ba-card>

@@ -2,6 +2,7 @@ export interface BonificacionsInterface {
    idbonificacion?: number;
    cantidad?: string;
    validado?: boolean;
+   fecha?: string;
    estado_idestado?: number;
    concepto?: string;
    chofer_idchofer?: number;

@@ -15,8 +15,12 @@ export class PieChart {
   public charts: Array<Object>;
   private _init = false;
 
+  color = 'red';
+
   constructor(private _pieChartService: PieChartService) {
-    this.charts = this._pieChartService.getData();
+    
+    this._pieChartService.all()
+      .subscribe(result => this.charts = result.result);
   }
 
   ngAfterViewInit() {

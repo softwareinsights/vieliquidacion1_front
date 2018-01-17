@@ -24,6 +24,14 @@ export class PermisotaxiasignadosService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}permisotaxiasignado`;
        }
+
+       sendToRepair = ( permisotaxiasignado: PermisotaxiasignadosInterface ) : Observable<PermisotaxiasignadosResponseInterface> => {
+           return this._http.post(`${this.endPoint}/send-to-repair`, permisotaxiasignado, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+
        all = () : Observable<PermisotaxiasignadosResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

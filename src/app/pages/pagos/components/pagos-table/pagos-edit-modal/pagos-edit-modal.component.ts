@@ -27,11 +27,11 @@ export class PagosEditModalComponent extends DialogComponent<PagosInterface, any
   nota: string;
   cantPagada: number;
   estado_idestado: number;
-  bonificado: number;
   descripcion: string;
   folio: string;
-  fianza: string;
   liquidacion: string;
+  foliofianza: string;
+  fianza: string;
   chofer_idchofer: number;
 
   modalHeader: string;
@@ -47,11 +47,11 @@ export class PagosEditModalComponent extends DialogComponent<PagosInterface, any
   notaAC: AbstractControl;
   cantPagadaAC: AbstractControl;
   estado_idestadoAC: AbstractControl;
-  bonificadoAC: AbstractControl;
   descripcionAC: AbstractControl;
   folioAC: AbstractControl;
-  fianzaAC: AbstractControl;
   liquidacionAC: AbstractControl;
+  foliofianzaAC: AbstractControl;
+  fianzaAC: AbstractControl;
   chofer_idchoferAC: AbstractControl;
   constructor(
       private service: PagosService,
@@ -72,11 +72,11 @@ export class PagosEditModalComponent extends DialogComponent<PagosInterface, any
     'notaAC' : ['',Validators.compose([Validators.required,Validators.maxLength(60)])],
     'cantPagadaAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
-    'bonificadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'descripcionAC' : ['',Validators.compose([Validators.maxLength(200)])],
     'folioAC' : ['',Validators.compose([Validators.required,Validators.maxLength(30)])],
-    'fianzaAC' : [''],
     'liquidacionAC' : [''],
+    'foliofianzaAC' : ['',Validators.compose([Validators.maxLength(30)])],
+    'fianzaAC' : [''],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
   });
   this.cantidadRecibidaAC = this.form.controls['cantidadRecibidaAC'];
@@ -87,11 +87,11 @@ export class PagosEditModalComponent extends DialogComponent<PagosInterface, any
   this.notaAC = this.form.controls['notaAC'];
   this.cantPagadaAC = this.form.controls['cantPagadaAC'];
   this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
-  this.bonificadoAC = this.form.controls['bonificadoAC'];
   this.descripcionAC = this.form.controls['descripcionAC'];
   this.folioAC = this.form.controls['folioAC'];
-  this.fianzaAC = this.form.controls['fianzaAC'];
   this.liquidacionAC = this.form.controls['liquidacionAC'];
+  this.foliofianzaAC = this.form.controls['foliofianzaAC'];
+  this.fianzaAC = this.form.controls['fianzaAC'];
   this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
   }
   ngOnInit() {
@@ -163,11 +163,11 @@ export class PagosEditModalComponent extends DialogComponent<PagosInterface, any
                   nota: this.nota,
                   cantPagada: this.cantPagada,
                   estado_idestado: this.estado_idestado,
-                  bonificado: this.bonificado,
                   descripcion: this.descripcion,
                   folio: this.folio,
-                  fianza: this.fianza,
                   liquidacion: this.liquidacion,
+                  foliofianza: this.foliofianza,
+                  fianza: this.fianza,
                   chofer_idchofer: this.chofer_idchofer,
               })
               .subscribe(

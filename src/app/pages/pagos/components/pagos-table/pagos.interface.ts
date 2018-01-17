@@ -8,11 +8,11 @@ export interface PagosInterface {
    nota?: string;
    cantPagada?: number;
    estado_idestado?: number;
-   bonificado?: number;
    descripcion?: string;
    folio?: string;
-   fianza?: string;
    liquidacion?: string;
+   foliofianza?: string;
+   fianza?: string;
    chofer_idchofer?: number;
    baja?: boolean;
    created_by?: number;

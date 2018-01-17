@@ -24,6 +24,13 @@ export class VehiculoreparandosService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}vehiculoreparando`;
        }
+
+       goOutVehicle = ( vehiculoreparando: VehiculoreparandosInterface ) : Observable<VehiculoreparandosResponseInterface> => {
+           return this._http.post(`${this.endPoint}/go-out-vehicle`, vehiculoreparando, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
        all = () : Observable<VehiculoreparandosResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

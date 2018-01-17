@@ -82,7 +82,7 @@ export class VehiculoreparandosAddModalComponent extends DialogComponent<Vehicul
     'horaEstimadaAC' : [''],
     'inventarioAC' : ['',Validators.compose([Validators.maxLength(80)])],
     'motivoAC' : ['',Validators.compose([Validators.maxLength(80)])],
-    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
+    'estado_idestadoAC' : [''],
     'enviotaller_idenviotallerAC' : ['',Validators.compose([Validators.maxLength(11)])],
     'taller_idtallerAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'mecanico_idmecanicoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],

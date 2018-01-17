@@ -25,6 +25,16 @@ export class VehiculoreparandosTableComponent implements OnInit {
     ngOnInit() {
         this.getAll();
     }
+
+
+    goOutVehicle(vehiculoreparandos: VehiculoreparandosInterface) {
+      this.service.goOutVehicle(vehiculoreparandos)
+      .subscribe(
+          (data) => this.showToast(data),
+          error => console.log(error),
+          () => console.log('Delete completed')
+      );
+    }
     addModalShow() {
       const disposable = this.dialogService.addDialog(VehiculoreparandosAddModalComponent)
       .subscribe( data => {

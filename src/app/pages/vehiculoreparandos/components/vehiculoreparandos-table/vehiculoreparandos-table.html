@@ -41,6 +41,9 @@
                         <tr>
                             <th style='width: 20%'></th>
                             <th style='width: 6%'>
+                                <mfDefaultSorter by='estado_estado_idestado'>Estado</mfDefaultSorter>
+                            </th>
+                            <th style='width: 6%'>
                                 <mfDefaultSorter by='fechaIngresa'>Fecha Ingreso</mfDefaultSorter>
                             </th>
                             <th style='width: 6%'>
@@ -65,9 +68,6 @@
                                 <mfDefaultSorter by='motivo'>Motivo</mfDefaultSorter>
                             </th>
                             <th style='width: 6%'>
-                                <mfDefaultSorter by='estado_estado_idestado'>Estado</mfDefaultSorter>
-                            </th>
-                            <th style='width: 6%'>
                                 <mfDefaultSorter by='enviotaller_enviotaller_idenviotaller'>Envio Taller</mfDefaultSorter>
                             </th>
                             <th style='width: 6%'>
@@ -84,9 +84,11 @@
                     <tbody>
                         <tr *ngFor='let item of mf.data;  let i = index'>
                             <td>
+                                <button *ngIf="item.estado_estado_idestado === 'REPARANDO'" title='Dar Salida' (click)='goOutVehicle(item)' class='btn btn-sm btn-warning'><i class='fa fa-check'></i></button>
                                 <button title='Editar Registro' (click)='editModalShow(item)' class='btn btn-sm btn-info'><i class='fa fa-edit'></i></button>
                                 <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
                             </td>
+                            <td>{{ item.estado_estado_idestado }}</td>
                             <td>{{ item.fechaIngresa | date:'dd/MM/y' }}</td>
                             <td>{{ item.horaIngresa  }}</td>
                             <td>{{ item.fechaSalida | date:'dd/MM/y' }}</td>
@@ -95,7 +97,6 @@
                             <td>{{ item.horaEstimada  }}</td>
                             <td>{{ item.inventario  }}</td>
                             <td>{{ item.motivo  }}</td>
-                            <td>{{ item.estado_estado_idestado }}</td>
                             <td>{{ item.enviotaller_enviotaller_idenviotaller }}</td>
                             <td>{{ item.taller_taller_idtaller }}</td>
                             <td>{{ item.mecanico_mecanico_idmecanico }}</td>

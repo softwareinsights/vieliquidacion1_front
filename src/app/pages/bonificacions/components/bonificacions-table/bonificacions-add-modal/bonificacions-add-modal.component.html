@@ -23,6 +23,12 @@
                 <input [(ngModel)]="validado" [formControl]="validadoAC" type="checkbox" class="form-check-input" id="inputvalidadoAC">
               </div>
             </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!fechaAC.valid && fechaAC.touched), 'has-success': (fechaAC.valid && fechaAC.touched)}">
+              <label for="inputfechaAC" class="col-sm-3 form-control-label">Fecha</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="fecha" [formControl]="fechaAC" type="date"  class="form-control" id="inputfechaAC" placeholder="Fecha" >
+              </div>
+            </div>
             <div class="form-group row" [ngClass]="{'has-error': (!estado_idestadoAC.valid && estado_idestadoAC.touched), 'has-success': (estado_idestadoAC.valid && estado_idestadoAC.touched)}">
               <label for="inputestado_idestadoAC" class="col-sm-3 form-control-label">Estado</label>
               <div class="col-sm-7">

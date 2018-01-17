@@ -17,16 +17,10 @@
                 <input [(ngModel)]="fecha" [formControl]="fechaAC" type="date"  class="form-control" id="inputfechaAC" placeholder="Fecha" required>
               </div>
             </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!montoapagarAC.valid && montoapagarAC.touched), 'has-success': (montoapagarAC.valid && montoapagarAC.touched)}">
-              <label for="inputmontoapagarAC" class="col-sm-3 form-control-label">Monto a Pagar</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!saldoanteriorAC.valid && saldoanteriorAC.touched), 'has-success': (saldoanteriorAC.valid && saldoanteriorAC.touched)}">
+              <label for="inputsaldoanteriorAC" class="col-sm-3 form-control-label">Saldo Anterior</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="montoapagar" [formControl]="montoapagarAC" type="number"  class="form-control" id="inputmontoapagarAC" placeholder="Monto a Pagar" required>
-              </div>
-            </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!h_corteAC.valid && h_corteAC.touched), 'has-success': (h_corteAC.valid && h_corteAC.touched)}">
-              <label for="inputh_corteAC" class="col-sm-3 form-control-label">Hora de Corte</label>
-              <div class="col-sm-9">
-                <input [(ngModel)]="h_corte" [formControl]="h_corteAC" type="time"  class="form-control" id="inputh_corteAC" placeholder="Hora de Corte" required>
+                <input [(ngModel)]="saldoanterior" [formControl]="saldoanteriorAC" type="number"  class="form-control" id="inputsaldoanteriorAC" placeholder="Saldo Anterior" >
               </div>
             </div>
             <div class="form-group row" [ngClass]="{'has-error': (!saldoactualAC.valid && saldoactualAC.touched), 'has-success': (saldoactualAC.valid && saldoactualAC.touched)}">
@@ -35,8 +29,26 @@
                 <input [(ngModel)]="saldoactual" [formControl]="saldoactualAC" type="number"  class="form-control" id="inputsaldoactualAC" placeholder="Saldo Actual" required>
               </div>
             </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!montopagadoAC.valid && montopagadoAC.touched), 'has-success': (montopagadoAC.valid && montopagadoAC.touched)}">
+              <label for="inputmontopagadoAC" class="col-sm-3 form-control-label">Monto Pagado</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="montopagado" [formControl]="montopagadoAC" type="number"  class="form-control" id="inputmontopagadoAC" placeholder="Monto Pagado" required>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!bonificadoAC.valid && bonificadoAC.touched), 'has-success': (bonificadoAC.valid && bonificadoAC.touched)}">
+              <label for="inputbonificadoAC" class="col-sm-3 form-control-label">Cantidad Bonificada</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="bonificado" [formControl]="bonificadoAC" type="number"  class="form-control" id="inputbonificadoAC" placeholder="Cantidad Bonificada" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!h_corteAC.valid && h_corteAC.touched), 'has-success': (h_corteAC.valid && h_corteAC.touched)}">
+              <label for="inputh_corteAC" class="col-sm-3 form-control-label">Hora de Corte</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="h_corte" [formControl]="h_corteAC" type="time"  class="form-control" id="inputh_corteAC" placeholder="Hora de Corte" required>
+              </div>
+            </div>
             <div class="form-group row" [ngClass]="{'has-error': (!permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched), 'has-success': (permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched)}">
-              <label for="inputpermisotaxiasignado_idpermisotaxiasignadoAC" class="col-sm-3 form-control-label">Permiso</label>
+              <label for="inputpermisotaxiasignado_idpermisotaxiasignadoAC" class="col-sm-3 form-control-label">Permiso Taxi</label>
               <div class="col-sm-7">
                <select [(ngModel)]="permisotaxiasignado_idpermisotaxiasignado" [formControl]="permisotaxiasignado_idpermisotaxiasignadoAC" class="form-control" id="inputpermisotaxiasignado_idpermisotaxiasignadoAC" required>
                  <option value="{{item.idpermisotaxiasignado}}" *ngFor="let item of _permisotaxiasignado">{{item.permisotaxi_permisotaxi_idpermisotaxi}}</option>

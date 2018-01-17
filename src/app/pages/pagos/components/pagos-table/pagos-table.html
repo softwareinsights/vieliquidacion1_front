@@ -24,6 +24,9 @@
                         </tr>
                         <tr>
                             <th style='width: 20%'></th>
+                            <th style='width: 15%'>
+                                <mfDefaultSorter by='chofer_chofer_idchofer'>Chofer</mfDefaultSorter>
+                            </th>
                             <th style='width: 5%'>
                                 <mfDefaultSorter by='cantidadRecibida'>Cantidad Recibida</mfDefaultSorter>
                             </th>
@@ -49,22 +52,19 @@
                                 <mfDefaultSorter by='estado_estado_idestado'>Estado</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
-                                <mfDefaultSorter by='bonificado'>Bonificado</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
                                 <mfDefaultSorter by='descripcion'>Descripción</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
-                                <mfDefaultSorter by='folio'>Folio</mfDefaultSorter>
+                                <mfDefaultSorter by='folio'>Folio Liquidación</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
-                                <mfDefaultSorter by='fianza'>Fianza</mfDefaultSorter>
+                                <mfDefaultSorter by='liquidacion'>Pago a Liquidación</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
-                                <mfDefaultSorter by='liquidacion'>Liquidación</mfDefaultSorter>
+                                <mfDefaultSorter by='foliofianza'>Folio Fianza</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
-                                <mfDefaultSorter by='chofer_chofer_idchofer'>Chofer</mfDefaultSorter>
+                                <mfDefaultSorter by='fianza'>Pago a Fianza</mfDefaultSorter>
                             </th>
                         </tr>
                     </thead>
@@ -74,6 +74,7 @@
                                 <button title='Editar Registro' (click)='editModalShow(item)' class='btn btn-sm btn-info'><i class='fa fa-edit'></i></button>
                                 <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
                             </td>
+                            <td>{{ item.chofer_chofer_idchofer }}</td>
                             <td>{{ item.cantidadRecibida  }}</td>
                             <td>{{ item.cambio  }}</td>
                             <td>{{ item.kilometraje  }}</td>
@@ -82,12 +83,11 @@
                             <td>{{ item.nota  }}</td>
                             <td>{{ item.cantPagada  }}</td>
                             <td>{{ item.estado_estado_idestado }}</td>
-                            <td>{{ item.bonificado  }}</td>
                             <td>{{ item.descripcion  }}</td>
                             <td>{{ item.folio  }}</td>
-                            <td>{{ item.fianza  }}</td>
                             <td>{{ item.liquidacion  }}</td>
-                            <td>{{ item.chofer_chofer_idchofer }}</td>
+                            <td>{{ item.foliofianza  }}</td>
+                            <td>{{ item.fianza  }}</td>
                         </tr>
                     </tbody>
                     <tfoot>

@@ -147,18 +147,6 @@ export const PAGES_MENU = [
         }
     },
     {
-        path: 'pagobonificacions',
-        data: {
-        menu: {
-            title: 'general.menu.pagobonificacions',
-            icon: 'ion-social-buffer',
-            selected: false,
-            expanded: false,
-            order: 0
-        }
-        }
-    },
-    {
         path: 'pagofianzas',
         data: {
         menu: {
@@ -231,6 +219,30 @@ export const PAGES_MENU = [
         }
     },
     {
+        path: 'si_modulos',
+        data: {
+        menu: {
+            title: 'general.menu.si_modulos',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+        }
+        }
+    },
+    {
+        path: 'si_reportes',
+        data: {
+        menu: {
+            title: 'general.menu.si_reportes',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+        }
+        }
+    },
+    {
         path: 'tallers',
         data: {
         menu: {
@@ -267,18 +279,6 @@ export const PAGES_MENU = [
         }
     },
     {
-        path: 'si_modulos',
-        data: {
-        menu: {
-            title: 'general.menu.si_modulos',
-            icon: 'ion-social-buffer',
-            selected: false,
-            expanded: false,
-            order: 0
-        }
-        }
-    },
-    {
         path: 'si_permisos',
         data: {
         menu: {
@@ -307,18 +307,6 @@ export const PAGES_MENU = [
         data: {
         menu: {
             title: 'general.menu.si_users',
-            icon: 'ion-social-buffer',
-            selected: false,
-            expanded: false,
-            order: 0
-        }
-        }
-    },
-    {
-        path: 'si_reportes',
-        data: {
-        menu: {
-            title: 'general.menu.si_reportes',
             icon: 'ion-social-buffer',
             selected: false,
             expanded: false,

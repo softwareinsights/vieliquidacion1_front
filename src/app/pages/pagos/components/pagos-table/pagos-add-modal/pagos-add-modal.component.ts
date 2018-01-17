@@ -9,9 +9,9 @@ import { EstadosService } from './../../../../estados/components/estados-table/e
 import { EstadosAddModalComponent } from './../../../../estados/components/estados-table/estados-add-modal/estados-add-modal.component';
 import { ChofersService } from './../../../../chofers/components/chofers-table/chofers.service';
 import { ChofersAddModalComponent } from './../../../../chofers/components/chofers-table/chofers-add-modal/chofers-add-modal.component';
-import { BonificacionsService } from './../../../../bonificacions/components/bonificacions-table/bonificacions.service';
-import { BonificacionsAddModalComponent } from './../../../../bonificacions/components/bonificacions-table/bonificacions-add-modal/bonificacions-add-modal.component';
-import { PagobonificacionsService } from './../../../../pagobonificacions/components/pagobonificacions-table/pagobonificacions.service';
+import { LiquidacionsService } from './../../../../liquidacions/components/liquidacions-table/liquidacions.service';
+import { LiquidacionsAddModalComponent } from './../../../../liquidacions/components/liquidacions-table/liquidacions-add-modal/liquidacions-add-modal.component';
+import { PagoliquidacionsService } from './../../../../pagoliquidacions/components/pagoliquidacions-table/pagoliquidacions.service';
 
 @Component({
   selector: 'add-service-modal',
@@ -21,7 +21,7 @@ import { PagobonificacionsService } from './../../../../pagobonificacions/compon
 export class PagosAddModalComponent extends DialogComponent<PagosInterface, any> implements OnInit {
   _estado: string[] = [];
   _chofer: string[] = [];
-  _bonificacion: string[] = [];
+  _liquidacion: string[] = [];
 
   cantidadRecibida: number;
   cambio: number;
@@ -31,13 +31,13 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
   nota: string;
   cantPagada: number;
   estado_idestado: number;
-  bonificado: number;
   descripcion: string;
   folio: string;
-  fianza: string;
   liquidacion: string;
+  foliofianza: string;
+  fianza: string;
   chofer_idchofer: number;
-  pagobonificacion: any[];
+  pagoliquidacion: any[];
 
   modalHeader: string;
   data: any;
@@ -51,20 +51,20 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
   notaAC: AbstractControl;
   cantPagadaAC: AbstractControl;
   estado_idestadoAC: AbstractControl;
-  bonificadoAC: AbstractControl;
   descripcionAC: AbstractControl;
   folioAC: AbstractControl;
-  fianzaAC: AbstractControl;
   liquidacionAC: AbstractControl;
+  foliofianzaAC: AbstractControl;
+  fianzaAC: AbstractControl;
   chofer_idchoferAC: AbstractControl;
-  pagobonificacionAC: AbstractControl;
+  pagoliquidacionAC: AbstractControl;
 
   constructor(
     private service: PagosService,
     private estadosService: EstadosService,
     private chofersService: ChofersService,
-    private bonificacionsService: BonificacionsService,
-    private pagobonificacionsService: PagobonificacionsService,
+    private liquidacionsService: LiquidacionsService,
+    private pagoliquidacionsService: PagoliquidacionsService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
@@ -80,13 +80,13 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
     'notaAC' : ['',Validators.compose([Validators.required,Validators.maxLength(60)])],
     'cantPagadaAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
-    'bonificadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'descripcionAC' : ['',Validators.compose([Validators.maxLength(200)])],
     'folioAC' : ['',Validators.compose([Validators.required,Validators.maxLength(30)])],
-    'fianzaAC' : [''],
     'liquidacionAC' : [''],
+    'foliofianzaAC' : ['',Validators.compose([Validators.maxLength(30)])],
+    'fianzaAC' : [''],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
-    'pagobonificacionAC' : [''],
+    'pagoliquidacionAC' : [''],
     });
     this.cantidadRecibidaAC = this.form.controls['cantidadRecibidaAC'];
     this.cambioAC = this.form.controls['cambioAC'];
@@ -96,18 +96,18 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
     this.notaAC = this.form.controls['notaAC'];
     this.cantPagadaAC = this.form.controls['cantPagadaAC'];
     this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
-    this.bonificadoAC = this.form.controls['bonificadoAC'];
     this.descripcionAC = this.form.controls['descripcionAC'];
     this.folioAC = this.form.controls['folioAC'];
-    this.fianzaAC = this.form.controls['fianzaAC'];
     this.liquidacionAC = this.form.controls['liquidacionAC'];
+    this.foliofianzaAC = this.form.controls['foliofianzaAC'];
+    this.fianzaAC = this.form.controls['fianzaAC'];
     this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
-    this.pagobonificacionAC = this.form.controls['pagobonificacionAC'];
+    this.pagoliquidacionAC = this.form.controls['pagoliquidacionAC'];
   }
   ngOnInit() {
       this.getEstado();
       this.getChofer();
-      this.getBonificacion();
+      this.getLiquidacion();
   }
   estadoAddModalShow() {
       const disposable = this.dialogService.addDialog(EstadosAddModalComponent)
@@ -141,18 +141,18 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
           this.toastrService.error(result.message);
       }
   }
-  bonificacionAddModalShow() {
-      const disposable = this.dialogService.addDialog(BonificacionsAddModalComponent)
+  liquidacionAddModalShow() {
+      const disposable = this.dialogService.addDialog(LiquidacionsAddModalComponent)
       .subscribe( data => {
           if (data) {
-          this.bonificacionShowToast(data);
+          this.liquidacionShowToast(data);
           }
       });
   }
-  bonificacionShowToast(result) {
+  liquidacionShowToast(result) {
       if (result.success) {
           this.toastrService.success(result.message);
-          this.getBonificacion();
+          this.getLiquidacion();
       } else {
           this.toastrService.error(result.message);
       }
@@ -169,14 +169,14 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
           (data: any) => this._chofer = data.result,
       );
   }
-  getBonificacion() {
-      this.bonificacionsService.all()
+  getLiquidacion() {
+      this.liquidacionsService.all()
       .subscribe(
-          (data: any) => this._bonificacion = data.result,
+          (data: any) => this._liquidacion = data.result,
       );
   }
-  postPagobonificacion(data) {
-      this.pagobonificacionsService.insert(data)
+  postPagoliquidacion(data) {
+      this.pagoliquidacionsService.insert(data)
       .subscribe(
           (result: any) => {
               this.data = result;
@@ -200,20 +200,21 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
                   nota: this.nota,
                   cantPagada: this.cantPagada,
                   estado_idestado: this.estado_idestado,
-                  bonificado: this.bonificado,
                   descripcion: this.descripcion,
                   folio: this.folio,
-                  fianza: this.fianza,
                   liquidacion: this.liquidacion,
+                  foliofianza: this.foliofianza,
+                  fianza: this.fianza,
                   chofer_idchofer: this.chofer_idchofer,
         })
         .subscribe(
             (data: any) => {
               if (data.success) {
-                  this.pagobonificacion.forEach(element => {
-                      this.postPagobonificacion({
+                  this.pagoliquidacion.forEach(element => {
+                      this.postPagoliquidacion({
                           pago_idpago: data.result.insertId,
-                          bonificacion_idbonificacion: +element,
+                          liquidacion_idliquidacion: +element,
+                          chofer_idchofer: this.chofer_idchofer,
                       });
                   });
               } else {

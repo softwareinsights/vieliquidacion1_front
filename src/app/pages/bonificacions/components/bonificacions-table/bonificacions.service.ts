@@ -24,6 +24,15 @@ export class BonificacionsService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}bonificacion`;
        }
+
+
+       applyBonification = ( bonificacion: BonificacionsInterface ) : Observable<BonificacionsResponseInterface> => {
+           return this._http.post(`${this.endPoint}/apply-bonification`, bonificacion, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+
        all = () : Observable<BonificacionsResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

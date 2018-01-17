@@ -1,9 +1,11 @@
 export interface LiquidacionsInterface {
    idliquidacion?: number;
    fecha?: string;
-   montoapagar?: string;
-   h_corte?: string;
+   saldoanterior?: string;
    saldoactual?: string;
+   montopagado?: string;
+   bonificado?: string;
+   h_corte?: string;
    permisotaxiasignado_idpermisotaxiasignado?: number;
    chofer_idchofer?: number;
    estado_idestado?: number;

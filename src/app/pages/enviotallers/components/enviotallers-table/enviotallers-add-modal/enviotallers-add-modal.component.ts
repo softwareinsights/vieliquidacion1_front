@@ -15,7 +15,7 @@ import { TallersAddModalComponent } from './../../../../tallers/components/talle
   styleUrls: [('./enviotallers-add-modal.component.scss')],
   templateUrl: './enviotallers-add-modal.component.html'
 })
-export class EnviotallersAddModalComponent extends DialogComponent<EnviotallersInterface, any> implements OnInit {
+export class EnviotallersAddModalComponent extends DialogComponent<EnviotallersInterface, any> implements OnInit, EnviotallersInterface {
   _permisotaxiasignado: string[] = [];
   _taller: string[] = [];
 

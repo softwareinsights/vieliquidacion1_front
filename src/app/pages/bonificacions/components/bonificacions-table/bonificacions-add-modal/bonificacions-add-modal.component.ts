@@ -21,6 +21,7 @@ export class BonificacionsAddModalComponent extends DialogComponent<Bonificacion
 
   cantidad: string;
   validado: boolean;
+  fecha: string;
   estado_idestado: number;
   concepto: string;
   chofer_idchofer: number;
@@ -31,6 +32,7 @@ export class BonificacionsAddModalComponent extends DialogComponent<Bonificacion
   submitted: boolean = false;
   cantidadAC: AbstractControl;
   validadoAC: AbstractControl;
+  fechaAC: AbstractControl;
   estado_idestadoAC: AbstractControl;
   conceptoAC: AbstractControl;
   chofer_idchoferAC: AbstractControl;
@@ -48,12 +50,14 @@ export class BonificacionsAddModalComponent extends DialogComponent<Bonificacion
     this.form = fb.group({
     'cantidadAC' : [''],
     'validadoAC' : [''],
+    'fechaAC' : [''],
     'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'conceptoAC' : ['',Validators.compose([Validators.maxLength(45)])],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     });
     this.cantidadAC = this.form.controls['cantidadAC'];
     this.validadoAC = this.form.controls['validadoAC'];
+    this.fechaAC = this.form.controls['fechaAC'];
     this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
     this.conceptoAC = this.form.controls['conceptoAC'];
     this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
@@ -117,6 +121,7 @@ export class BonificacionsAddModalComponent extends DialogComponent<Bonificacion
         .insert({
                   cantidad: this.cantidad,
                   validado: this.validado,
+                  fecha: this.fecha,
                   estado_idestado: this.estado_idestado,
                   concepto: this.concepto,
                   chofer_idchofer: this.chofer_idchofer,
