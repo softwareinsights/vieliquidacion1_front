@@ -30,7 +30,50 @@ export class VehiculoreparandosTableComponent implements OnInit {
     goOutVehicle(vehiculoreparandos: VehiculoreparandosInterface) {
       this.service.goOutVehicle(vehiculoreparandos)
       .subscribe(
-          (data) => this.showToast(data),
+          (data) => {
+
+            
+            if (data.success) {
+
+
+              this.showToast(data);
+
+              if(vehiculoreparandos.enviotaller_idenviotaller) {
+
+
+                // Update a vehiculo
+                const vehiculo: VehiculosInterface = {
+                  idvehiculo: data.result.idvehiculo,
+                  estado_idestado: 19 // DISPONIBLE
+                }
+                this.vehiculosService
+                .update(vehiculo)
+                .subscribe(
+                    (data: any) => {
+                      this.showToast(data);
+                });
+
+                // Update a chofer
+                const chofer: ChofersInterface = {
+                  idchofer: data.result.idchofer,
+                  estado_idestado: 5 // ACTIVO
+                }
+                this.chofersService
+                .update(chofer)
+                .subscribe(
+                    (data: any) => {
+                      this.showToast(data);
+                });
+
+
+
+              }
+
+
+            }
+
+
+          }
           error => console.log(error),
           () => console.log('Delete completed')
       );
