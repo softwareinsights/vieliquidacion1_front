@@ -23,30 +23,7 @@
                 <input [(ngModel)]="hora" [formControl]="horaAC" type="time"  class="form-control" id="inputhoraAC" placeholder="Hora" >
               </div>
             </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!manoObraAC.valid && manoObraAC.touched), 'has-success': (manoObraAC.valid && manoObraAC.touched)}">
-              <label for="inputmanoObraAC" class="col-sm-3 form-control-label">Mano de Obra</label>
-              <div class="col-sm-9">
-                <input [(ngModel)]="manoObra" [formControl]="manoObraAC" type="number" maxlength='11' class="form-control" id="inputmanoObraAC" placeholder="Mano de Obra" >
-              </div>
-            </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!subtotalAC.valid && subtotalAC.touched), 'has-success': (subtotalAC.valid && subtotalAC.touched)}">
-              <label for="inputsubtotalAC" class="col-sm-3 form-control-label">Subtotal</label>
-              <div class="col-sm-9">
-                <input [(ngModel)]="subtotal" [formControl]="subtotalAC" type="number" maxlength='11' class="form-control" id="inputsubtotalAC" placeholder="Subtotal" >
-              </div>
-            </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!totalAC.valid && totalAC.touched), 'has-success': (totalAC.valid && totalAC.touched)}">
-              <label for="inputtotalAC" class="col-sm-3 form-control-label">Total</label>
-              <div class="col-sm-9">
-                <input [(ngModel)]="total" [formControl]="totalAC" type="number" maxlength='11' class="form-control" id="inputtotalAC" placeholder="Total" >
-              </div>
-            </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!anticipoAC.valid && anticipoAC.touched), 'has-success': (anticipoAC.valid && anticipoAC.touched)}">
-              <label for="inputanticipoAC" class="col-sm-3 form-control-label">Anticipo</label>
-              <div class="col-sm-9">
-                <input [(ngModel)]="anticipo" [formControl]="anticipoAC" type="number" maxlength='11' class="form-control" id="inputanticipoAC" placeholder="Anticipo" >
-              </div>
-            </div>
+
             <div class="form-group row" [ngClass]="{'has-error': (!estado_idestadoAC.valid && estado_idestadoAC.touched), 'has-success': (estado_idestadoAC.valid && estado_idestadoAC.touched)}">
               <label for="inputestado_idestadoAC" class="col-sm-3 form-control-label">Estado</label>
               <div class="col-sm-7">
@@ -58,23 +35,45 @@
                 <button (click)='estadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
               </div>
             </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!descripcionAC.valid && descripcionAC.touched), 'has-success': (descripcionAC.valid && descripcionAC.touched)}">
-              <label for="inputdescripcionAC" class="col-sm-3 form-control-label">Descripción</label>
-              <div class="col-sm-9">
-                <input [(ngModel)]="descripcion" [formControl]="descripcionAC" type="text" maxlength='200' class="form-control" id="inputdescripcionAC" placeholder="Descripción" >
-              </div>
-            </div>
             <div class="form-group row" [ngClass]="{'has-error': (!vehiculoreparando_idvehiculoreparandoAC.valid && vehiculoreparando_idvehiculoreparandoAC.touched), 'has-success': (vehiculoreparando_idvehiculoreparandoAC.valid && vehiculoreparando_idvehiculoreparandoAC.touched)}">
               <label for="inputvehiculoreparando_idvehiculoreparandoAC" class="col-sm-3 form-control-label">Vehículo Reparando</label>
               <div class="col-sm-7">
                <select [(ngModel)]="vehiculoreparando_idvehiculoreparando" [formControl]="vehiculoreparando_idvehiculoreparandoAC" class="form-control" id="inputvehiculoreparando_idvehiculoreparandoAC" required>
-                 <option value="{{item.idvehiculoreparando}}" *ngFor="let item of _vehiculoreparando">{{item.motivo}}</option>
+                 <option value="{{item.idvehiculoreparando}}" *ngFor="let item of _vehiculoreparando">{{item.enviotaller_enviotaller_idenviotaller}}</option>
                </select>
               </div>
               <div class='col-sm-2'>
                 <button (click)='vehiculoreparandoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
               </div>
             </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!descripcionAC.valid && descripcionAC.touched), 'has-success': (descripcionAC.valid && descripcionAC.touched)}">
+              <label for="inputdescripcionAC" class="col-sm-3 form-control-label">Descripción</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="descripcion" [formControl]="descripcionAC" type="text" maxlength='200' class="form-control" id="inputdescripcionAC" placeholder="Descripción" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!manoObraAC.valid && manoObraAC.touched), 'has-success': (manoObraAC.valid && manoObraAC.touched)}">
+              <label for="inputmanoObraAC" class="col-sm-3 form-control-label">Mano de Obra</label>
+              <div class="col-sm-9">
+                <input (change)="calculateTotal()" [(ngModel)]="manoObra" [formControl]="manoObraAC" type="number" maxlength='11' class="form-control" id="inputmanoObraAC" placeholder="Mano de Obra" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!anticipoAC.valid && anticipoAC.touched), 'has-success': (anticipoAC.valid && anticipoAC.touched)}">
+              <label for="inputanticipoAC" class="col-sm-3 form-control-label">Anticipo</label>
+              <div class="col-sm-9">
+                <input (change)="calculateTotal()" [(ngModel)]="anticipo" [formControl]="anticipoAC" type="number" maxlength='11' class="form-control" id="inputanticipoAC" placeholder="Anticipo" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!subtotalAC.valid && subtotalAC.touched), 'has-success': (subtotalAC.valid && subtotalAC.touched)}">
+              <label for="inputsubtotalAC" class="col-sm-3 form-control-label">Subtotal</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="subtotal" [formControl]="subtotalAC" type="number" maxlength='11' class="form-control" id="inputsubtotalAC" placeholder="Subtotal" >
+              </div>
+            </div>
+            
+            <!--
             <div class="form-group row" [ngClass]="{'has-error': (!orden_has_refaccionAC.valid && orden_has_refaccionAC.touched), 'has-success': (orden_has_refaccionAC.valid && orden_has_refaccionAC.touched)}">
               <label for="inputorden_has_refaccionAC" class="col-sm-3 form-check-label">Refacciones</label>
               <div class="col-sm-7">
@@ -86,6 +85,76 @@
                 <button (click)='refaccionAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
               </div>
             </div>
+            -->
+
+            <div class="row">
+              <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="registrar-datos">Refacción utilizada</label><br>
+                    <button (click)="showRefaccionesModal()" type="button" class="btn btn-outline-primary btn-block">Seleccionar</button>
+                  </div>
+              </div>
+              <div class="col-md-2">
+                  <div class="form-group">
+                    <label for="idrefaccion">Refacción</label>
+                    {{refaccionSelected.nombre}}
+                  </div>
+              </div>
+              <div class="col-md-2">
+                  <div class="form-group">
+                    <label for="cantidadrefaccion">Cantidad</label>
+                    <input (change)="setPrecioVenta()" [(ngModel)]="refaccionCantidad" [formControl]="refaccionCantidadAC" name="cantidadrefaccion" type="number" class="form-control disable-text" value="1" placeholder="0">
+                  </div>
+              </div>
+              <div class="col-md-2">
+                  <div class="form-group">
+                    <label for="preciorefaccion">Precio</label>
+                    <input [(ngModel)]="refaccionPrecio" [formControl]="refaccionPrecioAC" name="preciorefaccion" type="number" class="form-control disable-text" placeholder="0.00">
+                  </div>
+              </div>
+              <div class="col-md-2">
+                  <button (click)="addToList()" type="button" class="btn btn-success btn-block">Agregar</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <th>Id Refacción</th>
+                    <th>Nombre</th>
+                    <th>Precio Unit.</th>
+                    <th>Cantidad</th>
+                    <th>Importe</th>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let refaccion of refacciones">
+                      <tr>
+                        <td>{{ refaccion.idrefaccion }}</td>
+                        <td>{{ refaccion.nombre }}</td>
+                        <td>{{ refaccion.precioVenta | currency: 'MXN' }} </td>
+                        <td>{{ refaccion.cantidad }}</td>
+                        <td>{{ refaccion.precioVenta * refaccion.cantidad | currency: 'MXN' }}</td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!totalAC.valid && totalAC.touched), 'has-success': (totalAC.valid && totalAC.touched)}">
+              <label for="inputtotalAC" class="col-md-12 form-control-label">Total</label>
+              <div class="col-md-12">
+                <input [(ngModel)]="total" [formControl]="totalAC" type="number" maxlength='11' class="form-control" id="inputtotalAC" placeholder="Total" >
+              </div>
+            </div>
+
+
+
+
+
+
           </ba-card>
         </div>
         <div class="modal-footer">

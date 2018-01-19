@@ -20,7 +20,7 @@
             <div class="form-group row" [ngClass]="{'has-error': (!fianzaAC.valid && fianzaAC.touched), 'has-success': (fianzaAC.valid && fianzaAC.touched)}">
               <label for="inputfianzaAC" class="col-sm-3 form-control-label">Fianza</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="fianza" [formControl]="fianzaAC" type="number" maxlength='11' class="form-control" id="inputfianzaAC" placeholder="Fianza" >
+                <input [(ngModel)]="fianza" [formControl]="fianzaAC" type="number" maxlength='11' class="form-control" id="inputfianzaAC" placeholder="Fianza" value="2500">
               </div>
             </div>
             <div class="form-group row" [ngClass]="{'has-error': (!estado_idestadoAC.valid && estado_idestadoAC.touched), 'has-success': (estado_idestadoAC.valid && estado_idestadoAC.touched)}">

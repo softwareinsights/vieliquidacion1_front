@@ -1,3 +1,5 @@
+import { PagosAddModalComponent } from './../../../pagos/components/pagos-table/pagos-add-modal/pagos-add-modal.component';
+import { PagosInterface } from './../../../pagos/components/pagos-table/pagos.interface';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { ChofersInterface } from './chofers.interface';
@@ -25,6 +27,46 @@ export class ChofersTableComponent implements OnInit {
     ngOnInit() {
         this.getAll();
     }
+
+    addPagoModalShow(chofers: ChofersInterface) {
+
+      const date = new Date();
+      const month = (date.getMonth() + 1);
+      const now = date.getFullYear() + "-" + ((month < 10) ? "0" : "") + month + "-" + date.getDate();
+      const hour = date.getHours() + ":" + date.getMinutes();
+
+      // Envio a pago
+      const pago: PagosInterface = {
+        cantidadRecibida: 0,
+        cambio: 0,
+        kilometraje: 0,
+        fecha: now,
+        hora: hour,
+        nota: '',
+        cantPagada: 0,
+        estado_idestado: 6,
+        folio: '',
+        liquidacion: chofers.deudaliquidacion,
+        foliofianza: '',
+        fianza: chofers.deudafianza,
+        chofer_idchofer: chofers.idchofer
+      }
+
+      const disposable = this.dialogService.addDialog(PagosAddModalComponent, pago)
+      .subscribe( data => {
+          if (data) {
+            if (data.success) {
+
+              console.log("data addPagoModalShow", data);
+
+
+            }
+            this.showToast(data);
+          }
+      });
+    }
+
+
     addModalShow() {
       const disposable = this.dialogService.addDialog(ChofersAddModalComponent)
       .subscribe( data => {

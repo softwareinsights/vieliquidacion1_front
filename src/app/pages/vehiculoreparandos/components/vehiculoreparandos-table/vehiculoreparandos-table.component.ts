@@ -1,3 +1,7 @@
+import { VehiculosService } from './../../../vehiculos/components/vehiculos-table/vehiculos.service';
+import { ChofersService } from './../../../chofers/components/chofers-table/chofers.service';
+import { ChofersInterface } from './../../../chofers/components/chofers-table/chofers.interface';
+import { VehiculosInterface } from './../../../vehiculos/components/vehiculos-table/vehiculos.interface';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { VehiculoreparandosInterface } from './vehiculoreparandos.interface';
@@ -6,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { VehiculoreparandosService } from './vehiculoreparandos.service';
 import { VehiculoreparandosAddModalComponent } from './vehiculoreparandos-add-modal/vehiculoreparandos-add-modal.component';
 import { VehiculoreparandosEditModalComponent } from './vehiculoreparandos-edit-modal/vehiculoreparandos-edit-modal.component';
+
 @Component({
 selector: 'vehiculoreparandos-table',
 templateUrl: './vehiculoreparandos-table.html',
@@ -19,6 +24,8 @@ export class VehiculoreparandosTableComponent implements OnInit {
     sortOrder = 'asc';
     constructor(
       private service: VehiculoreparandosService, 
+      private vehiculosService: VehiculosService,
+      private chofersService: ChofersService,
       private toastrService: ToastrService, 
       private dialogService: DialogService) {
     }
@@ -31,16 +38,13 @@ export class VehiculoreparandosTableComponent implements OnInit {
       this.service.goOutVehicle(vehiculoreparandos)
       .subscribe(
           (data) => {
-
-            
+            console.log('service.goOutVehicle data', data);
             if (data.success) {
-
-
               this.showToast(data);
 
-              if(vehiculoreparandos.enviotaller_idenviotaller) {
 
-
+              console.log('vehiculoreparandos', vehiculoreparandos);
+              if (vehiculoreparandos.enviotaller_idenviotaller) {
                 // Update a vehiculo
                 const vehiculo: VehiculosInterface = {
                   idvehiculo: data.result.idvehiculo,
@@ -64,20 +68,11 @@ export class VehiculoreparandosTableComponent implements OnInit {
                     (data: any) => {
                       this.showToast(data);
                 });
-
-
-
               }
-
-
             }
-
-
-          }
-          error => console.log(error),
-          () => console.log('Delete completed')
-      );
+          });
     }
+
     addModalShow() {
       const disposable = this.dialogService.addDialog(VehiculoreparandosAddModalComponent)
       .subscribe( data => {

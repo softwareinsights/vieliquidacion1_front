@@ -101,6 +101,15 @@ export class VehiculoreparandosAddModalComponent extends DialogComponent<Vehicul
     this.taller_idtallerAC = this.form.controls['taller_idtallerAC'];
     this.mecanico_idmecanicoAC = this.form.controls['mecanico_idmecanicoAC'];
     this.permisotaxiasignado_idpermisotaxiasignadoAC = this.form.controls['permisotaxiasignado_idpermisotaxiasignadoAC'];
+
+    // FECHA Y HORA ACTUAL
+    const date = new Date();
+    const month = (date.getMonth() + 1);
+    const now = date.getFullYear() + "-" + ((month < 10) ? "0" : "") + month + "-" + date.getDate();
+    const hour = date.getHours() + ":" + date.getMinutes();
+
+    this.fechaIngresa = now;
+    this.horaIngresa = hour;
   }
   ngOnInit() {
       this.getEstado();

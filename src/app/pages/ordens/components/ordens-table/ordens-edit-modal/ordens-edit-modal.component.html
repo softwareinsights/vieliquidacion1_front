@@ -29,6 +29,12 @@
                 <input [(ngModel)]="manoObra" [formControl]="manoObraAC" type="number" maxlength='11' class="form-control" id="inputmanoObraAC" placeholder="Mano de Obra" >
               </div>
             </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!anticipoAC.valid && anticipoAC.touched), 'has-success': (anticipoAC.valid && anticipoAC.touched)}">
+              <label for="inputanticipoAC" class="col-sm-3 form-control-label">Anticipo</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="anticipo" [formControl]="anticipoAC" type="number" maxlength='11' class="form-control" id="inputanticipoAC" placeholder="Anticipo" >
+              </div>
+            </div>
             <div class="form-group row" [ngClass]="{'has-error': (!subtotalAC.valid && subtotalAC.touched), 'has-success': (subtotalAC.valid && subtotalAC.touched)}">
               <label for="inputsubtotalAC" class="col-sm-3 form-control-label">Subtotal</label>
               <div class="col-sm-9">
@@ -39,12 +45,6 @@
               <label for="inputtotalAC" class="col-sm-3 form-control-label">Total</label>
               <div class="col-sm-9">
                 <input [(ngModel)]="total" [formControl]="totalAC" type="number" maxlength='11' class="form-control" id="inputtotalAC" placeholder="Total" >
-              </div>
-            </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!anticipoAC.valid && anticipoAC.touched), 'has-success': (anticipoAC.valid && anticipoAC.touched)}">
-              <label for="inputanticipoAC" class="col-sm-3 form-control-label">Anticipo</label>
-              <div class="col-sm-9">
-                <input [(ngModel)]="anticipo" [formControl]="anticipoAC" type="number" maxlength='11' class="form-control" id="inputanticipoAC" placeholder="Anticipo" >
               </div>
             </div>
             <div class="form-group row" [ngClass]="{'has-error': (!estado_idestadoAC.valid && estado_idestadoAC.touched), 'has-success': (estado_idestadoAC.valid && estado_idestadoAC.touched)}">

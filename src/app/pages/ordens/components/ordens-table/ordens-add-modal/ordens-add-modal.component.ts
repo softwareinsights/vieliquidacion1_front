@@ -1,3 +1,5 @@
+import { RefaccionsInterface } from './../../../../refaccions/components/refaccions-table/refaccions.interface';
+import { RefaccionesModalComponent } from './../../refacciones-modal/refacciones-modal.component';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { OrdensService } from './../ordens.service';
@@ -12,6 +14,8 @@ import { VehiculoreparandosAddModalComponent } from './../../../../vehiculorepar
 import { RefaccionsService } from './../../../../refaccions/components/refaccions-table/refaccions.service';
 import { RefaccionsAddModalComponent } from './../../../../refaccions/components/refaccions-table/refaccions-add-modal/refaccions-add-modal.component';
 import { Orden_has_refaccionsService } from './../../../../orden_has_refaccions/components/orden_has_refaccions-table/orden_has_refaccions.service';
+
+
 
 @Component({
   selector: 'add-service-modal',
@@ -49,6 +53,39 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
   vehiculoreparando_idvehiculoreparandoAC: AbstractControl;
   orden_has_refaccionAC: AbstractControl;
 
+  refaccionIdrefaccionAC: AbstractControl;
+  refaccionCantidadAC: AbstractControl;
+  refaccionPrecioAC: AbstractControl;
+
+
+
+
+  orden: OrdensInterface = {
+    idorden: null,
+    fecha: new Date().toLocaleDateString(),
+    descripcion: '',
+    estado_idestado: 6,
+    manoObra: 0,
+    subtotal: 0,
+    total: 0,
+    anticipo: 0,
+    vehiculoreparando_idvehiculoreparando: 0
+  }
+  refaccionSelected: RefaccionsInterface = {
+    idrefaccion: null,
+    nombre: '',
+    precioCompra: null,
+    precioVenta: null,
+    taller_idtaller: null
+  }
+  refaccionCantidad = 1;
+  refaccionPrecio = 0;
+  refacciones = [];
+
+
+
+
+
   constructor(
     private service: OrdensService,
     private estadosService: EstadosService,
@@ -64,6 +101,11 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
     this.form = fb.group({
     'fechaAC' : [''],
     'horaAC' : [''],
+
+    'refaccionIdrefaccionAC': [''],
+    'refaccionCantidadAC': [''],
+    'refaccionPrecioAC': [''],
+
     'manoObraAC' : ['',Validators.compose([Validators.maxLength(11)])],
     'subtotalAC' : ['',Validators.compose([Validators.maxLength(11)])],
     'totalAC' : ['',Validators.compose([Validators.maxLength(11)])],
@@ -83,12 +125,83 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
     this.descripcionAC = this.form.controls['descripcionAC'];
     this.vehiculoreparando_idvehiculoreparandoAC = this.form.controls['vehiculoreparando_idvehiculoreparandoAC'];
     this.orden_has_refaccionAC = this.form.controls['orden_has_refaccionAC'];
+
+    this.refaccionIdrefaccionAC = this.form.controls['refaccionIdrefaccionAC'];
+    this.refaccionCantidadAC = this.form.controls['refaccionCantidadAC'];
+    this.refaccionPrecioAC = this.form.controls['refaccionPrecioAC'];
+
+    // FECHA Y HORA ACTUAL
+    const date = new Date();
+    const month = (date.getMonth() + 1);
+    const now = date.getFullYear() + "-" + ((month < 10) ? "0" : "") + month + "-" + date.getDate();
+    const hour = date.getHours() + ":" + date.getMinutes();
+
+    this.fecha = now;
+    this.hora = hour;
+    this.estado_idestado = 6;
   }
   ngOnInit() {
       this.getEstado();
       this.getVehiculoreparando();
       this.getRefaccion();
   }
+
+  showRefaccionesModal() {
+    this.dialogService.addDialog( RefaccionesModalComponent)
+      .subscribe( refaccion => {
+          console.log("refaccion", refaccion);
+        if ( refaccion ) {
+          this.refaccionSelected = refaccion;
+          this.refaccionCantidad = 1;
+          this.refaccionPrecio = refaccion.precioVenta;
+        }
+      });
+  }
+
+  setPrecioVenta() {
+    if ( this.refaccionSelected.precioVenta && this.refaccionPrecio > 0 ) {
+      this.refaccionPrecio = this.refaccionSelected.precioVenta * this.refaccionCantidad;
+    }
+  }
+
+  addToList() {
+    if ( this.refaccionSelected.idrefaccion !== null ) {
+      this.refacciones.push({
+        idrefaccion: this.refaccionSelected.idrefaccion,
+        nombre: this.refaccionSelected.nombre,
+        precioVenta: this.refaccionSelected.precioVenta,
+        cantidad: this.refaccionCantidad
+      })
+      this.addToSubtotal( this.refaccionCantidad * this.refaccionSelected.precioVenta )
+      // Inicializa los valores por cada agregar a la lista
+      this.refaccionSelected = {
+        idrefaccion: null,
+        nombre: '',
+        precioCompra: null,
+        precioVenta: null,
+        taller_idtaller: null
+      }
+      this.refaccionCantidad = 1;
+      this.refaccionPrecio = 0;
+    }
+  }
+  addToSubtotal( cantidad ) {
+    this.subtotal += cantidad;
+    this.addToTotal( cantidad );
+  }
+
+  addToTotal( cantidad ) {
+    this.total += cantidad;
+  }
+
+
+  calculateTotal() {
+    this.total = 0;
+    this.total += this.subtotal;
+    this.total += this.manoObra;
+    this.total += this.anticipo * -1;
+  }
+  
   estadoAddModalShow() {
       const disposable = this.dialogService.addDialog(EstadosAddModalComponent)
       .subscribe( data => {

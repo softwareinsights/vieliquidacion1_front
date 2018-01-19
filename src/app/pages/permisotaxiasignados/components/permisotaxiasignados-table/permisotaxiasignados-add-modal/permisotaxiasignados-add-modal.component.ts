@@ -1,3 +1,4 @@
+import { LiquidacionsService } from './../../../../liquidacions/components/liquidacions-table/liquidacions.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { PermisotaxiasignadosService } from './../permisotaxiasignados.service';
@@ -48,6 +49,7 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
     private chofersService: ChofersService,
     private vehiculosService: VehiculosService,
     private permisotaxisService: PermisotaxisService,
+    private liquidacionsService: LiquidacionsService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
@@ -65,7 +67,16 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
     this.horaAC = this.form.controls['horaAC'];
     this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
     this.vehiculo_idvehiculoAC = this.form.controls['vehiculo_idvehiculoAC'];
-    this.permisotaxi_idpermisotaxiAC = this.form.controls['permisotaxi_idpermisotaxiAC'];
+    this.permisotaxi_idpermisotaxiAC = this.form.controls['permisotaxi_idpermisotaxiAC'];    
+    
+    // FECHA Y HORA ACTUAL
+    const date = new Date();
+    const month = (date.getMonth() + 1);
+    const now = date.getFullYear() + "-" + ((month < 10) ? "0" : "") + month + "-" + date.getDate();
+    const hour = date.getHours() + ":" + date.getMinutes();
+
+    this.fecha = now;
+    this.hora = hour;
   }
   ngOnInit() {
       this.getEstado();
@@ -161,10 +172,22 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
           (data: any) => this._permisotaxi = data.result,
       );
   }
+
+  // AGREGA LIQUIDACIÓN DESPUES DE CREAR PERMISOTAXIASIGNADO
+  postLiquidacion(data) {
+      this.liquidacionsService.insert(data)
+      .subscribe(
+          (result: any) => {
+              this.data = result;
+              this.confirm();
+          });
+  }
+
   confirm() {
     this.result = this.data;
     this.close();
   }
+
   onSubmit(values: PermisotaxiasignadosInterface): void {
     this.submitted = true;
     if (this.form.valid) {
@@ -179,8 +202,25 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
         })
         .subscribe(
             (data: any) => {
-              this.data = data;
-              this.confirm();
+              if (data.success) {
+
+                // FALTA SACAR EL 
+                this.postLiquidacion({
+                    fecha: this.fecha,
+                    saldoanterior: '350',
+                    saldoactual: '350',
+                    montopagado: '0',
+                    bonificado: '0',
+                    h_corte: this.hora,
+                    permisotaxiasignado_idpermisotaxiasignado: data.result.insertId,
+                    chofer_idchofer: this.chofer_idchofer,
+                    estado_idestado: 9 // ADEUDANDO
+                });
+          
+              } else {
+                  this.data = data;
+                  this.confirm();
+              }
             });
     }
   }

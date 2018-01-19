@@ -23,6 +23,11 @@ export class LiquidacionsService {
         this.headers.append('Authorization', 'JWT ' + this.authService.token);
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}liquidacion`;
+       }       
+       allAdeudandoFromIdChofer = ( id ) : Observable<LiquidacionsResponseInterface> => {
+           return this._http.get(`${this.endPoint}/adeudando-from-idchofer/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
        }
        all = () : Observable<LiquidacionsResponseInterface> => {
            return this._http.get(this.endPoint, this.options)

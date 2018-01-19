@@ -2,10 +2,14 @@
     <div class='row'>
         <ba-card title='Listado' baCardClass='with-scroll' class='data-table-container'>
             <div class='panel panel-default'>
-                <table class='table table-striped' [mfData]='data | marcaDataFilter : filterQuery1 | modeloDataFilter : filterQuery2 | placaDataFilter : filterQuery3 | colorDataFilter : filterQuery4 | persona_propietarioDataFilter : filterQuery5' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
+                <table class='table table-striped' [mfData]='data | estado_estado_idestadoDataFilter : filterQuery0 | marcaDataFilter : filterQuery1 | modeloDataFilter : filterQuery2 | placaDataFilter : filterQuery3 | colorDataFilter : filterQuery4 | persona_propietarioDataFilter : filterQuery5' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
                     <thead>
                         <tr>
                             <th colspan='2' class='text-left'>
+                                Filtrar por Estado:
+                                <input class='form-control' [(ngModel)]='filterQuery0' />
+                            </th>
+                            <th colspan='1' class='text-left'>
                                 Filtrar por Marca:
                                 <input class='form-control' [(ngModel)]='filterQuery1' />
                             </th>
@@ -21,13 +25,16 @@
                                 Filtrar por Color:
                                 <input class='form-control' [(ngModel)]='filterQuery4' />
                             </th>
-                            <th colspan='3' class='text-left'>
+                            <th colspan='2' class='text-left'>
                                 Filtrar por Nombre de Propietario:
                                 <input class='form-control' [(ngModel)]='filterQuery5' />
                             </th>
                         </tr>
                         <tr>
                             <th style='width: 20%'></th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='estado_estado_idestado'>Estado</mfDefaultSorter>
+                            </th>
                             <th style='width: 5%'>
                                 <mfDefaultSorter by='marca'>Marca</mfDefaultSorter>
                             </th>
@@ -50,13 +57,10 @@
                                 <mfDefaultSorter by='kilometraje'>Kilometraje</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
-                                <mfDefaultSorter by='estado_estado_idestado'>Estado</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
                                 <mfDefaultSorter by='poliza'>Póliza</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
-                                <mfDefaultSorter by='polizaTipo'>Póliza Tipo</mfDefaultSorter>
+                                <mfDefaultSorter by='polizaTipo'>Mutualidad</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
                                 <mfDefaultSorter by='condActual'>Condición Actual</mfDefaultSorter>
@@ -78,6 +82,7 @@
                                 <button title='Editar Registro' (click)='editModalShow(item)' class='btn btn-sm btn-info'><i class='fa fa-edit'></i></button>
                                 <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
                             </td>
+                            <td>{{ item.estado_estado_idestado }}</td>
                             <td>{{ item.marca  }}</td>
                             <td>{{ item.modelo  }}</td>
                             <td>{{ item.anio  }}</td>
@@ -85,7 +90,6 @@
                             <td>{{ item.serieMotor  }}</td>
                             <td>{{ item.placa  }}</td>
                             <td>{{ item.kilometraje  }}</td>
-                            <td>{{ item.estado_estado_idestado }}</td>
                             <td>{{ item.poliza  }}</td>
                             <td>{{ item.polizaTipo  }}</td>
                             <td>{{ item.condActual  }}</td>

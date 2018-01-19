@@ -26,7 +26,7 @@
             <div class="form-group row" [ngClass]="{'has-error': (!passwordAC.valid && passwordAC.touched), 'has-success': (passwordAC.valid && passwordAC.touched)}">
               <label for="inputpasswordAC" class="col-sm-3 form-control-label">Password</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="password" [formControl]="passwordAC" type="text" maxlength='60' class="form-control" id="inputpasswordAC" placeholder="Password" >
+                <input [(ngModel)]="password" [formControl]="passwordAC" type="password" maxlength='60' class="form-control" id="inputpasswordAC">
               </div>
             </div>
             <div class="form-group row" [ngClass]="{'has-error': (!Rol_idsi_rolAC.valid && Rol_idsi_rolAC.touched), 'has-success': (Rol_idsi_rolAC.valid && Rol_idsi_rolAC.touched)}">

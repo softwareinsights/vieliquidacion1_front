@@ -25,6 +25,9 @@
                         <tr>
                             <th style='width: 20%'></th>
                             <th style='width: 8%'>
+                                <mfDefaultSorter by='idorden'>Id Orden</mfDefaultSorter>
+                            </th>
+                            <th style='width: 8%'>
                                 <mfDefaultSorter by='fecha'>Fecha</mfDefaultSorter>
                             </th>
                             <th style='width: 8%'>
@@ -34,13 +37,13 @@
                                 <mfDefaultSorter by='manoObra'>Mano de Obra</mfDefaultSorter>
                             </th>
                             <th style='width: 8%'>
+                                <mfDefaultSorter by='anticipo'>Anticipo</mfDefaultSorter>
+                            </th>
+                            <th style='width: 8%'>
                                 <mfDefaultSorter by='subtotal'>Subtotal</mfDefaultSorter>
                             </th>
                             <th style='width: 8%'>
                                 <mfDefaultSorter by='total'>Total</mfDefaultSorter>
-                            </th>
-                            <th style='width: 8%'>
-                                <mfDefaultSorter by='anticipo'>Anticipo</mfDefaultSorter>
                             </th>
                             <th style='width: 8%'>
                                 <mfDefaultSorter by='estado_estado_idestado'>Estado</mfDefaultSorter>
@@ -59,12 +62,13 @@
                                 <button title='Editar Registro' (click)='editModalShow(item)' class='btn btn-sm btn-info'><i class='fa fa-edit'></i></button>
                                 <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
                             </td>
+                            <td>{{ item.idorden  }}</td>
                             <td>{{ item.fecha | date:'dd/MM/y' }}</td>
                             <td>{{ item.hora  }}</td>
-                            <td>{{ item.manoObra  }}</td>
-                            <td>{{ item.subtotal  }}</td>
-                            <td>{{ item.total  }}</td>
-                            <td>{{ item.anticipo  }}</td>
+                            <td>{{ item.manoObra | currency: 'MXN' }}</td>
+                            <td>{{ item.anticipo | currency: 'MXN' }}</td>
+                            <td>{{ item.subtotal | currency: 'MXN' }}</td>
+                            <td>{{ item.total | currency: 'MXN' }}</td>
                             <td>{{ item.estado_estado_idestado }}</td>
                             <td>{{ item.descripcion  }}</td>
                             <td>{{ item.vehiculoreparando_vehiculoreparando_idvehiculoreparando }}</td>

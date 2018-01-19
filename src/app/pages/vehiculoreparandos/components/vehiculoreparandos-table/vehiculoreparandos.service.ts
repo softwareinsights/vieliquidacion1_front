@@ -26,6 +26,8 @@ export class VehiculoreparandosService {
        }
 
        goOutVehicle = ( vehiculoreparando: VehiculoreparandosInterface ) : Observable<VehiculoreparandosResponseInterface> => {
+           
+           console.log('service vehiculoreparando', vehiculoreparando);
            return this._http.post(`${this.endPoint}/go-out-vehicle`, vehiculoreparando, this.options)
                .map((response: Response) => response.json())
                .catch(this.handleError);

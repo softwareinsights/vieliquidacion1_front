@@ -1,3 +1,9 @@
+import { VehiculosService } from './../../../vehiculos/components/vehiculos-table/vehiculos.service';
+import { ChofersService } from './../../../chofers/components/chofers-table/chofers.service';
+import { ChofersInterface } from './../../../chofers/components/chofers-table/chofers.interface';
+import { VehiculosInterface } from './../../../vehiculos/components/vehiculos-table/vehiculos.interface';
+
+
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { CorralonsInterface } from './corralons.interface';
@@ -19,12 +25,52 @@ export class CorralonsTableComponent implements OnInit {
     sortOrder = 'asc';
     constructor(
       private service: CorralonsService, 
+
+      private vehiculosService: VehiculosService,
+      private chofersService: ChofersService,
+
       private toastrService: ToastrService, 
       private dialogService: DialogService) {
     }
     ngOnInit() {
         this.getAll();
     }
+
+    goOutCorralon(corralons: CorralonsInterface) {
+      this.service.goOutCorralon(corralons)
+      .subscribe(
+          (data) => {
+            if (data.success) {
+              this.showToast(data);
+
+                // Update a vehiculo
+                const vehiculo: VehiculosInterface = {
+                  idvehiculo: data.result.idvehiculo,
+                  estado_idestado: 19 // DISPONIBLE
+                }
+                this.vehiculosService
+                .update(vehiculo)
+                .subscribe(
+                    (data: any) => {
+                      this.showToast(data);
+                });
+
+                // Update a chofer
+                const chofer: ChofersInterface = {
+                  idchofer: data.result.idchofer,
+                  estado_idestado: 5 // ACTIVO
+                }
+                this.chofersService
+                .update(chofer)
+                .subscribe(
+                    (data: any) => {
+                      this.showToast(data);
+                });
+                
+            }
+          });
+    }
+
     addModalShow() {
       const disposable = this.dialogService.addDialog(CorralonsAddModalComponent)
       .subscribe( data => {

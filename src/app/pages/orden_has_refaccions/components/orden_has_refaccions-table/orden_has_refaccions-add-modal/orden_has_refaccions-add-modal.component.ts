@@ -19,7 +19,6 @@ export class Orden_has_refaccionsAddModalComponent extends DialogComponent<Orden
   _orden: string[] = [];
   _refaccion: string[] = [];
 
-  idorden_has_refaccion: number;
   orden_idorden: number;
   refaccion_idrefaccion: number;
   cantidad: number;
@@ -28,7 +27,6 @@ export class Orden_has_refaccionsAddModalComponent extends DialogComponent<Orden
   data: any;
   form: FormGroup;
   submitted: boolean = false;
-  idorden_has_refaccionAC: AbstractControl;
   orden_idordenAC: AbstractControl;
   refaccion_idrefaccionAC: AbstractControl;
   cantidadAC: AbstractControl;
@@ -44,12 +42,10 @@ export class Orden_has_refaccionsAddModalComponent extends DialogComponent<Orden
   ) {
     super(dialogService);
     this.form = fb.group({
-    'idorden_has_refaccionAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'orden_idordenAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'refaccion_idrefaccionAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'cantidadAC' : ['',Validators.compose([Validators.maxLength(11)])],
     });
-    this.idorden_has_refaccionAC = this.form.controls['idorden_has_refaccionAC'];
     this.orden_idordenAC = this.form.controls['orden_idordenAC'];
     this.refaccion_idrefaccionAC = this.form.controls['refaccion_idrefaccionAC'];
     this.cantidadAC = this.form.controls['cantidadAC'];
@@ -111,7 +107,6 @@ export class Orden_has_refaccionsAddModalComponent extends DialogComponent<Orden
     if (this.form.valid) {
       this.service
         .insert({
-                  idorden_has_refaccion: this.idorden_has_refaccion,
                   orden_idorden: this.orden_idorden,
                   refaccion_idrefaccion: this.refaccion_idrefaccion,
                   cantidad: this.cantidad,

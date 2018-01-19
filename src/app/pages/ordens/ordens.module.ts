@@ -11,6 +11,8 @@ import { routing } from './ordens.routing';
 import { OrdensComponent } from './ordens.component';
 import { OrdensService } from './components/ordens-table/ordens.service';
 import { OrdensTableComponent } from './components/ordens-table/ordens-table.component';
+import { RefaccionesModalComponent } from './components/refacciones-modal/refacciones-modal.component';
+
 
 @NgModule({
   imports: [
@@ -28,8 +30,10 @@ import { OrdensTableComponent } from './components/ordens-table/ordens-table.com
   declarations: [
     OrdensComponent,
     OrdensTableComponent,
+    RefaccionesModalComponent
   ],
   entryComponents: [
+    RefaccionesModalComponent
   ],
   providers: [
     OrdensService

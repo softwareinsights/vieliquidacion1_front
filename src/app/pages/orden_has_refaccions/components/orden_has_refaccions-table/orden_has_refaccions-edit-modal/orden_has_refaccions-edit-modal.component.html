@@ -12,9 +12,9 @@
         <div class="modal-body" style="height: 65vh; overflow-y: auto;">
           <ba-card cardTitle="Información Refacciones de ordenes">
             <div class="form-group row" [ngClass]="{'has-error': (!idorden_has_refaccionAC.valid && idorden_has_refaccionAC.touched), 'has-success': (idorden_has_refaccionAC.valid && idorden_has_refaccionAC.touched)}">
-              <label for="inputidorden_has_refaccionAC" class="col-sm-3 form-control-label">Idorden_has_refaccion</label>
+              <label for="inputidorden_has_refaccionAC" class="col-sm-3 form-control-label">Id Orden Refacción</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="idorden_has_refaccion" [formControl]="idorden_has_refaccionAC" type="number" maxlength='11' class="form-control" id="inputidorden_has_refaccionAC" placeholder="Idorden_has_refaccion" required>
+                <input [(ngModel)]="idorden_has_refaccion" [formControl]="idorden_has_refaccionAC" type="number" maxlength='11' class="form-control" id="inputidorden_has_refaccionAC" required>
               </div>
             </div>
             <div class="form-group row" [ngClass]="{'has-error': (!orden_idordenAC.valid && orden_idordenAC.touched), 'has-success': (orden_idordenAC.valid && orden_idordenAC.touched)}">

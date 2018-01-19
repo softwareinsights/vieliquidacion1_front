@@ -24,6 +24,14 @@ export class CorralonsService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}corralon`;
        }
+
+       goOutCorralon = ( corralon: CorralonsInterface ) : Observable<CorralonsResponseInterface> => {
+           console.log('service corralon', corralon);
+           return this._http.post(`${this.endPoint}/go-out-corralon`, corralon, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
        all = () : Observable<CorralonsResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

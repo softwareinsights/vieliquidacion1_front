@@ -37,7 +37,6 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
         this.getAll();
     }
 
-
     addCorralonModalShow(permisotaxiasignados: PermisotaxiasignadosInterface) {
 
       // Envio a taller
@@ -74,7 +73,7 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
               // Update a vehiculo
               const vehiculo: VehiculosInterface = {
                 idvehiculo: permisotaxiasignados.vehiculo_idvehiculo,
-                estado_idestado: 18 // TALLER
+                estado_idestado: 18 // CORRALON
               }
               this.vehiculosService
               .update(vehiculo)
@@ -102,9 +101,6 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
       error => console.log(error),
       () => console.log('Modified complete'));
     }
-
-
-
 
     addEnviotallerModalShow(permisotaxiasignados: PermisotaxiasignadosInterface) {
 
@@ -166,8 +162,6 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
       error => console.log(error),
       () => console.log('Modified complete'));
     }
-
-
 
     addModalShow() {
       const disposable = this.dialogService.addDialog(PermisotaxiasignadosAddModalComponent)

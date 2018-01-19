@@ -27,7 +27,6 @@ export class PagosEditModalComponent extends DialogComponent<PagosInterface, any
   nota: string;
   cantPagada: number;
   estado_idestado: number;
-  descripcion: string;
   folio: string;
   liquidacion: string;
   foliofianza: string;
@@ -47,7 +46,6 @@ export class PagosEditModalComponent extends DialogComponent<PagosInterface, any
   notaAC: AbstractControl;
   cantPagadaAC: AbstractControl;
   estado_idestadoAC: AbstractControl;
-  descripcionAC: AbstractControl;
   folioAC: AbstractControl;
   liquidacionAC: AbstractControl;
   foliofianzaAC: AbstractControl;
@@ -72,7 +70,6 @@ export class PagosEditModalComponent extends DialogComponent<PagosInterface, any
     'notaAC' : ['',Validators.compose([Validators.required,Validators.maxLength(60)])],
     'cantPagadaAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
-    'descripcionAC' : ['',Validators.compose([Validators.maxLength(200)])],
     'folioAC' : ['',Validators.compose([Validators.required,Validators.maxLength(30)])],
     'liquidacionAC' : [''],
     'foliofianzaAC' : ['',Validators.compose([Validators.maxLength(30)])],
@@ -87,7 +84,6 @@ export class PagosEditModalComponent extends DialogComponent<PagosInterface, any
   this.notaAC = this.form.controls['notaAC'];
   this.cantPagadaAC = this.form.controls['cantPagadaAC'];
   this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
-  this.descripcionAC = this.form.controls['descripcionAC'];
   this.folioAC = this.form.controls['folioAC'];
   this.liquidacionAC = this.form.controls['liquidacionAC'];
   this.foliofianzaAC = this.form.controls['foliofianzaAC'];
@@ -163,7 +159,6 @@ export class PagosEditModalComponent extends DialogComponent<PagosInterface, any
                   nota: this.nota,
                   cantPagada: this.cantPagada,
                   estado_idestado: this.estado_idestado,
-                  descripcion: this.descripcion,
                   folio: this.folio,
                   liquidacion: this.liquidacion,
                   foliofianza: this.foliofianza,
