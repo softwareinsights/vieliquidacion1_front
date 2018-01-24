@@ -203,20 +203,26 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
         .subscribe(
             (data: any) => {
               if (data.success) {
+                this.permisotaxisService.findLiquidacionByIdInThisDay(this.permisotaxi_idpermisotaxi)
+                    .subscribe(
+                        (_data: any) => {
+                        if (_data.success) {
+                            
+                            // FALTA SACAR EL 
+                            this.postLiquidacion({
+                                fecha: this.fecha,
+                                saldoanterior: _data.result.liquidacion,
+                                saldoactual: _data.result.liquidacion,
+                                montopagado: '0',
+                                bonificado: '0',
+                                h_corte: this.hora,
+                                permisotaxiasignado_idpermisotaxiasignado: data.result.insertId,
+                                chofer_idchofer: this.chofer_idchofer,
+                                estado_idestado: 9 // ADEUDANDO
+                            });
+                        }
+                    });
 
-                // FALTA SACAR EL 
-                this.postLiquidacion({
-                    fecha: this.fecha,
-                    saldoanterior: '350',
-                    saldoactual: '350',
-                    montopagado: '0',
-                    bonificado: '0',
-                    h_corte: this.hora,
-                    permisotaxiasignado_idpermisotaxiasignado: data.result.insertId,
-                    chofer_idchofer: this.chofer_idchofer,
-                    estado_idestado: 9 // ADEUDANDO
-                });
-          
               } else {
                   this.data = data;
                   this.confirm();

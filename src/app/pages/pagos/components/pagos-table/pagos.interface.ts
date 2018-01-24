@@ -10,9 +10,9 @@ export interface PagosInterface {
    estado_idestado?: number;
    descripcion?: string;
    folio?: string;
-   liquidacion?: string;
+   liquidacion?: number;
    foliofianza?: string;
-   fianza?: string;
+   fianza?: number;
    chofer_idchofer?: number;
    baja?: boolean;
    created_by?: number;

@@ -1,6 +1,6 @@
 import { AuthService } from './../../../shared/auth.service';
-import {Injectable} from '@angular/core';
-import {Router, Routes} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Router, Routes } from '@angular/router';
 import * as _ from 'lodash';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -26,33 +26,31 @@ export class BaMenuService {
    *
    * @param {Routes} routes Type compatible with app.menu.ts
    */
-  public updateMenuByRoutes(routes: Routes) {
+  updateMenuByRoutes(routes: Routes) {
     let convertedRoutes = this.convertRoutesToMenus(_.cloneDeep(routes));
     this.menuItems.next(convertedRoutes);
   }
 
-  public convertRoutesToMenus(routes:Routes):any[] {
+  convertRoutesToMenus(routes: Routes): any[] {
     let items = this._convertArrayToItems(routes);
     return this._skipEmpty(items);
   }
 
-  public getCurrentItem():any {
+  getCurrentItem(): any {
     return this._currentMenuItem;
   }
 
-  public selectMenuItem(menuItems:any[]):any[] {
+  selectMenuItem(menuItems: any[]): any[] {
     let items = [];
     
     // Obtiene módulos con acceso
     let auth_items = [];
     this._menuItems.forEach((item) => {
-      let nombre = item.nombre + 's';
+      const nombre = `${item.nombre}s`;
       auth_items.push(nombre);
     });
-
     menuItems.forEach((item) => {
       this._selectItem(item);
-
       if (item.selected) {
         this._currentMenuItem = item;
       }
@@ -62,16 +60,15 @@ export class BaMenuService {
       }
 
       // Si item path está dentro de módulos permitidos
-      if (auth_items.indexOf(item.route.path) > -1) {
+      if (auth_items.indexOf(item.route.path) > -1 || item.route.path === 'dashboard') {
         items.push(item);
       }
 
     });
-
     return items;
   }
 
-  protected _skipEmpty(items:any[]):any[] {
+  protected _skipEmpty(items: any[]): any[] {
     let menu = [];
     items.forEach((item) => {
       let menuItem;
@@ -91,7 +88,7 @@ export class BaMenuService {
     return [].concat.apply([], menu);
   }
 
-  protected _convertArrayToItems(routes:any[], parent?:any):any[] {
+  protected _convertArrayToItems(routes: any[], parent?: any): any[] {
     let items = [];
     routes.forEach((route) => {
       items.push(this._convertObjectToItem(route, parent));
@@ -99,8 +96,8 @@ export class BaMenuService {
     return items;
   }
 
-  protected _convertObjectToItem(object, parent?:any):any {
-    let item:any = {};
+  protected _convertObjectToItem(object, parent?: any): any {
+    let item: any = {};
     if (object.data && object.data.menu) {
       // this is a menu object
       item = object.data.menu;
@@ -123,27 +120,25 @@ export class BaMenuService {
       item.children = this._convertArrayToItems(object.children, item);
     }
 
-    let prepared = this._prepareItem(item);
+    const prepared = this._prepareItem(item);
 
     // if current item is selected or expanded - then parent is expanded too
     if ((prepared.selected || prepared.expanded) && parent) {
       parent.expanded = true;
     }
-
     return prepared;
   }
 
-  protected _prepareItem(object:any):any {
+  protected _prepareItem(object: any): any {
     if (!object.skip) {
       object.target = object.target || '';
       object.pathMatch = object.pathMatch  || 'full';
       return this._selectItem(object);
     }
-
     return object;
   }
 
-  protected _selectItem(object:any):any {
+  protected _selectItem(object: any): any {
     object.selected = this._router.isActive(this._router.createUrlTree(object.route.paths), object.pathMatch === 'full');
     return object;
   }

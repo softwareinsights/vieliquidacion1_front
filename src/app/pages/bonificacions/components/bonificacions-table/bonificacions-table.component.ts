@@ -25,8 +25,18 @@ export class BonificacionsTableComponent implements OnInit {
     ngOnInit() {
         this.getAll();
     }
-
-
+    validateBonification(bonificacions: BonificacionsInterface) {
+      const bonificacion = {
+        'validado': true,
+        'idbonificacion': bonificacions.idbonificacion,
+      }
+      this.service.update(bonificacion)
+          .subscribe(
+              (data) => this.showToast(data),
+              error => console.log(error),
+              () => console.log('Delete completed')
+          );
+    }
     applyBonification(bonificacions: BonificacionsInterface) {
       this.service.applyBonification(bonificacions)
           .subscribe(
@@ -35,8 +45,6 @@ export class BonificacionsTableComponent implements OnInit {
               () => console.log('Delete completed')
           );
     }
-
-
     addModalShow() {
       const disposable = this.dialogService.addDialog(BonificacionsAddModalComponent)
       .subscribe( data => {

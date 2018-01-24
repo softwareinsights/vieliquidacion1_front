@@ -19,9 +19,6 @@ export class PagoliquidacionsAddModalComponent extends DialogComponent<Pagoliqui
   _pago: string[] = [];
   _chofer: string[] = [];
 
-  saldoanterior: string;
-  montopagado: string;
-  saldoactual: string;
   pago_idpago: number;
   liquidacion_idliquidacion: number;
   chofer_idchofer: number;
@@ -30,9 +27,6 @@ export class PagoliquidacionsAddModalComponent extends DialogComponent<Pagoliqui
   data: any;
   form: FormGroup;
   submitted: boolean = false;
-  saldoanteriorAC: AbstractControl;
-  montopagadoAC: AbstractControl;
-  saldoactualAC: AbstractControl;
   pago_idpagoAC: AbstractControl;
   liquidacion_idliquidacionAC: AbstractControl;
   chofer_idchoferAC: AbstractControl;
@@ -48,16 +42,10 @@ export class PagoliquidacionsAddModalComponent extends DialogComponent<Pagoliqui
   ) {
     super(dialogService);
     this.form = fb.group({
-    'saldoanteriorAC' : [''],
-    'montopagadoAC' : [''],
-    'saldoactualAC' : [''],
     'pago_idpagoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'liquidacion_idliquidacionAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     });
-    this.saldoanteriorAC = this.form.controls['saldoanteriorAC'];
-    this.montopagadoAC = this.form.controls['montopagadoAC'];
-    this.saldoactualAC = this.form.controls['saldoactualAC'];
     this.pago_idpagoAC = this.form.controls['pago_idpagoAC'];
     this.liquidacion_idliquidacionAC = this.form.controls['liquidacion_idliquidacionAC'];
     this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
@@ -119,9 +107,6 @@ export class PagoliquidacionsAddModalComponent extends DialogComponent<Pagoliqui
     if (this.form.valid) {
       this.service
         .insert({
-                  saldoanterior: this.saldoanterior,
-                  montopagado: this.montopagado,
-                  saldoactual: this.saldoactual,
                   pago_idpago: this.pago_idpago,
                   liquidacion_idliquidacion: this.liquidacion_idliquidacion,
                   chofer_idchofer: this.chofer_idchofer,

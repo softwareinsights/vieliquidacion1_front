@@ -16,15 +16,6 @@
                                 <mfDefaultSorter by='chofer_chofer_idchofer'>Chofer</mfDefaultSorter>
                             </th>
                             <th style='width: 13%'>
-                                <mfDefaultSorter by='saldoanterior'>Saldo Anterior</mfDefaultSorter>
-                            </th>
-                            <th style='width: 13%'>
-                                <mfDefaultSorter by='montopagado'>Monto Pagado</mfDefaultSorter>
-                            </th>
-                            <th style='width: 13%'>
-                                <mfDefaultSorter by='saldoactual'>Saldo Actual</mfDefaultSorter>
-                            </th>
-                            <th style='width: 13%'>
                                 <mfDefaultSorter by='pago_pago_idpago'>Folio</mfDefaultSorter>
                             </th>
                             <th style='width: 13%'>
@@ -39,9 +30,6 @@
                                 <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
                             </td>
                             <td>{{ item.chofer_chofer_idchofer }}</td>
-                            <td>{{ item.saldoanterior  }}</td>
-                            <td>{{ item.montopagado  }}</td>
-                            <td>{{ item.saldoactual  }}</td>
                             <td>{{ item.pago_pago_idpago }}</td>
                             <td>{{ item.liquidacion_idliquidacion  }}</td>
                         </tr>

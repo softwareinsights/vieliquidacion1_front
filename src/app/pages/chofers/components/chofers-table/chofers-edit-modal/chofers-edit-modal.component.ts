@@ -28,8 +28,8 @@ export class ChofersEditModalComponent extends DialogComponent<ChofersInterface,
   aval2: number;
   aval3: number;
   aval4: number;
-  deudafianza: string;
-  deudaliquidacion: string;
+  deudafianza: number;
+  deudaliquidacion: number;
 
   modalHeader: string;
   data: any;

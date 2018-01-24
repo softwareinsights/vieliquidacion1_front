@@ -1,3 +1,4 @@
+import { Orden_has_refaccionsInterface } from './../../../../orden_has_refaccions/components/orden_has_refaccions-table/orden_has_refaccions.interface';
 import { RefaccionsInterface } from './../../../../refaccions/components/refaccions-table/refaccions.interface';
 import { RefaccionesModalComponent } from './../../refacciones-modal/refacciones-modal.component';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
@@ -57,9 +58,6 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
   refaccionCantidadAC: AbstractControl;
   refaccionPrecioAC: AbstractControl;
 
-
-
-
   orden: OrdensInterface = {
     idorden: null,
     fecha: new Date().toLocaleDateString(),
@@ -80,10 +78,7 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
   }
   refaccionCantidad = 1;
   refaccionPrecio = 0;
-  refacciones = [];
-
-
-
+  refacciones: any[] = [];
 
 
   constructor(
@@ -139,6 +134,11 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
     this.fecha = now;
     this.hora = hour;
     this.estado_idestado = 6;
+
+    this.manoObra = 0;
+    this.anticipo = 0;
+    this.subtotal = 0;
+    this.total = 0;
   }
   ngOnInit() {
       this.getEstado();
@@ -170,7 +170,7 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
         idrefaccion: this.refaccionSelected.idrefaccion,
         nombre: this.refaccionSelected.nombre,
         precioVenta: this.refaccionSelected.precioVenta,
-        cantidad: this.refaccionCantidad
+        cantidad: this.refaccionCantidad,
       })
       this.addToSubtotal( this.refaccionCantidad * this.refaccionSelected.precioVenta )
       // Inicializa los valores por cada agregar a la lista
@@ -179,7 +179,7 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
         nombre: '',
         precioCompra: null,
         precioVenta: null,
-        taller_idtaller: null
+        taller_idtaller: null,
       }
       this.refaccionCantidad = 1;
       this.refaccionPrecio = 0;
@@ -194,12 +194,11 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
     this.total += cantidad;
   }
 
-
   calculateTotal() {
     this.total = 0;
     this.total += this.subtotal;
     this.total += this.manoObra;
-    this.total += this.anticipo * -1;
+    this.total -= this.anticipo;
   }
   
   estadoAddModalShow() {
@@ -268,7 +267,8 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
           (data: any) => this._refaccion = data.result,
       );
   }
-  postOrden_has_refaccion(data) {
+  postOrden_has_refaccion(data: Orden_has_refaccionsInterface) {
+      console.log("data Orden_has_refaccionsInterface", data);
       this.orden_has_refaccionsService.insert(data)
       .subscribe(
           (result: any) => {
@@ -298,10 +298,11 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
         .subscribe(
             (data: any) => {
               if (data.success) {
-                  this.orden_has_refaccion.forEach(element => {
+                  this.refacciones.forEach(element => {
                       this.postOrden_has_refaccion({
                           orden_idorden: data.result.insertId,
-                          refaccion_idrefaccion: +element,
+                          refaccion_idrefaccion: +element.idrefaccion,
+                          cantidad: element.cantidad,
                       });
                   });
               } else {

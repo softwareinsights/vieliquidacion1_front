@@ -28,9 +28,9 @@ export class PagosEditModalComponent extends DialogComponent<PagosInterface, any
   cantPagada: number;
   estado_idestado: number;
   folio: string;
-  liquidacion: string;
+  liquidacion: number;
   foliofianza: string;
-  fianza: string;
+  fianza: number;
   chofer_idchofer: number;
 
   modalHeader: string;

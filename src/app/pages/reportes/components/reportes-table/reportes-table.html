@@ -1,0 +1,37 @@
+<div class='widgets'>
+    <div class='row'>
+        <ba-card title='Listado' baCardClass='with-scroll' class='data-table-container'>
+            <div class='panel panel-default'>
+                <table class='table table-striped' [mfData]='data | nombreDataFilter : filterQuery1' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
+                    <thead>
+                        <tr>
+                            <th style='width: 33%'>
+                                <mfDefaultSorter by='persona_nombre'>Chofer</mfDefaultSorter>
+                            </th>
+                            <th style='width: 33%'>
+                                <mfDefaultSorter by='liquidacion_fecha'>Fecha de Liquidación</mfDefaultSorter>
+                            </th>
+                            <th style='width: 33%'>
+                                <mfDefaultSorter by='estado_estado_idestado'>Estado de Liquidación</mfDefaultSorter>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let item of mf.data;  let i = index'>
+                            <td>{{ item.persona_nombre }}</td>
+                            <td>{{ item.liquidacion_fecha }}</td>
+                            <td>{{ item.estado_estado_idestado }}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan='5'>
+                                <mfBootstrapPaginator [rowsOnPageSet]='[5,10,15]'></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </ba-card>
+    </div>
+</div>

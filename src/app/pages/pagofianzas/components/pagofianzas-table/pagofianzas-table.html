@@ -36,9 +36,9 @@
                                 <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
                             </td>
                             <td>{{ item.chofer_chofer_idchofer }}</td>
-                            <td>{{ item.saldoanterior  }}</td>
-                            <td>{{ item.montopagado  }}</td>
-                            <td>{{ item.saldoactual  }}</td>
+                            <td>{{ item.saldoanterior | currency: 'MXN' }}</td>
+                            <td>{{ item.montopagado | currency: 'MXN' }}</td>
+                            <td>{{ item.saldoactual | currency: 'MXN' }}</td>
                             <td>{{ item.pago_pago_idpago }}</td>
                         </tr>
                     </tbody>

@@ -2,6 +2,19 @@ export const PAGES_MENU = [
 {
     path: 'pages',
     children: [
+        
+    {
+        path: 'dashboard',
+        data: {
+        menu: {
+            title: 'general.menu.dashboard',
+            icon: 'ion-android-home',
+            selected: false,
+            expanded: false,
+            order: 0
+        }
+        }
+    },
     {
         path: 'bonificacions',
         data: {
@@ -219,22 +232,10 @@ export const PAGES_MENU = [
         }
     },
     {
-        path: 'si_modulos',
+        path: 'reportes',
         data: {
         menu: {
-            title: 'general.menu.si_modulos',
-            icon: 'ion-social-buffer',
-            selected: false,
-            expanded: false,
-            order: 0
-        }
-        }
-    },
-    {
-        path: 'si_reportes',
-        data: {
-        menu: {
-            title: 'general.menu.si_reportes',
+            title: 'general.menu.reportes',
             icon: 'ion-social-buffer',
             selected: false,
             expanded: false,
@@ -279,6 +280,18 @@ export const PAGES_MENU = [
         }
     },
     {
+        path: 'si_modulos',
+        data: {
+        menu: {
+            title: 'general.menu.si_modulos',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+        }
+        }
+    },
+    {
         path: 'si_permisos',
         data: {
         menu: {
@@ -308,18 +321,6 @@ export const PAGES_MENU = [
         menu: {
             title: 'general.menu.si_users',
             icon: 'ion-social-buffer',
-            selected: false,
-            expanded: false,
-            order: 0
-        }
-        }
-    },
-    {
-        path: 'dashboard',
-        data: {
-        menu: {
-            title: 'general.menu.dashboard',
-            icon: 'ion-android-home',
             selected: false,
             expanded: false,
             order: 0

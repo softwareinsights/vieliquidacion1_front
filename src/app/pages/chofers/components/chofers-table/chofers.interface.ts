@@ -9,8 +9,8 @@ export interface ChofersInterface {
    aval2?: number;
    aval3?: number;
    aval4?: number;
-   deudafianza?: string;
-   deudaliquidacion?: string;
+   deudafianza?: number;
+   deudaliquidacion?: number;
    baja?: boolean;
    created_by?: number;
    created_at?: string;

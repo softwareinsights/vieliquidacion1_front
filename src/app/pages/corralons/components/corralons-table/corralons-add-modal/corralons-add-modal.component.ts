@@ -61,7 +61,7 @@ export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterfa
     'infraccionNumeroAC' : ['',Validators.compose([Validators.maxLength(11)])],
     'corralonNombreAC' : ['',Validators.compose([Validators.maxLength(45)])],
     'motivoAC' : ['',Validators.compose([Validators.maxLength(150)])],
-    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
+    'estado_idestadoAC' : [''],
     'permisotaxiasignado_idpermisotaxiasignadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     });
     this.fechaAC = this.form.controls['fechaAC'];
@@ -73,6 +73,16 @@ export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterfa
     this.motivoAC = this.form.controls['motivoAC'];
     this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
     this.permisotaxiasignado_idpermisotaxiasignadoAC = this.form.controls['permisotaxiasignado_idpermisotaxiasignadoAC'];
+
+    // FECHA Y HORA ACTUAL
+    const date = new Date();
+    const month = (date.getMonth() + 1);
+    const now = date.getFullYear() + "-" + ((month < 10) ? "0" : "") + month + "-" + date.getDate();
+    const hour = date.getHours() + ":" + date.getMinutes();
+
+    this.fecha = now;
+    this.hora = hour;
+    this.estado_idestado = 18;
   }
   ngOnInit() {
       this.getEstado();
@@ -138,7 +148,7 @@ export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterfa
                   infraccionNumero: this.infraccionNumero,
                   corralonNombre: this.corralonNombre,
                   motivo: this.motivo,
-                  estado_idestado: this.estado_idestado,
+                  estado_idestado: 18,
                   permisotaxiasignado_idpermisotaxiasignado: this.permisotaxiasignado_idpermisotaxiasignado,
         })
         .subscribe(

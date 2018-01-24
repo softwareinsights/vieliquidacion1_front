@@ -34,6 +34,11 @@ export class PermisotaxisService {
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
+       findLiquidacionByIdInThisDay = ( id ) : Observable<PermisotaxisResponseInterface> => {
+           return this._http.get(`${this.endPoint}/this-day/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        update = ( permisotaxi: PermisotaxisInterface ) : Observable<PermisotaxisResponseInterface> => {
            return this._http.patch(this.endPoint, permisotaxi, this.options)
                .map((response: Response) => response.json())

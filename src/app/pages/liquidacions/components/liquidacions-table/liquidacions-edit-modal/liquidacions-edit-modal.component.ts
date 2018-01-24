@@ -23,10 +23,10 @@ export class LiquidacionsEditModalComponent extends DialogComponent<Liquidacions
 
   idliquidacion: number;
   fecha: string;
-  saldoanterior: string;
-  saldoactual: string;
-  montopagado: string;
-  bonificado: string;
+  saldoanterior: number;
+  saldoactual: number;
+  montopagado: number;
+  bonificado: number;
   h_corte: string;
   permisotaxiasignado_idpermisotaxiasignado: number;
   chofer_idchofer: number;

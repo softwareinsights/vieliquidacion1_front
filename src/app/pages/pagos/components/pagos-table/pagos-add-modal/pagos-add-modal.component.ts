@@ -1,3 +1,8 @@
+import { ChofersResponseInterface } from './../../../../chofers/components/chofers-table/chofers-response.interface';
+import { ChofersInterface } from './../../../../chofers/components/chofers-table/chofers.interface';
+import { PagofianzasService } from './../../../../pagofianzas/components/pagofianzas-table/pagofianzas.service';
+import { PagofianzasInterface } from './../../../../pagofianzas/components/pagofianzas-table/pagofianzas.interface';
+import { PagoliquidacionsInterface } from './../../../../pagoliquidacions/components/pagoliquidacions-table/pagoliquidacions.interface';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { PagosService } from './../pagos.service';
@@ -32,9 +37,9 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
   cantPagada: number;
   estado_idestado: number;
   folio: string;
-  liquidacion: string;
+  liquidacion: number;
   foliofianza: string;
-  fianza: string;
+  fianza: number;
   chofer_idchofer: number;
   pagoliquidacion: any[];
 
@@ -63,6 +68,7 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
     private chofersService: ChofersService,
     private liquidacionsService: LiquidacionsService,
     private pagoliquidacionsService: PagoliquidacionsService,
+    private pagofianzasService: PagofianzasService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
@@ -78,9 +84,9 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
     'notaAC' : ['',Validators.compose([Validators.required,Validators.maxLength(60)])],
     'cantPagadaAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
-    'folioAC' : ['',Validators.compose([Validators.required,Validators.maxLength(30)])],
+    'folioAC' : [''],
     'liquidacionAC' : [''],
-    'foliofianzaAC' : ['',Validators.compose([Validators.maxLength(30)])],
+    'foliofianzaAC' : [''],
     'fianzaAC' : [''],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'pagoliquidacionAC' : [''],
@@ -172,7 +178,29 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
           (data: any) => this._liquidacion = data.result,
       );
   }
-  postPagoliquidacion(data) {
+  choferChange() {
+      this.liquidacionsService.allAdeudandoFromIdChofer(this.chofer_idchofer)
+      .subscribe(
+          (data: any) => this._liquidacion = data.result,
+      );
+  }
+  updateChoferFianza(data: ChofersInterface) {
+      this.chofersService.update(data)
+      .subscribe(
+          (result: any) => {
+              this.data = result;
+              this.confirm();
+          });
+  }
+  postPagofianza(data: PagofianzasInterface) {
+      this.pagofianzasService.insert(data)
+      .subscribe(
+          (result: any) => {
+              this.data = result;
+              this.confirm();
+          });
+  }
+  postPagoliquidacion(data: PagoliquidacionsInterface) {
       this.pagoliquidacionsService.insert(data)
       .subscribe(
           (result: any) => {
@@ -180,6 +208,30 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
               this.confirm();
           });
   }
+
+  updateChoferById(idChofer: number) {
+      this.chofersService.findById(idChofer)
+      .subscribe(
+          (chofer: ChofersResponseInterface) => {
+              if (chofer.success) {
+                  
+                const deudafianza = chofer.result[0].deudafianza - this.fianza;
+                let idestado = 0;
+                if (deudafianza <= 0) {
+                    idestado = 8; // Pagado
+                } else {
+                    idestado = 9; // Adeudando
+                }    
+
+                this.updateChoferFianza({
+                    'idchofer': this.chofer_idchofer,
+                    'deudafianza': deudafianza,
+                    'estado_idestado_fianza': idestado,
+                });
+              }
+          });
+  }
+
   confirm() {
     this.result = this.data;
     this.close();
@@ -206,13 +258,22 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
         .subscribe(
             (data: any) => {
               if (data.success) {
-                  this.pagoliquidacion.forEach(element => {
-                      this.postPagoliquidacion({
-                          pago_idpago: data.result.insertId,
-                          liquidacion_idliquidacion: +element,
-                          chofer_idchofer: this.chofer_idchofer,
-                      });
-                  });
+                    this.postPagofianza({
+                        pago_idpago: data.result.insertId,
+                        montopagado: this.fianza,
+                        chofer_idchofer: this.chofer_idchofer,
+                    });
+                    
+                    // Update a deuda fianza
+                    this.updateChoferById(this.chofer_idchofer);
+
+                    this.pagoliquidacion.forEach(element => {
+                        this.postPagoliquidacion({
+                            pago_idpago: data.result.insertId,
+                            liquidacion_idliquidacion: +element,
+                            chofer_idchofer: this.chofer_idchofer,
+                        });
+                    });
               } else {
                   this.data = data;
                   this.confirm();

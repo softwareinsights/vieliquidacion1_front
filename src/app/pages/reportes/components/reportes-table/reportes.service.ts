@@ -1,7 +1,7 @@
 import { AuthService } from './../../../../shared/auth.service';
-import { BonificacionsResponseInterface } from './bonificacions-response.interface';
+import { ReportesResponseInterface } from './reportes-response.interface';
 import { Observable } from 'rxjs/Observable';
-import { BonificacionsInterface } from './bonificacions.interface';
+import { ReportesInterface } from './reportes.interface';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Configuration } from '../../../../app.constants';
@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class BonificacionsService {
+export class ReportesService {
     private actionUrl: string;
     private headers: Headers;
     private options: RequestOptions;
@@ -22,46 +22,40 @@ export class BonificacionsService {
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
         this.headers.append('Authorization', 'JWT ' + this.authService.token);
         this.options = new RequestOptions({ headers: this.headers });
-        this.endPoint = `${this._configuration.ServerWithApiUrl}bonificacion`;
+        this.endPoint = `${this._configuration.ServerWithApiUrl}liquidacion/reporte`;
        }
-
-       applyBonification = ( bonificacion: BonificacionsInterface ) : Observable<BonificacionsResponseInterface> => {
-           return this._http.post(`${this.endPoint}/apply-bonification`, bonificacion, this.options)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
-       all = () : Observable<BonificacionsResponseInterface> => {
+       all = () : Observable<ReportesResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
-       findById = ( id ) : Observable<BonificacionsResponseInterface> => {
+       findById = ( id ) : Observable<ReportesResponseInterface> => {
            return this._http.get(`${this.endPoint}/${id}`, this.options)
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
-       update = ( bonificacion: BonificacionsInterface ) : Observable<BonificacionsResponseInterface> => {
-           return this._http.patch(this.endPoint, bonificacion, this.options)
+       update = ( reporte: ReportesInterface ) : Observable<ReportesResponseInterface> => {
+           return this._http.patch(this.endPoint, reporte, this.options)
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
-       remove= ( id ) : Observable<BonificacionsResponseInterface> => {
+       remove= ( id ) : Observable<ReportesResponseInterface> => {
            return this._http.delete(`${this.endPoint}/${id}`, this.options)
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
-       exist = ( id ) : Observable<BonificacionsResponseInterface> => {
+       exist = ( id ) : Observable<ReportesResponseInterface> => {
            return this._http.get(`${this.endPoint}/${id}`, this.options)
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
-       count = () : Observable<BonificacionsResponseInterface> => {
+       count = () : Observable<ReportesResponseInterface> => {
            return this._http.get(`${this.endPoint}`, this.options)
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
-       insert = ( bonificacion: BonificacionsInterface ) : Observable<BonificacionsResponseInterface> => {
-           return this._http.post(this.endPoint, bonificacion, this.options)
+       insert = ( reporte: ReportesInterface ) : Observable<ReportesResponseInterface> => {
+           return this._http.post(this.endPoint, reporte, this.options)
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }

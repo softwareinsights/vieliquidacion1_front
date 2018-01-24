@@ -36,9 +36,9 @@
               </div>
             </div>
             <div class="form-group row" [ngClass]="{'has-error': (!subtotalAC.valid && subtotalAC.touched), 'has-success': (subtotalAC.valid && subtotalAC.touched)}">
-              <label for="inputsubtotalAC" class="col-sm-3 form-control-label">Subtotal</label>
+              <label for="inputsubtotalAC" class="col-sm-3 form-control-label">Total Refacciones</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="subtotal" [formControl]="subtotalAC" type="number" maxlength='11' class="form-control" id="inputsubtotalAC" placeholder="Subtotal" >
+                <input [(ngModel)]="subtotal" [formControl]="subtotalAC" type="number" maxlength='11' class="form-control" id="inputsubtotalAC" placeholder="Total Refacciones" >
               </div>
             </div>
             <div class="form-group row" [ngClass]="{'has-error': (!totalAC.valid && totalAC.touched), 'has-success': (totalAC.valid && totalAC.touched)}">

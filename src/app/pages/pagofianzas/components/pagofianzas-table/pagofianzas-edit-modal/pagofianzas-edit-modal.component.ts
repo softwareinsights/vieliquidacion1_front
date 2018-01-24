@@ -19,9 +19,9 @@ export class PagofianzasEditModalComponent extends DialogComponent<PagofianzasIn
   _chofer: string[] = [];
 
   idpagofianza: number;
-  saldoanterior: string;
-  montopagado: string;
-  saldoactual: string;
+  saldoanterior: number;
+  montopagado: number;
+  saldoactual: number;
   pago_idpago: number;
   chofer_idchofer: number;
 

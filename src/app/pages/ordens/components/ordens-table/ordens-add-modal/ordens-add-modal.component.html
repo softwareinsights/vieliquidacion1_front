@@ -23,7 +23,6 @@
                 <input [(ngModel)]="hora" [formControl]="horaAC" type="time"  class="form-control" id="inputhoraAC" placeholder="Hora" >
               </div>
             </div>
-
             <div class="form-group row" [ngClass]="{'has-error': (!estado_idestadoAC.valid && estado_idestadoAC.touched), 'has-success': (estado_idestadoAC.valid && estado_idestadoAC.touched)}">
               <label for="inputestado_idestadoAC" class="col-sm-3 form-control-label">Estado</label>
               <div class="col-sm-7">
@@ -66,13 +65,6 @@
                 <input (change)="calculateTotal()" [(ngModel)]="anticipo" [formControl]="anticipoAC" type="number" maxlength='11' class="form-control" id="inputanticipoAC" placeholder="Anticipo" >
               </div>
             </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!subtotalAC.valid && subtotalAC.touched), 'has-success': (subtotalAC.valid && subtotalAC.touched)}">
-              <label for="inputsubtotalAC" class="col-sm-3 form-control-label">Subtotal</label>
-              <div class="col-sm-9">
-                <input [(ngModel)]="subtotal" [formControl]="subtotalAC" type="number" maxlength='11' class="form-control" id="inputsubtotalAC" placeholder="Subtotal" >
-              </div>
-            </div>
-            
             <!--
             <div class="form-group row" [ngClass]="{'has-error': (!orden_has_refaccionAC.valid && orden_has_refaccionAC.touched), 'has-success': (orden_has_refaccionAC.valid && orden_has_refaccionAC.touched)}">
               <label for="inputorden_has_refaccionAC" class="col-sm-3 form-check-label">Refacciones</label>
@@ -86,7 +78,6 @@
               </div>
             </div>
             -->
-
             <div class="row">
               <div class="col-md-4">
                   <div class="form-group">
@@ -140,21 +131,20 @@
                 </table>
               </div>
             </div>
-
             <hr>
-
+            <div class="form-group row" [ngClass]="{'has-error': (!subtotalAC.valid && subtotalAC.touched), 'has-success': (subtotalAC.valid && subtotalAC.touched)}">
+              <label for="inputsubtotalAC" class="col-sm-3 form-control-label">Total Refacciones</label>
+              <div class="col-sm-9">
+                <input (change)="calculateTotal()" [(ngModel)]="subtotal" [formControl]="subtotalAC" type="number" maxlength='11' class="form-control" id="inputsubtotalAC" placeholder="Total Refacciones" >
+              </div>
+            </div>
+            <hr>
             <div class="form-group row" [ngClass]="{'has-error': (!totalAC.valid && totalAC.touched), 'has-success': (totalAC.valid && totalAC.touched)}">
               <label for="inputtotalAC" class="col-md-12 form-control-label">Total</label>
               <div class="col-md-12">
-                <input [(ngModel)]="total" [formControl]="totalAC" type="number" maxlength='11' class="form-control" id="inputtotalAC" placeholder="Total" >
+                <input (click)="calculateTotal()" [(ngModel)]="total" [formControl]="totalAC" type="number" maxlength='11' class="form-control" id="inputtotalAC" placeholder="Total" >
               </div>
             </div>
-
-
-
-
-
-
           </ba-card>
         </div>
         <div class="modal-footer">

@@ -28,30 +28,6 @@
                                 <mfDefaultSorter by='chofer_chofer_idchofer'>Chofer</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
-                                <mfDefaultSorter by='cantidadRecibida'>Cantidad Recibida</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='cambio'>Cambio</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='kilometraje'>Kilometraje</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='fecha'>Fecha</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='hora'>Hora</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='nota'>Nota</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='cantPagada'>Cantidad Pagada</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='estado_estado_idestado'>Estado</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
                                 <mfDefaultSorter by='folio'>Folio Liquidación</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
@@ -63,6 +39,30 @@
                             <th style='width: 5%'>
                                 <mfDefaultSorter by='fianza'>Pago a Fianza</mfDefaultSorter>
                             </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='fecha'>Fecha</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='hora'>Hora</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='cantidadRecibida'>Cantidad Recibida</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='cambio'>Cambio</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='kilometraje'>Kilometraje</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='nota'>Nota</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='cantPagada'>Cantidad Pagada</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='estado_estado_idestado'>Estado</mfDefaultSorter>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,18 +72,18 @@
                                 <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
                             </td>
                             <td>{{ item.chofer_chofer_idchofer }}</td>
-                            <td>{{ item.cantidadRecibida }}</td>
-                            <td>{{ item.cambio }}</td>
-                            <td>{{ item.kilometraje  }}</td>
+                            <td>{{ item.folio }}</td>
+                            <td>{{ item.liquidacion | currency: 'MXN' }}</td>
+                            <td>{{ item.foliofianza }}</td>
+                            <td>{{ item.fianza | currency: 'MXN' }}</td>
                             <td>{{ item.fecha | date:'dd/MM/y' }}</td>
                             <td>{{ item.hora }}</td>
+                            <td>{{ item.cantidadRecibida | currency: 'MXN' }}</td>
+                            <td>{{ item.cambio | currency: 'MXN' }}</td>
+                            <td>{{ item.kilometraje  }}</td>
                             <td>{{ item.nota }}</td>
-                            <td>{{ item.cantPagada }}</td>
+                            <td>{{ item.cantPagada | currency: 'MXN' }}</td>
                             <td>{{ item.estado_estado_idestado }}</td>
-                            <td>{{ item.folio }}</td>
-                            <td>{{ item.liquidacion }}</td>
-                            <td>{{ item.foliofianza }}</td>
-                            <td>{{ item.fianza }}</td>
                         </tr>
                     </tbody>
                     <tfoot>

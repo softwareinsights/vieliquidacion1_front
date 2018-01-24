@@ -79,6 +79,8 @@ export const routes: Routes = [
         canActivateChild: [AuthGuard] },
     { path: 'si_users', loadChildren: './si_users/si_users.module#Si_usersModule',
         canActivateChild: [AuthGuard] },
+    { path: 'reportes', loadChildren: './reportes/reportes.module#ReportesModule',
+        canActivateChild: [AuthGuard] }
     ]
 }
 ];

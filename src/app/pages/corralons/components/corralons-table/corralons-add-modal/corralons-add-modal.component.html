@@ -23,18 +23,20 @@
                 <input [(ngModel)]="hora" [formControl]="horaAC" type="time"  class="form-control" id="inputhoraAC" placeholder="Hora de Ingreso" >
               </div>
             </div>
+            <!--
             <div class="form-group row" [ngClass]="{'has-error': (!fechaSalidaAC.valid && fechaSalidaAC.touched), 'has-success': (fechaSalidaAC.valid && fechaSalidaAC.touched)}">
               <label for="inputfechaSalidaAC" class="col-sm-3 form-control-label">Fecha de Salida</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="fechaSalida" [formControl]="fechaSalidaAC" type="date"  class="form-control" id="inputfechaSalidaAC" placeholder="Fecha de Salida" >
+                <input [(ngModel)]="fechaSalida" [formControl]="fechaSalidaAC" type="date"  class="form-control" id="inputfechaSalidaAC" placeholder="Fecha de Salida" disabled>
               </div>
             </div>
             <div class="form-group row" [ngClass]="{'has-error': (!horaSalidaAC.valid && horaSalidaAC.touched), 'has-success': (horaSalidaAC.valid && horaSalidaAC.touched)}">
               <label for="inputhoraSalidaAC" class="col-sm-3 form-control-label">Hora de Salida</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="horaSalida" [formControl]="horaSalidaAC" type="time"  class="form-control" id="inputhoraSalidaAC" placeholder="Hora de Salida" >
+                <input [(ngModel)]="horaSalida" [formControl]="horaSalidaAC" type="time"  class="form-control" id="inputhoraSalidaAC" placeholder="Hora de Salida" disabled>
               </div>
             </div>
+            -->
             <div class="form-group row" [ngClass]="{'has-error': (!infraccionNumeroAC.valid && infraccionNumeroAC.touched), 'has-success': (infraccionNumeroAC.valid && infraccionNumeroAC.touched)}">
               <label for="inputinfraccionNumeroAC" class="col-sm-3 form-control-label">No. Infracción</label>
               <div class="col-sm-9">
@@ -53,6 +55,7 @@
                 <input [(ngModel)]="motivo" [formControl]="motivoAC" type="text" maxlength='150' class="form-control" id="inputmotivoAC" placeholder="Motivo" >
               </div>
             </div>
+            <!--
             <div class="form-group row" [ngClass]="{'has-error': (!estado_idestadoAC.valid && estado_idestadoAC.touched), 'has-success': (estado_idestadoAC.valid && estado_idestadoAC.touched)}">
               <label for="inputestado_idestadoAC" class="col-sm-3 form-control-label">Estado</label>
               <div class="col-sm-7">
@@ -64,6 +67,7 @@
                 <button (click)='estadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
               </div>
             </div>
+            -->
             <div class="form-group row" [ngClass]="{'has-error': (!permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched), 'has-success': (permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched)}">
               <label for="inputpermisotaxiasignado_idpermisotaxiasignadoAC" class="col-sm-3 form-control-label">Permiso Taxi Asignado</label>
               <div class="col-sm-7">
