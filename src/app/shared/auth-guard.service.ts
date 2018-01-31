@@ -40,7 +40,7 @@ export class AuthGuard implements CanActivate {
       console.log("sin autorización");
     }
 
-    if(isAuthorized) {
+    if (isAuthorized) {
       return true;
     } else {
       // Store the attempted URL for redirecting

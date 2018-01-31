@@ -208,13 +208,12 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
                         (_data: any) => {
                         if (_data.success) {
                             
-                            // FALTA SACAR EL 
                             this.postLiquidacion({
                                 fecha: this.fecha,
                                 saldoanterior: _data.result.liquidacion,
                                 saldoactual: _data.result.liquidacion,
-                                montopagado: '0',
-                                bonificado: '0',
+                                montopagado: 0,
+                                bonificado: 0,
                                 h_corte: this.hora,
                                 permisotaxiasignado_idpermisotaxiasignado: data.result.insertId,
                                 chofer_idchofer: this.chofer_idchofer,
