@@ -33,7 +33,6 @@ export class PermisotaxiasignadosService {
        }
        */
 
-
        all = () : Observable<PermisotaxiasignadosResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

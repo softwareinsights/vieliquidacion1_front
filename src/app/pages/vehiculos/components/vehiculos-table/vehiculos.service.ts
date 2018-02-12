@@ -24,6 +24,12 @@ export class VehiculosService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}vehiculo`;
        }
+    
+       disponibles = () : Observable<VehiculosResponseInterface> => {
+        return this._http.get(`${this.endPoint}/disponibles`, this.options)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+        }
        all = () : Observable<VehiculosResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

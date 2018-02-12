@@ -146,7 +146,7 @@ export class PermisotaxiasignadosEditModalComponent extends DialogComponent<Perm
       }
   }
   getEstado() {
-      this.estadosService.all()
+      this.estadosService.disponibles()
       .subscribe(
           (data: any) => this._estado = data.result,
       );
@@ -158,7 +158,7 @@ export class PermisotaxiasignadosEditModalComponent extends DialogComponent<Perm
       );
   }
   getVehiculo() {
-      this.vehiculosService.all()
+      this.vehiculosService.disponibles()
       .subscribe(
           (data: any) => this._vehiculo = data.result,
       );

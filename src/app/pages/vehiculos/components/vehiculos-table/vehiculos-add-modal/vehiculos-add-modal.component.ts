@@ -131,7 +131,7 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
       }
   }
   getEstado() {
-      this.estadosService.all()
+      this.estadosService.disponibles()
       .subscribe(
           (data: any) => this._estado = data.result,
       );

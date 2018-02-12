@@ -106,7 +106,7 @@ export class PermisotaxisEditModalComponent extends DialogComponent<Permisotaxis
       }
   }
   getEstado() {
-      this.estadosService.all()
+      this.estadosService.disponibles()
       .subscribe(
           (data: any) => this._estado = data.result,
       );

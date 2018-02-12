@@ -24,6 +24,11 @@ export class EstadosService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}estado`;
        }
+       disponibles = () : Observable<EstadosResponseInterface> => {
+        return this._http.get(`${this.endPoint}/disponibles`, this.options)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+       }
        all = () : Observable<EstadosResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

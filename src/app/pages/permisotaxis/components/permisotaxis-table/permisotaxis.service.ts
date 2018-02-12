@@ -24,6 +24,11 @@ export class PermisotaxisService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}permisotaxi`;
        }
+       disponibles = () : Observable<PermisotaxisResponseInterface> => {
+        return this._http.get(`${this.endPoint}/disponibles`, this.options)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+        }
        all = () : Observable<PermisotaxisResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

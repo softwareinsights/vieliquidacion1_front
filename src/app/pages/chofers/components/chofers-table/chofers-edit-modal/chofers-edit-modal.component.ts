@@ -122,7 +122,7 @@ export class ChofersEditModalComponent extends DialogComponent<ChofersInterface,
       }
   }
   getEstado() {
-      this.estadosService.all()
+      this.estadosService.disponibles()
       .subscribe(
           (data: any) => this._estado = data.result,
       );

@@ -149,25 +149,25 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
       }
   }
   getEstado() {
-      this.estadosService.all()
+      this.estadosService.disponibles()
       .subscribe(
           (data: any) => this._estado = data.result,
       );
   }
   getChofer() {
-      this.chofersService.all()
+      this.chofersService.disponibles()
       .subscribe(
           (data: any) => this._chofer = data.result,
       );
   }
   getVehiculo() {
-      this.vehiculosService.all()
+      this.vehiculosService.disponibles()
       .subscribe(
           (data: any) => this._vehiculo = data.result,
       );
   }
   getPermisotaxi() {
-      this.permisotaxisService.all()
+      this.permisotaxisService.disponibles()
       .subscribe(
           (data: any) => this._permisotaxi = data.result,
       );
