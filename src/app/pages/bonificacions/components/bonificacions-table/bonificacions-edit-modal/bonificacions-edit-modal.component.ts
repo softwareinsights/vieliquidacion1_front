@@ -19,7 +19,7 @@ export class BonificacionsEditModalComponent extends DialogComponent<Bonificacio
   _chofer: string[] = [];
 
   idbonificacion: number;
-  cantidad: string;
+  cantidad: number;
   validado: boolean;
   fecha: string;
   estado_idestado: number;

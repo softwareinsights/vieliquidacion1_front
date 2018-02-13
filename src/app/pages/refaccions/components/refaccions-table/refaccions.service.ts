@@ -24,6 +24,11 @@ export class RefaccionsService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}refaccion`;
        }
+       findByIdTaller = ( id ) : Observable<RefaccionsResponseInterface> => {
+           return this._http.get(`${this.endPoint}/taller/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        all = () : Observable<RefaccionsResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

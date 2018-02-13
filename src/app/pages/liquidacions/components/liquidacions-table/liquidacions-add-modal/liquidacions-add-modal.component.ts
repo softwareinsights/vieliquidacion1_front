@@ -17,7 +17,7 @@ import { EstadosAddModalComponent } from './../../../../estados/components/estad
   styleUrls: [('./liquidacions-add-modal.component.scss')],
   templateUrl: './liquidacions-add-modal.component.html'
 })
-export class LiquidacionsAddModalComponent extends DialogComponent<LiquidacionsInterface, any> implements OnInit {
+export class LiquidacionsAddModalComponent extends DialogComponent<LiquidacionsInterface, any> implements OnInit, LiquidacionsInterface {
   _permisotaxiasignado: string[] = [];
   _chofer: string[] = [];
   _estado: string[] = [];

@@ -1,12 +1,10 @@
-import { CorralonsAddModalComponent } from './../../../corralons/components/corralons-table/corralons-add-modal/corralons-add-modal.component';
-import { CorralonsInterface } from './../../../corralons/components/corralons-table/corralons.interface';
 import { ChofersService } from './../../../chofers/components/chofers-table/chofers.service';
 import { ChofersInterface } from './../../../chofers/components/chofers-table/chofers.interface';
 import { VehiculosService } from './../../../vehiculos/components/vehiculos-table/vehiculos.service';
 import { VehiculosInterface } from './../../../vehiculos/components/vehiculos-table/vehiculos.interface';
 import { Persona_choferFilterPipe } from './../../../../theme/pipes/shared/persona_chofer-filter.pipe';
-import { EnviotallersAddModalComponent } from './../../../enviotallers/components/enviotallers-table/enviotallers-add-modal/enviotallers-add-modal.component';
-import { EnviotallersInterface } from './../../../enviotallers/components/enviotallers-table/enviotallers.interface';
+
+import { Router, ActivatedRoute } from '@angular/router';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { PermisotaxiasignadosInterface } from './permisotaxiasignados.interface';
@@ -15,6 +13,15 @@ import { Component, OnInit } from '@angular/core';
 import { PermisotaxiasignadosService } from './permisotaxiasignados.service';
 import { PermisotaxiasignadosAddModalComponent } from './permisotaxiasignados-add-modal/permisotaxiasignados-add-modal.component';
 import { PermisotaxiasignadosEditModalComponent } from './permisotaxiasignados-edit-modal/permisotaxiasignados-edit-modal.component';
+import { CorralonsInterface } from './../../../corralons/components/corralons-table/corralons.interface';
+import { CorralonsAddModalComponent } from './../../../corralons/components/corralons-table/corralons-add-modal/corralons-add-modal.component';
+import { EnviotallersInterface } from './../../../enviotallers/components/enviotallers-table/enviotallers.interface';
+import { EnviotallersAddModalComponent } from './../../../enviotallers/components/enviotallers-table/enviotallers-add-modal/enviotallers-add-modal.component';
+import { LiquidacionsInterface } from './../../../liquidacions/components/liquidacions-table/liquidacions.interface';
+import { LiquidacionsAddModalComponent } from './../../../liquidacions/components/liquidacions-table/liquidacions-add-modal/liquidacions-add-modal.component';
+import { VehiculoreparandosInterface } from './../../../vehiculoreparandos/components/vehiculoreparandos-table/vehiculoreparandos.interface';
+import { VehiculoreparandosAddModalComponent } from './../../../vehiculoreparandos/components/vehiculoreparandos-table/vehiculoreparandos-add-modal/vehiculoreparandos-add-modal.component';
+
 @Component({
 selector: 'permisotaxiasignados-table',
 templateUrl: './permisotaxiasignados-table.html',
@@ -26,32 +33,88 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
     rowsOnPage = 10;
     sortBy = 'idpermisotaxiasignado';
     sortOrder = 'asc';
+    backpage: boolean;
+
     constructor(
-      private service: PermisotaxiasignadosService,
+      private service: PermisotaxiasignadosService, 
       private vehiculosService: VehiculosService, 
       private chofersService: ChofersService, 
       private toastrService: ToastrService, 
-      private dialogService: DialogService) {
+      private dialogService: DialogService, 
+      private route: ActivatedRoute, 
+      private router: Router) {
     }
     ngOnInit() {
-        this.getAll();
+      this.route.params.subscribe(params => {
+        if (params['idchofer'] !== undefined) {
+          const idchofer = +params['idchofer'];
+          this.findByIdChofer(idchofer);
+          this.backpage = true;
+        }
+        if (params['idestado'] !== undefined) {
+          const idestado = +params['idestado'];
+          this.findByIdEstado(idestado);
+          this.backpage = true;
+        }
+        if (params['idpermisotaxi'] !== undefined) {
+          const idpermisotaxi = +params['idpermisotaxi'];
+          this.findByIdPermisotaxi(idpermisotaxi);
+          this.backpage = true;
+        }
+        if (!this.backpage) {
+          this.getAll();
+        }
+      });
     }
-
-    addCorralonModalShow(permisotaxiasignados: PermisotaxiasignadosInterface) {
-
-      // Envio a taller
+    private findByIdChofer(id: number): void {
+      this.service
+        .findByIdChofer(id)
+        .subscribe(
+            (data: PermisotaxiasignadosResponseInterface) => {
+                if (data.success) {
+                this.data = data.result;
+                } else {
+                this.toastrService.error(data.message);
+                }
+            },
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
+    }
+    private findByIdEstado(id: number): void {
+      this.service
+        .findByIdEstado(id)
+        .subscribe(
+            (data: PermisotaxiasignadosResponseInterface) => {
+                if (data.success) {
+                this.data = data.result;
+                } else {
+                this.toastrService.error(data.message);
+                }
+            },
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
+    }
+    private findByIdPermisotaxi(id: number): void {
+      this.service
+        .findByIdPermisotaxi(id)
+        .subscribe(
+            (data: PermisotaxiasignadosResponseInterface) => {
+                if (data.success) {
+                this.data = data.result;
+                } else {
+                this.toastrService.error(data.message);
+                }
+            },
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
+    }
+    backPage() {
+        window.history.back();
+    }
+    insertCorralon(permisotaxiasignados: PermisotaxiasignadosInterface) {
       const corralon: CorralonsInterface = {
-        fecha: '',
-        hora: '',
-        fechaSalida: '',
-        horaSalida: '',
-        infraccionNumero: 0,
-        corralonNombre: '',
-        motivo: '',
-        estado_idestado: 5, // ACTIVO
-        permisotaxiasignado_idpermisotaxiasignado: permisotaxiasignados.idpermisotaxiasignado,
+        permisotaxiasignado_idpermisotaxiasignado: permisotaxiasignados.idpermisotaxiasignado
       }
-
       const disposable = this.dialogService.addDialog(CorralonsAddModalComponent, corralon)
       .subscribe( data => {
           if (data) {
@@ -70,6 +133,7 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
                     this.showToast(data);
               });
 
+/*
               // Update a vehiculo
               const vehiculo: VehiculosInterface = {
                 idvehiculo: permisotaxiasignados.vehiculo_idvehiculo,
@@ -81,6 +145,7 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
                   (data: any) => {
                     this.showToast(data);
               });
+*/
 
               // Update a chofer
               const chofer: ChofersInterface = {
@@ -95,24 +160,24 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
               });
 
             }
-            this.showToast(data);
+          this.corralonShowToast(data);
           }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
+      });
     }
-
-    addEnviotallerModalShow(permisotaxiasignados: PermisotaxiasignadosInterface) {
-
-      // Envio a taller
+    corralonShowToast(result) {
+        if (result.success) {
+            this.toastrService.success(result.message);
+        } else {
+            this.toastrService.error(result.message);
+        }
+    }
+    viewCorralon(permisotaxiasignados: PermisotaxiasignadosInterface) {
+      this.router.navigate([`/pages/corralons/permisotaxiasignado/${permisotaxiasignados.idpermisotaxiasignado}`]);
+    }
+    insertEnviotaller(permisotaxiasignados: PermisotaxiasignadosInterface) {
       const enviotaller: EnviotallersInterface = {
-        fecha: '',
-        hora: '',
-        motivo: '',
-        permisotaxiasignado_idpermisotaxiasignado: permisotaxiasignados.idpermisotaxiasignado,
-        taller_idtaller: 0
+        permisotaxiasignado_idpermisotaxiasignado: permisotaxiasignados.idpermisotaxiasignado
       }
-
       const disposable = this.dialogService.addDialog(EnviotallersAddModalComponent, enviotaller)
       .subscribe( data => {
           if (data) {
@@ -131,6 +196,7 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
                     this.showToast(data);
               });
 
+/*
               // Update a vehiculo
               const vehiculo: VehiculosInterface = {
                 idvehiculo: permisotaxiasignados.vehiculo_idvehiculo,
@@ -142,6 +208,7 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
                   (data: any) => {
                     this.showToast(data);
               });
+*/
 
               // Update a chofer
               const chofer: ChofersInterface = {
@@ -156,13 +223,62 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
               });
 
             }
-            this.showToast(data);
+          this.enviotallerShowToast(data);
           }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
+      });
     }
-
+    enviotallerShowToast(result) {
+        if (result.success) {
+            this.toastrService.success(result.message);
+        } else {
+            this.toastrService.error(result.message);
+        }
+    }
+    viewEnviotaller(permisotaxiasignados: PermisotaxiasignadosInterface) {
+      this.router.navigate([`/pages/enviotallers/permisotaxiasignado/${permisotaxiasignados.idpermisotaxiasignado}`]);
+    }
+    insertLiquidacion(permisotaxiasignados: PermisotaxiasignadosInterface) {
+      const liquidacion: LiquidacionsInterface = {
+        permisotaxiasignado_idpermisotaxiasignado: permisotaxiasignados.idpermisotaxiasignado
+      }
+      const disposable = this.dialogService.addDialog(LiquidacionsAddModalComponent, liquidacion)
+      .subscribe( data => {
+          if (data) {
+          this.liquidacionShowToast(data);
+          }
+      });
+    }
+    liquidacionShowToast(result) {
+        if (result.success) {
+            this.toastrService.success(result.message);
+        } else {
+            this.toastrService.error(result.message);
+        }
+    }
+    viewLiquidacion(permisotaxiasignados: PermisotaxiasignadosInterface) {
+      this.router.navigate([`/pages/liquidacions/permisotaxiasignado/${permisotaxiasignados.idpermisotaxiasignado}`]);
+    }
+    insertVehiculoreparando(permisotaxiasignados: PermisotaxiasignadosInterface) {
+      const vehiculoreparando: VehiculoreparandosInterface = {
+        permisotaxiasignado_idpermisotaxiasignado: permisotaxiasignados.idpermisotaxiasignado
+      }
+      const disposable = this.dialogService.addDialog(VehiculoreparandosAddModalComponent, vehiculoreparando)
+      .subscribe( data => {
+          if (data) {
+          this.vehiculoreparandoShowToast(data);
+          }
+      });
+    }
+    vehiculoreparandoShowToast(result) {
+        if (result.success) {
+            this.toastrService.success(result.message);
+        } else {
+            this.toastrService.error(result.message);
+        }
+    }
+    viewVehiculoreparando(permisotaxiasignados: PermisotaxiasignadosInterface) {
+      this.router.navigate([`/pages/vehiculoreparandos/permisotaxiasignado/${permisotaxiasignados.idpermisotaxiasignado}`]);
+    }
     addModalShow() {
       const disposable = this.dialogService.addDialog(PermisotaxiasignadosAddModalComponent)
       .subscribe( data => {

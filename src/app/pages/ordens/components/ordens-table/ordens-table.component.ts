@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { OrdensInterface } from './ordens.interface';
@@ -17,13 +18,62 @@ export class OrdensTableComponent implements OnInit {
     rowsOnPage = 10;
     sortBy = 'idorden';
     sortOrder = 'asc';
+    backpage: boolean;
+
     constructor(
       private service: OrdensService, 
       private toastrService: ToastrService, 
-      private dialogService: DialogService) {
+      private dialogService: DialogService, 
+      private route: ActivatedRoute, 
+      private router: Router) {
     }
     ngOnInit() {
-        this.getAll();
+      this.route.params.subscribe(params => {
+        if (params['idvehiculoreparando'] !== undefined) {
+          const idvehiculoreparando = +params['idvehiculoreparando'];
+          this.findByIdVehiculoreparando(idvehiculoreparando);
+          this.backpage = true;
+        }
+        if (params['idestado'] !== undefined) {
+          const idestado = +params['idestado'];
+          this.findByIdEstado(idestado);
+          this.backpage = true;
+        }
+        if (!this.backpage) {
+          this.getAll();
+        }
+      });
+    }
+    private findByIdVehiculoreparando(id: number): void {
+      this.service
+        .findByIdVehiculoreparando(id)
+        .subscribe(
+            (data: OrdensResponseInterface) => {
+                if (data.success) {
+                this.data = data.result;
+                } else {
+                this.toastrService.error(data.message);
+                }
+            },
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
+    }
+    private findByIdEstado(id: number): void {
+      this.service
+        .findByIdEstado(id)
+        .subscribe(
+            (data: OrdensResponseInterface) => {
+                if (data.success) {
+                this.data = data.result;
+                } else {
+                this.toastrService.error(data.message);
+                }
+            },
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
+    }
+    backPage() {
+        window.history.back();
     }
     addModalShow() {
       const disposable = this.dialogService.addDialog(OrdensAddModalComponent)

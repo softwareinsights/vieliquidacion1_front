@@ -24,6 +24,16 @@ export class EgresoconceptosService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}egresoconcepto`;
        }
+       findByIdConcepto = ( id ) : Observable<EgresoconceptosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/concepto/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdTaller = ( id ) : Observable<EgresoconceptosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/taller/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        all = () : Observable<EgresoconceptosResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

@@ -24,6 +24,16 @@ export class Orden_has_refaccionsService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}orden_has_refaccion`;
        }
+       findByIdOrden = ( id ) : Observable<Orden_has_refaccionsResponseInterface> => {
+           return this._http.get(`${this.endPoint}/orden/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdRefaccion = ( id ) : Observable<Orden_has_refaccionsResponseInterface> => {
+           return this._http.get(`${this.endPoint}/refaccion/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        all = () : Observable<Orden_has_refaccionsResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

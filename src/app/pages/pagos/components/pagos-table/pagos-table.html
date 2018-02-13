@@ -2,6 +2,7 @@
     <div class='row'>
         <ba-card title='Listado' baCardClass='with-scroll' class='data-table-container'>
             <div class='panel panel-default'>
+                <div class="panel-heading" *ngIf="backpage"><h2>Información de Pagos</h2></div>
                 <table class='table table-striped' [mfData]='data | chofer_chofer_idchoferDataFilter : filterQuery1 | fechaDataFilter : filterQuery2 | notaDataFilter : filterQuery3 | estado_estado_idestadoDataFilter : filterQuery4' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
                     <thead>
                         <tr>
@@ -24,27 +25,6 @@
                         </tr>
                         <tr>
                             <th style='width: 20%'></th>
-                            <th style='width: 15%'>
-                                <mfDefaultSorter by='chofer_chofer_idchofer'>Chofer</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='folio'>Folio Liquidación</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='liquidacion'>Pago a Liquidación</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='foliofianza'>Folio Fianza</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='fianza'>Pago a Fianza</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='fecha'>Fecha</mfDefaultSorter>
-                            </th>
-                            <th style='width: 5%'>
-                                <mfDefaultSorter by='hora'>Hora</mfDefaultSorter>
-                            </th>
                             <th style='width: 5%'>
                                 <mfDefaultSorter by='cantidadRecibida'>Cantidad Recibida</mfDefaultSorter>
                             </th>
@@ -55,6 +35,12 @@
                                 <mfDefaultSorter by='kilometraje'>Kilometraje</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
+                                <mfDefaultSorter by='fecha'>Fecha</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='hora'>Hora</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
                                 <mfDefaultSorter by='nota'>Nota</mfDefaultSorter>
                             </th>
                             <th style='width: 5%'>
@@ -63,27 +49,52 @@
                             <th style='width: 5%'>
                                 <mfDefaultSorter by='estado_estado_idestado'>Estado</mfDefaultSorter>
                             </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='descripcion'>Descripción</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='folio'>Folio Liquidación</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='liquidacion'>Liquidación</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='foliofianza'>Folio Fianza</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='fianza'>Fianza</mfDefaultSorter>
+                            </th>
+                            <th style='width: 5%'>
+                                <mfDefaultSorter by='chofer_chofer_idchofer'>Chofer</mfDefaultSorter>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor='let item of mf.data;  let i = index'>
                             <td>
+                                <button title='Agregar Pago de Bonificaciones' (click)='insertPagobonificacion(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Pago de Bonificaciones</button>
+                                <button title='Ver Pago de Bonificaciones' (click)='viewPagobonificacion(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Pago de Bonificaciones</button>
+                                <button title='Agregar Pago de Fianzas' (click)='insertPagofianza(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Pago de Fianzas</button>
+                                <button title='Ver Pago de Fianzas' (click)='viewPagofianza(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Pago de Fianzas</button>
+                                <button title='Agregar Pago de Liquidaciones' (click)='insertPagoliquidacion(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Pago de Liquidaciones</button>
+                                <button title='Ver Pago de Liquidaciones' (click)='viewPagoliquidacion(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Pago de Liquidaciones</button>
                                 <button title='Editar Registro' (click)='editModalShow(item)' class='btn btn-sm btn-info'><i class='fa fa-edit'></i></button>
                                 <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
                             </td>
-                            <td>{{ item.chofer_chofer_idchofer }}</td>
-                            <td>{{ item.folio }}</td>
-                            <td>{{ item.liquidacion | currency: 'MXN' }}</td>
-                            <td>{{ item.foliofianza }}</td>
-                            <td>{{ item.fianza | currency: 'MXN' }}</td>
-                            <td>{{ item.fecha | date:'dd/MM/y' }}</td>
-                            <td>{{ item.hora }}</td>
-                            <td>{{ item.cantidadRecibida | currency: 'MXN' }}</td>
-                            <td>{{ item.cambio | currency: 'MXN' }}</td>
+                            <td>{{ item.cantidadRecibida  }}</td>
+                            <td>{{ item.cambio  }}</td>
                             <td>{{ item.kilometraje  }}</td>
-                            <td>{{ item.nota }}</td>
-                            <td>{{ item.cantPagada | currency: 'MXN' }}</td>
+                            <td>{{ item.fecha | date:'dd/MM/y' }}</td>
+                            <td>{{ item.hora  }}</td>
+                            <td>{{ item.nota  }}</td>
+                            <td>{{ item.cantPagada  }}</td>
                             <td>{{ item.estado_estado_idestado }}</td>
+                            <td>{{ item.descripcion  }}</td>
+                            <td>{{ item.folio  }}</td>
+                            <td>{{ item.liquidacion  }}</td>
+                            <td>{{ item.foliofianza  }}</td>
+                            <td>{{ item.fianza  }}</td>
+                            <td>{{ item.chofer_chofer_idchofer }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -98,8 +109,11 @@
         </ba-card>
     </div>
     <div class='row'>
-        <div class='col-sm-6'>
+        <div class='col-sm-2'>
             <button (click)='addModalShow()' class='btn btn-success'><i class='fa fa-plus'></i> Agregar</button>
+        </div>
+        <div class='col-sm-2' *ngIf="backpage">
+            <button (click)='backPage()' class='btn btn-primary'><i class='fa fa-arrow-left'></i> Regresar</button>
         </div>
     </div>
 </div>

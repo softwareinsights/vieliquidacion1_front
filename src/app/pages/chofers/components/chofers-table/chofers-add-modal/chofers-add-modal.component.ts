@@ -15,7 +15,7 @@ import { PersonasAddModalComponent } from './../../../../personas/components/per
   styleUrls: [('./chofers-add-modal.component.scss')],
   templateUrl: './chofers-add-modal.component.html'
 })
-export class ChofersAddModalComponent extends DialogComponent<ChofersInterface, any> implements OnInit {
+export class ChofersAddModalComponent extends DialogComponent<ChofersInterface, any> implements OnInit, ChofersInterface {
   _estado: string[] = [];
   _persona: string[] = [];
 
@@ -81,8 +81,6 @@ export class ChofersAddModalComponent extends DialogComponent<ChofersInterface, 
     this.aval4AC = this.form.controls['aval4AC'];
     this.deudafianzaAC = this.form.controls['deudafianzaAC'];
     this.deudaliquidacionAC = this.form.controls['deudaliquidacionAC'];
-
-    this.deudaliquidacion = 0;
   }
   ngOnInit() {
       this.getEstado();
@@ -131,9 +129,6 @@ export class ChofersAddModalComponent extends DialogComponent<ChofersInterface, 
       .subscribe(
           (data: any) => this._persona = data.result,
       );
-  }
-  setDeudaFianza() {
-      this.deudafianza = this.fianza;
   }
   confirm() {
     this.result = this.data;

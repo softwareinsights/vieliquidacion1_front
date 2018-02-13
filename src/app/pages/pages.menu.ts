@@ -1,8 +1,7 @@
 export const PAGES_MENU = [
 {
     path: 'pages',
-    children: [
-        
+    children: [     
     {
         path: 'dashboard',
         data: {
@@ -100,10 +99,10 @@ export const PAGES_MENU = [
         }
     },
     {
-        path: 'liquidacions',
+        path: 'mantenimientos',
         data: {
         menu: {
-            title: 'general.menu.liquidacions',
+            title: 'general.menu.mantenimientos',
             icon: 'ion-social-buffer',
             selected: false,
             expanded: false,
@@ -152,6 +151,18 @@ export const PAGES_MENU = [
         data: {
         menu: {
             title: 'general.menu.pagos',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+        }
+        }
+    },
+    {
+        path: 'pagobonificacions',
+        data: {
+        menu: {
+            title: 'general.menu.pagobonificacions',
             icon: 'ion-social-buffer',
             selected: false,
             expanded: false,
@@ -232,10 +243,58 @@ export const PAGES_MENU = [
         }
     },
     {
-        path: 'reportes',
+        path: 'si_modulos',
         data: {
         menu: {
-            title: 'general.menu.reportes',
+            title: 'general.menu.si_modulos',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+        }
+        }
+    },
+    {
+        path: 'si_permisos',
+        data: {
+        menu: {
+            title: 'general.menu.si_permisos',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+        }
+        }
+    },
+    {
+        path: 'si_reportes',
+        data: {
+        menu: {
+            title: 'general.menu.si_reportes',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+        }
+        }
+    },
+    {
+        path: 'si_rols',
+        data: {
+        menu: {
+            title: 'general.menu.si_rols',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+        }
+        }
+    },
+    {
+        path: 'si_users',
+        data: {
+        menu: {
+            title: 'general.menu.si_users',
             icon: 'ion-social-buffer',
             selected: false,
             expanded: false,
@@ -272,54 +331,6 @@ export const PAGES_MENU = [
         data: {
         menu: {
             title: 'general.menu.vehiculoreparandos',
-            icon: 'ion-social-buffer',
-            selected: false,
-            expanded: false,
-            order: 0
-        }
-        }
-    },
-    {
-        path: 'si_modulos',
-        data: {
-        menu: {
-            title: 'general.menu.si_modulos',
-            icon: 'ion-social-buffer',
-            selected: false,
-            expanded: false,
-            order: 0
-        }
-        }
-    },
-    {
-        path: 'si_permisos',
-        data: {
-        menu: {
-            title: 'general.menu.si_permisos',
-            icon: 'ion-social-buffer',
-            selected: false,
-            expanded: false,
-            order: 0
-        }
-        }
-    },
-    {
-        path: 'si_rols',
-        data: {
-        menu: {
-            title: 'general.menu.si_rols',
-            icon: 'ion-social-buffer',
-            selected: false,
-            expanded: false,
-            order: 0
-        }
-        }
-    },
-    {
-        path: 'si_users',
-        data: {
-        menu: {
-            title: 'general.menu.si_users',
             icon: 'ion-social-buffer',
             selected: false,
             expanded: false,

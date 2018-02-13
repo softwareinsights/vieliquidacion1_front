@@ -46,7 +46,7 @@ export class AuthService {
 
         // Recordar la sesión desde LocalStorage
         this.recordarSesion = (localStorage.getItem('recordarSesion') === 'true') ? true : false;
-        console.log("this.recordarSesion from authservice constructor", this.recordarSesion);
+        
         if (this.recordarSesion) {
             this.isLoggedIn = (localStorage.getItem('isLoggedIn') === 'true') ? true : false;
             this.token = (localStorage.getItem('token')) ? localStorage.getItem('token') : '';
@@ -84,8 +84,7 @@ export class AuthService {
                         });
                     });
                     this.user_modules = modules;
-                    console.log("modules from login", modules);
-                    
+
                     localStorage.setItem('token', response.token);
                     if (values.recordarSesion) {
                         localStorage.setItem('isLoggedIn', 'true');
@@ -158,7 +157,7 @@ export class AuthService {
     
     modulePermission(module_path: string) {
         const modules = this.getUserModulesPaths();
-        if (modules.indexOf(module_path) >= 0){
+        if (modules.indexOf(module_path) >= 0) {
             return true;
         } else {
             return false;

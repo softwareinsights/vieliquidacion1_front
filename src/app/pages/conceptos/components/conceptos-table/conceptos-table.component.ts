@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { ConceptosInterface } from './conceptos.interface';
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 import { ConceptosService } from './conceptos.service';
 import { ConceptosAddModalComponent } from './conceptos-add-modal/conceptos-add-modal.component';
 import { ConceptosEditModalComponent } from './conceptos-edit-modal/conceptos-edit-modal.component';
+import { EgresoconceptosInterface } from './../../../egresoconceptos/components/egresoconceptos-table/egresoconceptos.interface';
+import { EgresoconceptosAddModalComponent } from './../../../egresoconceptos/components/egresoconceptos-table/egresoconceptos-add-modal/egresoconceptos-add-modal.component';
+
 @Component({
 selector: 'conceptos-table',
 templateUrl: './conceptos-table.html',
@@ -17,13 +21,38 @@ export class ConceptosTableComponent implements OnInit {
     rowsOnPage = 10;
     sortBy = 'idconcepto';
     sortOrder = 'asc';
+    backpage: boolean;
+
     constructor(
       private service: ConceptosService, 
       private toastrService: ToastrService, 
-      private dialogService: DialogService) {
+      private dialogService: DialogService, 
+      private route: ActivatedRoute, 
+      private router: Router) {
     }
     ngOnInit() {
-        this.getAll();
+      this.getAll();
+    }
+    insertEgresoconcepto(conceptos: ConceptosInterface) {
+      const egresoconcepto: EgresoconceptosInterface = {
+        concepto_idconcepto: conceptos.idconcepto
+      }
+      const disposable = this.dialogService.addDialog(EgresoconceptosAddModalComponent, egresoconcepto)
+      .subscribe( data => {
+          if (data) {
+          this.egresoconceptoShowToast(data);
+          }
+      });
+    }
+    egresoconceptoShowToast(result) {
+        if (result.success) {
+            this.toastrService.success(result.message);
+        } else {
+            this.toastrService.error(result.message);
+        }
+    }
+    viewEgresoconcepto(conceptos: ConceptosInterface) {
+      this.router.navigate([`/pages/egresoconceptos/concepto/${conceptos.idconcepto}`]);
     }
     addModalShow() {
       const disposable = this.dialogService.addDialog(ConceptosAddModalComponent)

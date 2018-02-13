@@ -13,7 +13,7 @@ import { TallersAddModalComponent } from './../../../../tallers/components/talle
   styleUrls: [('./refaccions-add-modal.component.scss')],
   templateUrl: './refaccions-add-modal.component.html'
 })
-export class RefaccionsAddModalComponent extends DialogComponent<RefaccionsInterface, any> implements OnInit {
+export class RefaccionsAddModalComponent extends DialogComponent<RefaccionsInterface, any> implements OnInit, RefaccionsInterface {
   _taller: string[] = [];
 
   nombre: string;

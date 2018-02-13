@@ -15,7 +15,7 @@ import { ConceptosAddModalComponent } from './../../../../conceptos/components/c
   styleUrls: [('./egresoconceptos-add-modal.component.scss')],
   templateUrl: './egresoconceptos-add-modal.component.html'
 })
-export class EgresoconceptosAddModalComponent extends DialogComponent<EgresoconceptosInterface, any> implements OnInit {
+export class EgresoconceptosAddModalComponent extends DialogComponent<EgresoconceptosInterface, any> implements OnInit, EgresoconceptosInterface {
   _taller: string[] = [];
   _concepto: string[] = [];
 

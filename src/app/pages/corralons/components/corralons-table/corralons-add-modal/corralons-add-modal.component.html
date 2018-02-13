@@ -27,13 +27,13 @@
             <div class="form-group row" [ngClass]="{'has-error': (!fechaSalidaAC.valid && fechaSalidaAC.touched), 'has-success': (fechaSalidaAC.valid && fechaSalidaAC.touched)}">
               <label for="inputfechaSalidaAC" class="col-sm-3 form-control-label">Fecha de Salida</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="fechaSalida" [formControl]="fechaSalidaAC" type="date"  class="form-control" id="inputfechaSalidaAC" placeholder="Fecha de Salida" disabled>
+                <input [(ngModel)]="fechaSalida" [formControl]="fechaSalidaAC" type="date"  class="form-control" id="inputfechaSalidaAC" placeholder="Fecha de Salida" >
               </div>
             </div>
             <div class="form-group row" [ngClass]="{'has-error': (!horaSalidaAC.valid && horaSalidaAC.touched), 'has-success': (horaSalidaAC.valid && horaSalidaAC.touched)}">
               <label for="inputhoraSalidaAC" class="col-sm-3 form-control-label">Hora de Salida</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="horaSalida" [formControl]="horaSalidaAC" type="time"  class="form-control" id="inputhoraSalidaAC" placeholder="Hora de Salida" disabled>
+                <input [(ngModel)]="horaSalida" [formControl]="horaSalidaAC" type="time"  class="form-control" id="inputhoraSalidaAC" placeholder="Hora de Salida" >
               </div>
             </div>
             -->

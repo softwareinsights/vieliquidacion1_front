@@ -15,7 +15,7 @@ import { ChofersAddModalComponent } from './../../../../chofers/components/chofe
   styleUrls: [('./pagofianzas-add-modal.component.scss')],
   templateUrl: './pagofianzas-add-modal.component.html'
 })
-export class PagofianzasAddModalComponent extends DialogComponent<PagofianzasInterface, any> implements OnInit {
+export class PagofianzasAddModalComponent extends DialogComponent<PagofianzasInterface, any> implements OnInit, PagofianzasInterface {
   _pago: string[] = [];
   _chofer: string[] = [];
 

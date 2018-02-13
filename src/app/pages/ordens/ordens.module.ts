@@ -13,7 +13,6 @@ import { OrdensService } from './components/ordens-table/ordens.service';
 import { OrdensTableComponent } from './components/ordens-table/ordens-table.component';
 import { RefaccionesModalComponent } from './components/refacciones-modal/refacciones-modal.component';
 
-
 @NgModule({
   imports: [
     CommonModule,

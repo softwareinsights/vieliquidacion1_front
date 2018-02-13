@@ -21,7 +21,7 @@ import { PermisotaxiasignadosAddModalComponent } from './../../../../permisotaxi
   styleUrls: [('./vehiculoreparandos-add-modal.component.scss')],
   templateUrl: './vehiculoreparandos-add-modal.component.html'
 })
-export class VehiculoreparandosAddModalComponent extends DialogComponent<VehiculoreparandosInterface, any> implements OnInit {
+export class VehiculoreparandosAddModalComponent extends DialogComponent<VehiculoreparandosInterface, any> implements OnInit, VehiculoreparandosInterface {
   _estado: string[] = [];
   _enviotaller: string[] = [];
   _taller: string[] = [];
@@ -82,7 +82,7 @@ export class VehiculoreparandosAddModalComponent extends DialogComponent<Vehicul
     'horaEstimadaAC' : [''],
     'inventarioAC' : ['',Validators.compose([Validators.maxLength(80)])],
     'motivoAC' : ['',Validators.compose([Validators.maxLength(80)])],
-    'estado_idestadoAC' : [''],
+    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'enviotaller_idenviotallerAC' : ['',Validators.compose([Validators.maxLength(11)])],
     'taller_idtallerAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'mecanico_idmecanicoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
@@ -101,15 +101,6 @@ export class VehiculoreparandosAddModalComponent extends DialogComponent<Vehicul
     this.taller_idtallerAC = this.form.controls['taller_idtallerAC'];
     this.mecanico_idmecanicoAC = this.form.controls['mecanico_idmecanicoAC'];
     this.permisotaxiasignado_idpermisotaxiasignadoAC = this.form.controls['permisotaxiasignado_idpermisotaxiasignadoAC'];
-
-    // FECHA Y HORA ACTUAL
-    const date = new Date();
-    const month = (date.getMonth() + 1);
-    const now = date.getFullYear() + "-" + ((month < 10) ? "0" : "") + month + "-" + date.getDate();
-    const hour = date.getHours() + ":" + date.getMinutes();
-
-    this.fechaIngresa = now;
-    this.horaIngresa = hour;
   }
   ngOnInit() {
       this.getEstado();

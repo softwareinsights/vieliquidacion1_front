@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: [('./estados-add-modal.component.scss')],
   templateUrl: './estados-add-modal.component.html'
 })
-export class EstadosAddModalComponent extends DialogComponent<EstadosInterface, any> implements OnInit {
+export class EstadosAddModalComponent extends DialogComponent<EstadosInterface, any> implements OnInit, EstadosInterface {
 
   nombre: string;
 

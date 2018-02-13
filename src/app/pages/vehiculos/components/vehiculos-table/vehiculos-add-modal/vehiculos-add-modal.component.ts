@@ -15,7 +15,7 @@ import { PersonasAddModalComponent } from './../../../../personas/components/per
   styleUrls: [('./vehiculos-add-modal.component.scss')],
   templateUrl: './vehiculos-add-modal.component.html'
 })
-export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterface, any> implements OnInit {
+export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterface, any> implements OnInit, VehiculosInterface {
   _estado: string[] = [];
   _persona: string[] = [];
 
@@ -29,8 +29,6 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
   estado_idestado: number;
   poliza: string;
   polizaTipo: string;
-  condActual: string;
-  condInicial: string;
   color: string;
   propietario: number;
 
@@ -48,8 +46,6 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
   estado_idestadoAC: AbstractControl;
   polizaAC: AbstractControl;
   polizaTipoAC: AbstractControl;
-  condActualAC: AbstractControl;
-  condInicialAC: AbstractControl;
   colorAC: AbstractControl;
   propietarioAC: AbstractControl;
 
@@ -74,8 +70,6 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
     'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'polizaAC' : ['',Validators.compose([Validators.maxLength(15)])],
     'polizaTipoAC' : ['',Validators.compose([Validators.maxLength(15)])],
-    'condActualAC' : ['',Validators.compose([Validators.maxLength(150)])],
-    'condInicialAC' : ['',Validators.compose([Validators.maxLength(150)])],
     'colorAC' : ['',Validators.compose([Validators.maxLength(20)])],
     'propietarioAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     });
@@ -89,8 +83,6 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
     this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
     this.polizaAC = this.form.controls['polizaAC'];
     this.polizaTipoAC = this.form.controls['polizaTipoAC'];
-    this.condActualAC = this.form.controls['condActualAC'];
-    this.condInicialAC = this.form.controls['condInicialAC'];
     this.colorAC = this.form.controls['colorAC'];
     this.propietarioAC = this.form.controls['propietarioAC'];
   }
@@ -161,8 +153,6 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
                   estado_idestado: this.estado_idestado,
                   poliza: this.poliza,
                   polizaTipo: this.polizaTipo,
-                  condActual: this.condActual,
-                  condInicial: this.condInicial,
                   color: this.color,
                   propietario: this.propietario,
         })

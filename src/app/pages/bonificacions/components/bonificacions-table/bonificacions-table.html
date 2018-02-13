@@ -2,6 +2,7 @@
     <div class='row'>
         <ba-card title='Listado' baCardClass='with-scroll' class='data-table-container'>
             <div class='panel panel-default'>
+                <div class="panel-heading" *ngIf="backpage"><h2>Información de Bonificaciones</h2></div>
                 <table class='table table-striped' [mfData]='data | chofer_chofer_idchoferDataFilter : filterQuery1 | estado_estado_idestadoDataFilter : filterQuery2 | conceptoDataFilter : filterQuery3' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
                     <thead>
                         <tr>
@@ -43,16 +44,19 @@
                     <tbody>
                         <tr *ngFor='let item of mf.data;  let i = index'>
                             <td>
-                                <button *ngIf="!item.validado" title='Validar Bonificación' (click)='validateBonification(item)' class='btn btn-sm btn-primary'><i class='fa fa-check'></i></button>
-                                <button *ngIf="item.estado_estado_idestado == 'NOAPLICADA'" title='Aplicar Bonificación' (click)='applyBonification(item)' class='btn btn-sm btn-success'><i class='fa fa-dollar'></i></button>
+                                <button *ngIf="!item.validado" title='Validar Bonificación' (click)='validateBonification(item)' class='btn btn-sm btn-primary'><i class='fa fa-check'></i> Validar Bonificación</button>
+                                <button *ngIf="item.estado_estado_idestado == 'NOAPLICADA'" title='Aplicar Bonificación' (click)='applyBonification(item)' class='btn btn-sm btn-success'><i class='fa fa-dollar'></i> Aplicar Bonificación</button>
+                                
+                                <button title='Agregar Pago de Bonificaciones' (click)='insertPagobonificacion(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Pago de Bonificaciones</button>
+                                <button title='Ver Pago de Bonificaciones' (click)='viewPagobonificacion(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Pago de Bonificaciones</button>
                                 <button title='Editar Registro' (click)='editModalShow(item)' class='btn btn-sm btn-info'><i class='fa fa-edit'></i></button>
                                 <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
                             </td>
-                            <td>{{ item.cantidad }}</td>
+                            <td>{{ item.cantidad  }}</td>
                             <td>{{ item.validado ? 'Si' : 'No' }}</td>
                             <td>{{ item.fecha | date:'dd/MM/y' }}</td>
                             <td>{{ item.estado_estado_idestado }}</td>
-                            <td>{{ item.concepto }}</td>
+                            <td>{{ item.concepto  }}</td>
                             <td>{{ item.chofer_chofer_idchofer }}</td>
                         </tr>
                     </tbody>
@@ -68,8 +72,11 @@
         </ba-card>
     </div>
     <div class='row'>
-        <div class='col-sm-6'>
+        <div class='col-sm-2'>
             <button (click)='addModalShow()' class='btn btn-success'><i class='fa fa-plus'></i> Agregar</button>
+        </div>
+        <div class='col-sm-2' *ngIf="backpage">
+            <button (click)='backPage()' class='btn btn-primary'><i class='fa fa-arrow-left'></i> Regresar</button>
         </div>
     </div>
 </div>

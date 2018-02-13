@@ -1,9 +1,8 @@
-import { VehiculosService } from './../../../vehiculos/components/vehiculos-table/vehiculos.service';
-import { ChofersService } from './../../../chofers/components/chofers-table/chofers.service';
 import { ChofersInterface } from './../../../chofers/components/chofers-table/chofers.interface';
 import { VehiculosInterface } from './../../../vehiculos/components/vehiculos-table/vehiculos.interface';
-
-
+import { ChofersService } from './../../../chofers/components/chofers-table/chofers.service';
+import { VehiculosService } from './../../../vehiculos/components/vehiculos-table/vehiculos.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { CorralonsInterface } from './corralons.interface';
@@ -12,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { CorralonsService } from './corralons.service';
 import { CorralonsAddModalComponent } from './corralons-add-modal/corralons-add-modal.component';
 import { CorralonsEditModalComponent } from './corralons-edit-modal/corralons-edit-modal.component';
+
 @Component({
 selector: 'corralons-table',
 templateUrl: './corralons-table.html',
@@ -23,19 +23,38 @@ export class CorralonsTableComponent implements OnInit {
     rowsOnPage = 10;
     sortBy = 'idcorralon';
     sortOrder = 'asc';
+    backpage: boolean;
+
     constructor(
       private service: CorralonsService, 
+      private toastrService: ToastrService, 
+      private dialogService: DialogService, 
 
       private vehiculosService: VehiculosService,
       private chofersService: ChofersService,
 
-      private toastrService: ToastrService, 
-      private dialogService: DialogService) {
+      private route: ActivatedRoute, 
+      private router: Router) {
     }
     ngOnInit() {
-        this.getAll();
+      this.route.params.subscribe(params => {
+        if (params['idestado'] !== undefined) {
+          const idestado = +params['idestado'];
+          this.findByIdEstado(idestado);
+          this.backpage = true;
+        }
+        if (params['idpermisotaxiasignado'] !== undefined) {
+          const idpermisotaxiasignado = +params['idpermisotaxiasignado'];
+          this.findByIdPermisotaxiasignado(idpermisotaxiasignado);
+          this.backpage = true;
+        }
+        if (!this.backpage) {
+          this.getAll();
+        }
+      });
     }
 
+    
     goOutCorralon(corralons: CorralonsInterface) {
       this.service.goOutCorralon(corralons)
       .subscribe(
@@ -71,6 +90,37 @@ export class CorralonsTableComponent implements OnInit {
           });
     }
 
+    private findByIdEstado(id: number): void {
+      this.service
+        .findByIdEstado(id)
+        .subscribe(
+            (data: CorralonsResponseInterface) => {
+                if (data.success) {
+                this.data = data.result;
+                } else {
+                this.toastrService.error(data.message);
+                }
+            },
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
+    }
+    private findByIdPermisotaxiasignado(id: number): void {
+      this.service
+        .findByIdPermisotaxiasignado(id)
+        .subscribe(
+            (data: CorralonsResponseInterface) => {
+                if (data.success) {
+                this.data = data.result;
+                } else {
+                this.toastrService.error(data.message);
+                }
+            },
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
+    }
+    backPage() {
+        window.history.back();
+    }
     addModalShow() {
       const disposable = this.dialogService.addDialog(CorralonsAddModalComponent)
       .subscribe( data => {

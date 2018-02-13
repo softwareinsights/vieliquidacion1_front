@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: [('./personas-add-modal.component.scss')],
   templateUrl: './personas-add-modal.component.html'
 })
-export class PersonasAddModalComponent extends DialogComponent<PersonasInterface, any> implements OnInit {
+export class PersonasAddModalComponent extends DialogComponent<PersonasInterface, any> implements OnInit, PersonasInterface {
 
   nombre: string;
   edad: number;

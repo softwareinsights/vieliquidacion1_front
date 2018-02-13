@@ -24,6 +24,11 @@ export class Si_reportesService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}si_reporte`;
        }
+       findByIdSi_modulo = ( id ) : Observable<Si_reportesResponseInterface> => {
+           return this._http.get(`${this.endPoint}/si_modulo/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        all = () : Observable<Si_reportesResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

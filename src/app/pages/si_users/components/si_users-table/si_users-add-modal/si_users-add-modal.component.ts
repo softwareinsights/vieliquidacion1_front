@@ -13,13 +13,13 @@ import { Si_rolsAddModalComponent } from './../../../../si_rols/components/si_ro
   styleUrls: [('./si_users-add-modal.component.scss')],
   templateUrl: './si_users-add-modal.component.html'
 })
-export class Si_usersAddModalComponent extends DialogComponent<Si_usersInterface, any> implements OnInit {
+export class Si_usersAddModalComponent extends DialogComponent<Si_usersInterface, any> implements OnInit, Si_usersInterface {
   _si_rol: string[] = [];
 
   usuario: string;
   email: string;
   password: string;
-  Rol_idsi_rol: number;
+  si_rol_idsi_rol: number;
 
   modalHeader: string;
   data: any;
@@ -28,7 +28,7 @@ export class Si_usersAddModalComponent extends DialogComponent<Si_usersInterface
   usuarioAC: AbstractControl;
   emailAC: AbstractControl;
   passwordAC: AbstractControl;
-  Rol_idsi_rolAC: AbstractControl;
+  si_rol_idsi_rolAC: AbstractControl;
 
   constructor(
     private service: Si_usersService,
@@ -43,12 +43,12 @@ export class Si_usersAddModalComponent extends DialogComponent<Si_usersInterface
     'usuarioAC' : ['',Validators.compose([Validators.maxLength(45)])],
     'emailAC' : ['',Validators.compose([Validators.required,Validators.maxLength(60)])],
     'passwordAC' : ['',Validators.compose([Validators.maxLength(60)])],
-    'Rol_idsi_rolAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
+    'si_rol_idsi_rolAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
     });
     this.usuarioAC = this.form.controls['usuarioAC'];
     this.emailAC = this.form.controls['emailAC'];
     this.passwordAC = this.form.controls['passwordAC'];
-    this.Rol_idsi_rolAC = this.form.controls['Rol_idsi_rolAC'];
+    this.si_rol_idsi_rolAC = this.form.controls['si_rol_idsi_rolAC'];
   }
   ngOnInit() {
       this.getSi_rol();
@@ -87,7 +87,7 @@ export class Si_usersAddModalComponent extends DialogComponent<Si_usersInterface
                   usuario: this.usuario,
                   email: this.email,
                   password: this.password,
-                  Rol_idsi_rol: this.Rol_idsi_rol,
+                  si_rol_idsi_rol: this.si_rol_idsi_rol,
         })
         .subscribe(
             (data: any) => {

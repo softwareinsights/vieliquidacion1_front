@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: [('./si_rols-add-modal.component.scss')],
   templateUrl: './si_rols-add-modal.component.html'
 })
-export class Si_rolsAddModalComponent extends DialogComponent<Si_rolsInterface, any> implements OnInit {
+export class Si_rolsAddModalComponent extends DialogComponent<Si_rolsInterface, any> implements OnInit, Si_rolsInterface {
 
   nombre: string;
 

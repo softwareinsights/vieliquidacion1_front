@@ -13,13 +13,13 @@ import { Si_modulosAddModalComponent } from './../../../../si_modulos/components
   styleUrls: [('./si_reportes-add-modal.component.scss')],
   templateUrl: './si_reportes-add-modal.component.html'
 })
-export class Si_reportesAddModalComponent extends DialogComponent<Si_reportesInterface, any> implements OnInit {
+export class Si_reportesAddModalComponent extends DialogComponent<Si_reportesInterface, any> implements OnInit, Si_reportesInterface {
   _si_modulo: string[] = [];
 
   nombre: string;
   consulta: string;
   campos: string;
-  Modulo_idsi_modulo: number;
+  si_modulo_idsi_modulo: number;
   pfd: boolean;
   excel: boolean;
   print: boolean;
@@ -31,7 +31,7 @@ export class Si_reportesAddModalComponent extends DialogComponent<Si_reportesInt
   nombreAC: AbstractControl;
   consultaAC: AbstractControl;
   camposAC: AbstractControl;
-  Modulo_idsi_moduloAC: AbstractControl;
+  si_modulo_idsi_moduloAC: AbstractControl;
   pfdAC: AbstractControl;
   excelAC: AbstractControl;
   printAC: AbstractControl;
@@ -49,7 +49,7 @@ export class Si_reportesAddModalComponent extends DialogComponent<Si_reportesInt
     'nombreAC' : ['',Validators.compose([Validators.maxLength(45)])],
     'consultaAC' : ['',Validators.compose([Validators.required,Validators.maxLength(400)])],
     'camposAC' : ['',Validators.compose([Validators.required,Validators.maxLength(140)])],
-    'Modulo_idsi_moduloAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
+    'si_modulo_idsi_moduloAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
     'pfdAC' : [''],
     'excelAC' : [''],
     'printAC' : [''],
@@ -57,7 +57,7 @@ export class Si_reportesAddModalComponent extends DialogComponent<Si_reportesInt
     this.nombreAC = this.form.controls['nombreAC'];
     this.consultaAC = this.form.controls['consultaAC'];
     this.camposAC = this.form.controls['camposAC'];
-    this.Modulo_idsi_moduloAC = this.form.controls['Modulo_idsi_moduloAC'];
+    this.si_modulo_idsi_moduloAC = this.form.controls['si_modulo_idsi_moduloAC'];
     this.pfdAC = this.form.controls['pfdAC'];
     this.excelAC = this.form.controls['excelAC'];
     this.printAC = this.form.controls['printAC'];
@@ -99,7 +99,7 @@ export class Si_reportesAddModalComponent extends DialogComponent<Si_reportesInt
                   nombre: this.nombre,
                   consulta: this.consulta,
                   campos: this.campos,
-                  Modulo_idsi_modulo: this.Modulo_idsi_modulo,
+                  si_modulo_idsi_modulo: this.si_modulo_idsi_modulo,
                   pfd: this.pfd,
                   excel: this.excel,
                   print: this.print,

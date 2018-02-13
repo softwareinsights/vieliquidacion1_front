@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: [('./conceptos-add-modal.component.scss')],
   templateUrl: './conceptos-add-modal.component.html'
 })
-export class ConceptosAddModalComponent extends DialogComponent<ConceptosInterface, any> implements OnInit {
+export class ConceptosAddModalComponent extends DialogComponent<ConceptosInterface, any> implements OnInit, ConceptosInterface {
 
   nombre: string;
 

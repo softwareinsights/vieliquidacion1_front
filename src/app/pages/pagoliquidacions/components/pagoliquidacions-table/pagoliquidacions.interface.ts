@@ -1,5 +1,8 @@
 export interface PagoliquidacionsInterface {
    idpagoliquidacion?: number;
+   saldoanterior?: number;
+   montopagado?: number;
+   saldoactual?: number;
    pago_idpago?: number;
    liquidacion_idliquidacion?: number;
    chofer_idchofer?: number;

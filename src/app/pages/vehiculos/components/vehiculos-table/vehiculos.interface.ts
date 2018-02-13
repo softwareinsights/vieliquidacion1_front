@@ -10,8 +10,6 @@ export interface VehiculosInterface {
    estado_idestado?: number;
    poliza?: string;
    polizaTipo?: string;
-   condActual?: string;
-   condInicial?: string;
    color?: string;
    propietario?: number;
    baja?: boolean;

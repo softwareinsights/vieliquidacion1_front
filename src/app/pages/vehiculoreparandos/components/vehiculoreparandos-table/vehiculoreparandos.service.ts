@@ -26,13 +26,36 @@ export class VehiculoreparandosService {
        }
 
        goOutVehicle = ( vehiculoreparando: VehiculoreparandosInterface ) : Observable<VehiculoreparandosResponseInterface> => {
-           
-           console.log('service vehiculoreparando', vehiculoreparando);
            return this._http.post(`${this.endPoint}/go-out-vehicle`, vehiculoreparando, this.options)
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
 
+       findByIdEnviotaller = ( id ) : Observable<VehiculoreparandosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/enviotaller/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdEstado = ( id ) : Observable<VehiculoreparandosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/estado/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdMecanico = ( id ) : Observable<VehiculoreparandosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/mecanico/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdPermisotaxiasignado = ( id ) : Observable<VehiculoreparandosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/permisotaxiasignado/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdTaller = ( id ) : Observable<VehiculoreparandosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/taller/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        all = () : Observable<VehiculoreparandosResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

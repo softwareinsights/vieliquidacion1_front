@@ -1,8 +1,8 @@
 export interface Si_permisosInterface {
    idsi_permiso?: number;
    acceso?: boolean;
-   Rol_idsi_rol?: number;
-   Modulo_idsi_modulo?: number;
+   si_rol_idsi_rol?: number;
+   si_modulo_idsi_modulo?: number;
    readable?: boolean;
    writeable?: boolean;
    updateable?: boolean;

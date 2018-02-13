@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { PagoliquidacionsInterface } from './pagoliquidacions.interface';
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { PagoliquidacionsService } from './pagoliquidacions.service';
 import { PagoliquidacionsAddModalComponent } from './pagoliquidacions-add-modal/pagoliquidacions-add-modal.component';
 import { PagoliquidacionsEditModalComponent } from './pagoliquidacions-edit-modal/pagoliquidacions-edit-modal.component';
+
 @Component({
 selector: 'pagoliquidacions-table',
 templateUrl: './pagoliquidacions-table.html',
@@ -17,13 +19,62 @@ export class PagoliquidacionsTableComponent implements OnInit {
     rowsOnPage = 10;
     sortBy = 'idpagoliquidacion';
     sortOrder = 'asc';
+    backpage: boolean;
+
     constructor(
       private service: PagoliquidacionsService, 
       private toastrService: ToastrService, 
-      private dialogService: DialogService) {
+      private dialogService: DialogService, 
+      private route: ActivatedRoute, 
+      private router: Router) {
     }
     ngOnInit() {
-        this.getAll();
+      this.route.params.subscribe(params => {
+        if (params['idchofer'] !== undefined) {
+          const idchofer = +params['idchofer'];
+          this.findByIdChofer(idchofer);
+          this.backpage = true;
+        }
+        if (params['idpago'] !== undefined) {
+          const idpago = +params['idpago'];
+          this.findByIdPago(idpago);
+          this.backpage = true;
+        }
+        if (!this.backpage) {
+          this.getAll();
+        }
+      });
+    }
+    private findByIdChofer(id: number): void {
+      this.service
+        .findByIdChofer(id)
+        .subscribe(
+            (data: PagoliquidacionsResponseInterface) => {
+                if (data.success) {
+                this.data = data.result;
+                } else {
+                this.toastrService.error(data.message);
+                }
+            },
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
+    }
+    private findByIdPago(id: number): void {
+      this.service
+        .findByIdPago(id)
+        .subscribe(
+            (data: PagoliquidacionsResponseInterface) => {
+                if (data.success) {
+                this.data = data.result;
+                } else {
+                this.toastrService.error(data.message);
+                }
+            },
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
+    }
+    backPage() {
+        window.history.back();
     }
     addModalShow() {
       const disposable = this.dialogService.addDialog(PagoliquidacionsAddModalComponent)

@@ -28,6 +28,7 @@ export class Orden_has_refaccionsEditModalComponent extends DialogComponent<Orde
   form: FormGroup;
   submitted: boolean = false;
 
+  idorden_has_refaccionAC: AbstractControl;
   orden_idordenAC: AbstractControl;
   refaccion_idrefaccionAC: AbstractControl;
   cantidadAC: AbstractControl;
@@ -42,10 +43,12 @@ export class Orden_has_refaccionsEditModalComponent extends DialogComponent<Orde
   ) {
   super(dialogService);
   this.form = fb.group({
+    'idorden_has_refaccionAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'orden_idordenAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'refaccion_idrefaccionAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'cantidadAC' : ['',Validators.compose([Validators.maxLength(11)])],
   });
+  this.idorden_has_refaccionAC = this.form.controls['idorden_has_refaccionAC'];
   this.orden_idordenAC = this.form.controls['orden_idordenAC'];
   this.refaccion_idrefaccionAC = this.form.controls['refaccion_idrefaccionAC'];
   this.cantidadAC = this.form.controls['cantidadAC'];

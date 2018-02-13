@@ -31,7 +31,17 @@ export class CorralonsService {
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
-
+       
+       findByIdEstado = ( id ) : Observable<CorralonsResponseInterface> => {
+           return this._http.get(`${this.endPoint}/estado/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdPermisotaxiasignado = ( id ) : Observable<CorralonsResponseInterface> => {
+           return this._http.get(`${this.endPoint}/permisotaxiasignado/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        all = () : Observable<CorralonsResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

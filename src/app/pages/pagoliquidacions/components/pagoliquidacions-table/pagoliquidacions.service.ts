@@ -24,6 +24,16 @@ export class PagoliquidacionsService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}pagoliquidacion`;
        }
+       findByIdChofer = ( id ) : Observable<PagoliquidacionsResponseInterface> => {
+           return this._http.get(`${this.endPoint}/chofer/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdPago = ( id ) : Observable<PagoliquidacionsResponseInterface> => {
+           return this._http.get(`${this.endPoint}/pago/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        all = () : Observable<PagoliquidacionsResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

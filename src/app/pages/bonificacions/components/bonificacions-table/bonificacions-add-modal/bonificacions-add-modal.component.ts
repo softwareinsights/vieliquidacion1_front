@@ -15,11 +15,11 @@ import { ChofersAddModalComponent } from './../../../../chofers/components/chofe
   styleUrls: [('./bonificacions-add-modal.component.scss')],
   templateUrl: './bonificacions-add-modal.component.html'
 })
-export class BonificacionsAddModalComponent extends DialogComponent<BonificacionsInterface, any> implements OnInit {
+export class BonificacionsAddModalComponent extends DialogComponent<BonificacionsInterface, any> implements OnInit, BonificacionsInterface {
   _estado: string[] = [];
   _chofer: string[] = [];
 
-  cantidad: string;
+  cantidad: number;
   validado: boolean;
   fecha: string;
   estado_idestado: number;

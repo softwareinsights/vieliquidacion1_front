@@ -20,8 +20,8 @@ export class Si_permisosEditModalComponent extends DialogComponent<Si_permisosIn
 
   idsi_permiso: number;
   acceso: boolean;
-  Rol_idsi_rol: number;
-  Modulo_idsi_modulo: number;
+  si_rol_idsi_rol: number;
+  si_modulo_idsi_modulo: number;
   readable: boolean;
   writeable: boolean;
   updateable: boolean;
@@ -37,8 +37,8 @@ export class Si_permisosEditModalComponent extends DialogComponent<Si_permisosIn
   submitted: boolean = false;
 
   accesoAC: AbstractControl;
-  Rol_idsi_rolAC: AbstractControl;
-  Modulo_idsi_moduloAC: AbstractControl;
+  si_rol_idsi_rolAC: AbstractControl;
+  si_modulo_idsi_moduloAC: AbstractControl;
   readableAC: AbstractControl;
   writeableAC: AbstractControl;
   updateableAC: AbstractControl;
@@ -59,8 +59,8 @@ export class Si_permisosEditModalComponent extends DialogComponent<Si_permisosIn
   super(dialogService);
   this.form = fb.group({
     'accesoAC' : [''],
-    'Rol_idsi_rolAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
-    'Modulo_idsi_moduloAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
+    'si_rol_idsi_rolAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
+    'si_modulo_idsi_moduloAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
     'readableAC' : [''],
     'writeableAC' : [''],
     'updateableAC' : [''],
@@ -71,8 +71,8 @@ export class Si_permisosEditModalComponent extends DialogComponent<Si_permisosIn
     'delete_ownAC' : [''],
   });
   this.accesoAC = this.form.controls['accesoAC'];
-  this.Rol_idsi_rolAC = this.form.controls['Rol_idsi_rolAC'];
-  this.Modulo_idsi_moduloAC = this.form.controls['Modulo_idsi_moduloAC'];
+  this.si_rol_idsi_rolAC = this.form.controls['si_rol_idsi_rolAC'];
+  this.si_modulo_idsi_moduloAC = this.form.controls['si_modulo_idsi_moduloAC'];
   this.readableAC = this.form.controls['readableAC'];
   this.writeableAC = this.form.controls['writeableAC'];
   this.updateableAC = this.form.controls['updateableAC'];
@@ -144,8 +144,8 @@ export class Si_permisosEditModalComponent extends DialogComponent<Si_permisosIn
               .update({
                   idsi_permiso: this.idsi_permiso,
                   acceso: this.acceso,
-                  Rol_idsi_rol: this.Rol_idsi_rol,
-                  Modulo_idsi_modulo: this.Modulo_idsi_modulo,
+                  si_rol_idsi_rol: this.si_rol_idsi_rol,
+                  si_modulo_idsi_modulo: this.si_modulo_idsi_modulo,
                   readable: this.readable,
                   writeable: this.writeable,
                   updateable: this.updateable,

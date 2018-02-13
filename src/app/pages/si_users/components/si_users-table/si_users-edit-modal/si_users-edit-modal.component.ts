@@ -19,7 +19,7 @@ export class Si_usersEditModalComponent extends DialogComponent<Si_usersInterfac
   usuario: string;
   email: string;
   password: string;
-  Rol_idsi_rol: number;
+  si_rol_idsi_rol: number;
 
   modalHeader: string;
   data: any;
@@ -29,7 +29,7 @@ export class Si_usersEditModalComponent extends DialogComponent<Si_usersInterfac
   usuarioAC: AbstractControl;
   emailAC: AbstractControl;
   passwordAC: AbstractControl;
-  Rol_idsi_rolAC: AbstractControl;
+  si_rol_idsi_rolAC: AbstractControl;
   constructor(
       private service: Si_usersService,
       private si_rolsService: Si_rolsService,
@@ -43,12 +43,12 @@ export class Si_usersEditModalComponent extends DialogComponent<Si_usersInterfac
     'usuarioAC' : ['',Validators.compose([Validators.maxLength(45)])],
     'emailAC' : ['',Validators.compose([Validators.required,Validators.maxLength(60)])],
     'passwordAC' : ['',Validators.compose([Validators.maxLength(60)])],
-    'Rol_idsi_rolAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
+    'si_rol_idsi_rolAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
   });
   this.usuarioAC = this.form.controls['usuarioAC'];
   this.emailAC = this.form.controls['emailAC'];
   this.passwordAC = this.form.controls['passwordAC'];
-  this.Rol_idsi_rolAC = this.form.controls['Rol_idsi_rolAC'];
+  this.si_rol_idsi_rolAC = this.form.controls['si_rol_idsi_rolAC'];
   }
   ngOnInit() {
       this.getSi_rol();
@@ -90,7 +90,7 @@ export class Si_usersEditModalComponent extends DialogComponent<Si_usersInterfac
                   usuario: this.usuario,
                   email: this.email,
                   password: this.password,
-                  Rol_idsi_rol: this.Rol_idsi_rol,
+                  si_rol_idsi_rol: this.si_rol_idsi_rol,
               })
               .subscribe(
                   (data: any) => {

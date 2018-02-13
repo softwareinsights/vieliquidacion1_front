@@ -15,7 +15,7 @@ import { PermisotaxiasignadosAddModalComponent } from './../../../../permisotaxi
   styleUrls: [('./corralons-add-modal.component.scss')],
   templateUrl: './corralons-add-modal.component.html'
 })
-export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterface, any> implements OnInit {
+export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterface, any> implements OnInit, CorralonsInterface {
   _estado: string[] = [];
   _permisotaxiasignado: string[] = [];
 
@@ -61,7 +61,7 @@ export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterfa
     'infraccionNumeroAC' : ['',Validators.compose([Validators.maxLength(11)])],
     'corralonNombreAC' : ['',Validators.compose([Validators.maxLength(45)])],
     'motivoAC' : ['',Validators.compose([Validators.maxLength(150)])],
-    'estado_idestadoAC' : [''],
+    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'permisotaxiasignado_idpermisotaxiasignadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     });
     this.fechaAC = this.form.controls['fechaAC'];
@@ -73,7 +73,7 @@ export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterfa
     this.motivoAC = this.form.controls['motivoAC'];
     this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
     this.permisotaxiasignado_idpermisotaxiasignadoAC = this.form.controls['permisotaxiasignado_idpermisotaxiasignadoAC'];
-
+    
     // FECHA Y HORA ACTUAL
     const date = new Date();
     const month = (date.getMonth() + 1);
@@ -82,7 +82,8 @@ export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterfa
 
     this.fecha = now;
     this.hora = hour;
-    this.estado_idestado = 18;
+    this.estado_idestado = 18;  
+
   }
   ngOnInit() {
       this.getEstado();
@@ -148,7 +149,7 @@ export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterfa
                   infraccionNumero: this.infraccionNumero,
                   corralonNombre: this.corralonNombre,
                   motivo: this.motivo,
-                  estado_idestado: 18,
+                  estado_idestado: this.estado_idestado,
                   permisotaxiasignado_idpermisotaxiasignado: this.permisotaxiasignado_idpermisotaxiasignado,
         })
         .subscribe(

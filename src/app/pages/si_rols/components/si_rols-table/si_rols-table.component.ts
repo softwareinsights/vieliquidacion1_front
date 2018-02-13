@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { Si_rolsInterface } from './si_rols.interface';
@@ -6,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 import { Si_rolsService } from './si_rols.service';
 import { Si_rolsAddModalComponent } from './si_rols-add-modal/si_rols-add-modal.component';
 import { Si_rolsEditModalComponent } from './si_rols-edit-modal/si_rols-edit-modal.component';
+import { Si_permisosInterface } from './../../../si_permisos/components/si_permisos-table/si_permisos.interface';
+import { Si_permisosAddModalComponent } from './../../../si_permisos/components/si_permisos-table/si_permisos-add-modal/si_permisos-add-modal.component';
+import { Si_usersInterface } from './../../../si_users/components/si_users-table/si_users.interface';
+import { Si_usersAddModalComponent } from './../../../si_users/components/si_users-table/si_users-add-modal/si_users-add-modal.component';
+
 @Component({
 selector: 'si_rols-table',
 templateUrl: './si_rols-table.html',
@@ -17,13 +23,59 @@ export class Si_rolsTableComponent implements OnInit {
     rowsOnPage = 10;
     sortBy = 'idsi_rol';
     sortOrder = 'asc';
+    backpage: boolean;
+
     constructor(
       private service: Si_rolsService, 
       private toastrService: ToastrService, 
-      private dialogService: DialogService) {
+      private dialogService: DialogService, 
+      private route: ActivatedRoute, 
+      private router: Router) {
     }
     ngOnInit() {
-        this.getAll();
+      this.getAll();
+    }
+    insertSi_permiso(si_rols: Si_rolsInterface) {
+      const si_permiso: Si_permisosInterface = {
+        si_rol_idsi_rol: si_rols.idsi_rol
+      }
+      const disposable = this.dialogService.addDialog(Si_permisosAddModalComponent, si_permiso)
+      .subscribe( data => {
+          if (data) {
+          this.si_permisoShowToast(data);
+          }
+      });
+    }
+    si_permisoShowToast(result) {
+        if (result.success) {
+            this.toastrService.success(result.message);
+        } else {
+            this.toastrService.error(result.message);
+        }
+    }
+    viewSi_permiso(si_rols: Si_rolsInterface) {
+      this.router.navigate([`/pages/si_permisos/si_rol/${si_rols.idsi_rol}`]);
+    }
+    insertSi_user(si_rols: Si_rolsInterface) {
+      const si_user: Si_usersInterface = {
+        si_rol_idsi_rol: si_rols.idsi_rol
+      }
+      const disposable = this.dialogService.addDialog(Si_usersAddModalComponent, si_user)
+      .subscribe( data => {
+          if (data) {
+          this.si_userShowToast(data);
+          }
+      });
+    }
+    si_userShowToast(result) {
+        if (result.success) {
+            this.toastrService.success(result.message);
+        } else {
+            this.toastrService.error(result.message);
+        }
+    }
+    viewSi_user(si_rols: Si_rolsInterface) {
+      this.router.navigate([`/pages/si_users/si_rol/${si_rols.idsi_rol}`]);
     }
     addModalShow() {
       const disposable = this.dialogService.addDialog(Si_rolsAddModalComponent)

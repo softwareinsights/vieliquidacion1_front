@@ -3,7 +3,7 @@ export interface Si_usersInterface {
    usuario?: string;
    email?: string;
    password?: string;
-   Rol_idsi_rol?: number;
+   si_rol_idsi_rol?: number;
    super?: boolean;
    baja?: boolean;
    created_by?: number;

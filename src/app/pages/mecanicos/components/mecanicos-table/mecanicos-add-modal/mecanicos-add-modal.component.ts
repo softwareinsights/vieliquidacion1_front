@@ -15,7 +15,7 @@ import { TallersAddModalComponent } from './../../../../tallers/components/talle
   styleUrls: [('./mecanicos-add-modal.component.scss')],
   templateUrl: './mecanicos-add-modal.component.html'
 })
-export class MecanicosAddModalComponent extends DialogComponent<MecanicosInterface, any> implements OnInit {
+export class MecanicosAddModalComponent extends DialogComponent<MecanicosInterface, any> implements OnInit, MecanicosInterface {
   _persona: string[] = [];
   _taller: string[] = [];
 

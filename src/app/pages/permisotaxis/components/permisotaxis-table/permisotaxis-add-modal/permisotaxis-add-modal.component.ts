@@ -9,15 +9,18 @@ import { EstadosService } from './../../../../estados/components/estados-table/e
 import { EstadosAddModalComponent } from './../../../../estados/components/estados-table/estados-add-modal/estados-add-modal.component';
 import { PersonasService } from './../../../../personas/components/personas-table/personas.service';
 import { PersonasAddModalComponent } from './../../../../personas/components/personas-table/personas-add-modal/personas-add-modal.component';
+import { VehiculosService } from './../../../../vehiculos/components/vehiculos-table/vehiculos.service';
+import { VehiculosAddModalComponent } from './../../../../vehiculos/components/vehiculos-table/vehiculos-add-modal/vehiculos-add-modal.component';
 
 @Component({
   selector: 'add-service-modal',
   styleUrls: [('./permisotaxis-add-modal.component.scss')],
   templateUrl: './permisotaxis-add-modal.component.html'
 })
-export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisInterface, any> implements OnInit {
+export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisInterface, any> implements OnInit, PermisotaxisInterface {
   _estado: string[] = [];
   _persona: string[] = [];
+  _vehiculo: string[] = [];
 
   numero: string;
   estado_idestado: number;
@@ -26,6 +29,7 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
   liquidez: number;
   liquidezDom: number;
   propietario: number;
+  vehiculo_idvehiculo: number;
 
   modalHeader: string;
   data: any;
@@ -38,11 +42,13 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
   liquidezAC: AbstractControl;
   liquidezDomAC: AbstractControl;
   propietarioAC: AbstractControl;
+  vehiculo_idvehiculoAC: AbstractControl;
 
   constructor(
     private service: PermisotaxisService,
     private estadosService: EstadosService,
     private personasService: PersonasService,
+    private vehiculosService: VehiculosService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
@@ -50,13 +56,14 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
   ) {
     super(dialogService);
     this.form = fb.group({
-    'numeroAC' : ['',Validators.compose([Validators.maxLength(45)])],
+    'numeroAC' : ['',Validators.compose([Validators.required,Validators.maxLength(45)])],
     'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'fechaAltaAC' : [''],
     'vigenciaAC' : [''],
     'liquidezAC' : ['',Validators.compose([Validators.maxLength(11)])],
     'liquidezDomAC' : ['',Validators.compose([Validators.maxLength(11)])],
     'propietarioAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
+    'vehiculo_idvehiculoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     });
     this.numeroAC = this.form.controls['numeroAC'];
     this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
@@ -65,10 +72,12 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
     this.liquidezAC = this.form.controls['liquidezAC'];
     this.liquidezDomAC = this.form.controls['liquidezDomAC'];
     this.propietarioAC = this.form.controls['propietarioAC'];
+    this.vehiculo_idvehiculoAC = this.form.controls['vehiculo_idvehiculoAC'];
   }
   ngOnInit() {
       this.getEstado();
       this.getPersona();
+      this.getVehiculo();
   }
   estadoAddModalShow() {
       const disposable = this.dialogService.addDialog(EstadosAddModalComponent)
@@ -102,6 +111,22 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
           this.toastrService.error(result.message);
       }
   }
+  vehiculoAddModalShow() {
+      const disposable = this.dialogService.addDialog(VehiculosAddModalComponent)
+      .subscribe( data => {
+          if (data) {
+          this.vehiculoShowToast(data);
+          }
+      });
+  }
+  vehiculoShowToast(result) {
+      if (result.success) {
+          this.toastrService.success(result.message);
+          this.getVehiculo();
+      } else {
+          this.toastrService.error(result.message);
+      }
+  }
   getEstado() {
       this.estadosService.all()
       .subscribe(
@@ -112,6 +137,12 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
       this.personasService.all()
       .subscribe(
           (data: any) => this._persona = data.result,
+      );
+  }
+  getVehiculo() {
+      this.vehiculosService.all()
+      .subscribe(
+          (data: any) => this._vehiculo = data.result,
       );
   }
   confirm() {
@@ -130,6 +161,7 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
                   liquidez: this.liquidez,
                   liquidezDom: this.liquidezDom,
                   propietario: this.propietario,
+                  vehiculo_idvehiculo: this.vehiculo_idvehiculo,
         })
         .subscribe(
             (data: any) => {

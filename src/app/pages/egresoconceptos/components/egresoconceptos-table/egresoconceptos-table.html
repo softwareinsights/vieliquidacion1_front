@@ -2,6 +2,7 @@
     <div class='row'>
         <ba-card title='Listado' baCardClass='with-scroll' class='data-table-container'>
             <div class='panel panel-default'>
+                <div class="panel-heading" *ngIf="backpage"><h2>Información de Egreso Conceptos</h2></div>
                 <table class='table table-striped' [mfData]='data | fechaDataFilter : filterQuery1 | taller_taller_idtallerDataFilter : filterQuery2 | concepto_concepto_idconceptoDataFilter : filterQuery3' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
                     <thead>
                         <tr>
@@ -62,8 +63,11 @@
         </ba-card>
     </div>
     <div class='row'>
-        <div class='col-sm-6'>
+        <div class='col-sm-2'>
             <button (click)='addModalShow()' class='btn btn-success'><i class='fa fa-plus'></i> Agregar</button>
+        </div>
+        <div class='col-sm-2' *ngIf="backpage">
+            <button (click)='backPage()' class='btn btn-primary'><i class='fa fa-arrow-left'></i> Regresar</button>
         </div>
     </div>
 </div>

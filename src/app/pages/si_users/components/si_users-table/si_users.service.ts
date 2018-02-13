@@ -24,6 +24,11 @@ export class Si_usersService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}si_user`;
        }
+       findByIdSi_rol = ( id ) : Observable<Si_usersResponseInterface> => {
+           return this._http.get(`${this.endPoint}/si_rol/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        all = () : Observable<Si_usersResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

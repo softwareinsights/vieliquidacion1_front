@@ -11,8 +11,26 @@
         </div>
         <div class="modal-body" style="height: 65vh; overflow-y: auto;">
           <ba-card cardTitle="Información Pago de Liquidaciones">
+            <div class="form-group row" [ngClass]="{'has-error': (!saldoanteriorAC.valid && saldoanteriorAC.touched), 'has-success': (saldoanteriorAC.valid && saldoanteriorAC.touched)}">
+              <label for="inputsaldoanteriorAC" class="col-sm-3 form-control-label">Saldo Anterior</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="saldoanterior" [formControl]="saldoanteriorAC" type="number"  class="form-control" id="inputsaldoanteriorAC" placeholder="Saldo Anterior" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!montopagadoAC.valid && montopagadoAC.touched), 'has-success': (montopagadoAC.valid && montopagadoAC.touched)}">
+              <label for="inputmontopagadoAC" class="col-sm-3 form-control-label">Monto Pagado</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="montopagado" [formControl]="montopagadoAC" type="number"  class="form-control" id="inputmontopagadoAC" placeholder="Monto Pagado" >
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!saldoactualAC.valid && saldoactualAC.touched), 'has-success': (saldoactualAC.valid && saldoactualAC.touched)}">
+              <label for="inputsaldoactualAC" class="col-sm-3 form-control-label">Saldo Actual</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="saldoactual" [formControl]="saldoactualAC" type="number"  class="form-control" id="inputsaldoactualAC" placeholder="Saldo Actual" >
+              </div>
+            </div>
             <div class="form-group row" [ngClass]="{'has-error': (!pago_idpagoAC.valid && pago_idpagoAC.touched), 'has-success': (pago_idpagoAC.valid && pago_idpagoAC.touched)}">
-              <label for="inputpago_idpagoAC" class="col-sm-3 form-control-label">Folio</label>
+              <label for="inputpago_idpagoAC" class="col-sm-3 form-control-label">Pago</label>
               <div class="col-sm-7">
                <select [(ngModel)]="pago_idpago" [formControl]="pago_idpagoAC" class="form-control" id="inputpago_idpagoAC" required>
                  <option value="{{item.idpago}}" *ngFor="let item of _pago">{{item.folio}}</option>

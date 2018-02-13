@@ -9,8 +9,6 @@ import { EstadosService } from './../../../../estados/components/estados-table/e
 import { EstadosAddModalComponent } from './../../../../estados/components/estados-table/estados-add-modal/estados-add-modal.component';
 import { ChofersService } from './../../../../chofers/components/chofers-table/chofers.service';
 import { ChofersAddModalComponent } from './../../../../chofers/components/chofers-table/chofers-add-modal/chofers-add-modal.component';
-import { VehiculosService } from './../../../../vehiculos/components/vehiculos-table/vehiculos.service';
-import { VehiculosAddModalComponent } from './../../../../vehiculos/components/vehiculos-table/vehiculos-add-modal/vehiculos-add-modal.component';
 import { PermisotaxisService } from './../../../../permisotaxis/components/permisotaxis-table/permisotaxis.service';
 import { PermisotaxisAddModalComponent } from './../../../../permisotaxis/components/permisotaxis-table/permisotaxis-add-modal/permisotaxis-add-modal.component';
 @Component({
@@ -21,7 +19,6 @@ import { PermisotaxisAddModalComponent } from './../../../../permisotaxis/compon
 export class PermisotaxiasignadosEditModalComponent extends DialogComponent<PermisotaxiasignadosInterface, any> implements OnInit, PermisotaxiasignadosInterface {
   _estado: string[] = [];
   _chofer: string[] = [];
-  _vehiculo: string[] = [];
   _permisotaxi: string[] = [];
 
   idpermisotaxiasignado: number;
@@ -29,7 +26,6 @@ export class PermisotaxiasignadosEditModalComponent extends DialogComponent<Perm
   fecha: string;
   hora: string;
   chofer_idchofer: number;
-  vehiculo_idvehiculo: number;
   permisotaxi_idpermisotaxi: number;
 
   modalHeader: string;
@@ -41,13 +37,11 @@ export class PermisotaxiasignadosEditModalComponent extends DialogComponent<Perm
   fechaAC: AbstractControl;
   horaAC: AbstractControl;
   chofer_idchoferAC: AbstractControl;
-  vehiculo_idvehiculoAC: AbstractControl;
   permisotaxi_idpermisotaxiAC: AbstractControl;
   constructor(
       private service: PermisotaxiasignadosService,
       private estadosService: EstadosService,
       private chofersService: ChofersService,
-      private vehiculosService: VehiculosService,
       private permisotaxisService: PermisotaxisService,
       fb: FormBuilder,
       private toastrService: ToastrService,
@@ -60,20 +54,17 @@ export class PermisotaxiasignadosEditModalComponent extends DialogComponent<Perm
     'fechaAC' : [''],
     'horaAC' : [''],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
-    'vehiculo_idvehiculoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'permisotaxi_idpermisotaxiAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
   });
   this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
   this.fechaAC = this.form.controls['fechaAC'];
   this.horaAC = this.form.controls['horaAC'];
   this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
-  this.vehiculo_idvehiculoAC = this.form.controls['vehiculo_idvehiculoAC'];
   this.permisotaxi_idpermisotaxiAC = this.form.controls['permisotaxi_idpermisotaxiAC'];
   }
   ngOnInit() {
       this.getEstado();
       this.getChofer();
-      this.getVehiculo();
       this.getPermisotaxi();
   }
 
@@ -111,23 +102,6 @@ export class PermisotaxiasignadosEditModalComponent extends DialogComponent<Perm
           this.toastrService.error(result.message);
       }
   }
-  vehiculoAddModalShow() {
-      const disposable = this.dialogService.addDialog(VehiculosAddModalComponent)
-      .subscribe( data => {
-          if (data) {
-          this.vehiculoShowToast(data);
-          }
-      })
-  }
-
-  vehiculoShowToast(result) {
-      if (result.success) {
-          this.toastrService.success(result.message);
-          this.getVehiculo();
-      } else {
-          this.toastrService.error(result.message);
-      }
-  }
   permisotaxiAddModalShow() {
       const disposable = this.dialogService.addDialog(PermisotaxisAddModalComponent)
       .subscribe( data => {
@@ -157,12 +131,6 @@ export class PermisotaxiasignadosEditModalComponent extends DialogComponent<Perm
           (data: any) => this._chofer = data.result,
       );
   }
-  getVehiculo() {
-      this.vehiculosService.all()
-      .subscribe(
-          (data: any) => this._vehiculo = data.result,
-      );
-  }
   getPermisotaxi() {
       this.permisotaxisService.all()
       .subscribe(
@@ -183,7 +151,6 @@ export class PermisotaxiasignadosEditModalComponent extends DialogComponent<Perm
                   fecha: this.fecha,
                   hora: this.hora,
                   chofer_idchofer: this.chofer_idchofer,
-                  vehiculo_idvehiculo: this.vehiculo_idvehiculo,
                   permisotaxi_idpermisotaxi: this.permisotaxi_idpermisotaxi,
               })
               .subscribe(

@@ -4,7 +4,6 @@ export interface PermisotaxiasignadosInterface {
    fecha?: string;
    hora?: string;
    chofer_idchofer?: number;
-   vehiculo_idvehiculo?: number;
    permisotaxi_idpermisotaxi?: number;
    baja?: boolean;
    created_by?: number;

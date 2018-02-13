@@ -2,18 +2,15 @@
     <div class='row'>
         <ba-card title='Listado' baCardClass='with-scroll' class='data-table-container'>
             <div class='panel panel-default'>
-                <table class='table table-striped' [mfData]='data | nombreDataFilter : filterQuery1' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
+                <div class="panel-heading" *ngIf="backpage"><h2>Información de Estados</h2></div>
+                <table class='table table-striped' [mfData]='data' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
                     <thead>
                         <tr>
-                            <th colspan='2' class='text-left'>
-                                Filtrar por Estado:
-                                <input class='form-control' [(ngModel)]='filterQuery1' />
-                            </th>
                         </tr>
                         <tr>
                             <th style='width: 20%'></th>
                             <th style='width: 30%'>
-                                <mfDefaultSorter by='idestado'>Estado</mfDefaultSorter>
+                                <mfDefaultSorter by='idestado'>Id Estado</mfDefaultSorter>
                             </th>
                             <th style='width: 50%'>
                                 <mfDefaultSorter by='nombre'>Estado</mfDefaultSorter>
@@ -23,11 +20,31 @@
                     <tbody>
                         <tr *ngFor='let item of mf.data;  let i = index'>
                             <td>
+                                <button title='Agregar Bonificaciones' (click)='insertBonificacion(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Bonificaciones</button>
+                                <button title='Ver Bonificaciones' (click)='viewBonificacion(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Bonificaciones</button>
+                                <button title='Agregar Choferes' (click)='insertChofer(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Choferes</button>
+                                <button title='Ver Choferes' (click)='viewChofer(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Choferes</button>
+                                <button title='Agregar Corralones' (click)='insertCorralon(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Corralones</button>
+                                <button title='Ver Corralones' (click)='viewCorralon(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Corralones</button>
+                                <button title='Agregar Liquidaciones' (click)='insertLiquidacion(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Liquidaciones</button>
+                                <button title='Ver Liquidaciones' (click)='viewLiquidacion(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Liquidaciones</button>
+                                <button title='Agregar Ordenes' (click)='insertOrden(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Ordenes</button>
+                                <button title='Ver Ordenes' (click)='viewOrden(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Ordenes</button>
+                                <button title='Agregar Pagos' (click)='insertPago(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Pagos</button>
+                                <button title='Ver Pagos' (click)='viewPago(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Pagos</button>
+                                <button title='Agregar Permisos Taxi' (click)='insertPermisotaxi(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Permisos Taxi</button>
+                                <button title='Ver Permisos Taxi' (click)='viewPermisotaxi(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Permisos Taxi</button>
+                                <button title='Agregar Asignar Vehículo a Chofer' (click)='insertPermisotaxiasignado(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Asignar Vehículo a Chofer</button>
+                                <button title='Ver Asignar Vehículo a Chofer' (click)='viewPermisotaxiasignado(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Asignar Vehículo a Chofer</button>
+                                <button title='Agregar Vehículos' (click)='insertVehiculo(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Vehículos</button>
+                                <button title='Ver Vehículos' (click)='viewVehiculo(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Vehículos</button>
+                                <button title='Agregar Vehículos Reparando' (click)='insertVehiculoreparando(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Vehículos Reparando</button>
+                                <button title='Ver Vehículos Reparando' (click)='viewVehiculoreparando(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Vehículos Reparando</button>
                                 <button title='Editar Registro' (click)='editModalShow(item)' class='btn btn-sm btn-info'><i class='fa fa-edit'></i></button>
                                 <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
                             </td>
                             <td>{{ item.idestado }}</td>
-                            <td>{{ item.nombre }}</td>
+                            <td>{{ item.nombre  }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -42,8 +59,11 @@
         </ba-card>
     </div>
     <div class='row'>
-        <div class='col-sm-6'>
+        <div class='col-sm-2'>
             <button (click)='addModalShow()' class='btn btn-success'><i class='fa fa-plus'></i> Agregar</button>
+        </div>
+        <div class='col-sm-2' *ngIf="backpage">
+            <button (click)='backPage()' class='btn btn-primary'><i class='fa fa-arrow-left'></i> Regresar</button>
         </div>
     </div>
 </div>

@@ -23,9 +23,26 @@ export class LiquidacionsService {
         this.headers.append('Authorization', 'JWT ' + this.authService.token);
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}liquidacion`;
-       }       
+       }
+       
        allAdeudandoFromIdChofer = ( id ) : Observable<LiquidacionsResponseInterface> => {
            return this._http.get(`${this.endPoint}/adeudando-from-idchofer/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+       findByIdChofer = ( id ) : Observable<LiquidacionsResponseInterface> => {
+           return this._http.get(`${this.endPoint}/chofer/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdEstado = ( id ) : Observable<LiquidacionsResponseInterface> => {
+           return this._http.get(`${this.endPoint}/estado/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdPermisotaxiasignado = ( id ) : Observable<LiquidacionsResponseInterface> => {
+           return this._http.get(`${this.endPoint}/permisotaxiasignado/${id}`, this.options)
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }

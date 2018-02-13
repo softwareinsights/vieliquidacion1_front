@@ -24,6 +24,16 @@ export class ChofersService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;
        }
+       findByIdEstado = ( id ) : Observable<ChofersResponseInterface> => {
+           return this._http.get(`${this.endPoint}/estado/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdPersona = ( id ) : Observable<ChofersResponseInterface> => {
+           return this._http.get(`${this.endPoint}/persona/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        all = () : Observable<ChofersResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

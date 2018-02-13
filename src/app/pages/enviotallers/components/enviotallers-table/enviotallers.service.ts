@@ -24,6 +24,21 @@ export class EnviotallersService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}enviotaller`;
        }
+       findByIdMantenimiento = ( id ) : Observable<EnviotallersResponseInterface> => {
+           return this._http.get(`${this.endPoint}/mantenimiento/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdPermisotaxiasignado = ( id ) : Observable<EnviotallersResponseInterface> => {
+           return this._http.get(`${this.endPoint}/permisotaxiasignado/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdTaller = ( id ) : Observable<EnviotallersResponseInterface> => {
+           return this._http.get(`${this.endPoint}/taller/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        all = () : Observable<EnviotallersResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

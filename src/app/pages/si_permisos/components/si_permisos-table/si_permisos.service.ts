@@ -24,6 +24,16 @@ export class Si_permisosService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}si_permiso`;
        }
+       findByIdSi_modulo = ( id ) : Observable<Si_permisosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/si_modulo/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdSi_rol = ( id ) : Observable<Si_permisosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/si_rol/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        all = () : Observable<Si_permisosResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

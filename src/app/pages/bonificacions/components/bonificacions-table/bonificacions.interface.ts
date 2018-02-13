@@ -1,6 +1,6 @@
 export interface BonificacionsInterface {
    idbonificacion?: number;
-   cantidad?: string;
+   cantidad?: number;
    validado?: boolean;
    fecha?: string;
    estado_idestado?: number;

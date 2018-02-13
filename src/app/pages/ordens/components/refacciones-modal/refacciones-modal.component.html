@@ -2,7 +2,7 @@
     <div class="modal-content">
         <div class="modal-header">
              <button type="button" class="close" (click)="close()" >&times;</button>
-             <h4 class="modal-title"> Agregar refacción </h4>
+             <h4 class="modal-title"> Agregar Refacción </h4>
         </div>
         <div class="modal-body">
           <div class="container pt-2">
@@ -19,7 +19,7 @@
                             <tr style="cursor: pointer;" (click)="confirm(refaccion)">
                               <td> {{ refaccion.idrefaccion }} </td>
                               <td> {{ refaccion.nombre }} </td>
-                              <td> ${{ refaccion.precioVenta }} </td>
+                              <td> $ {{ refaccion.precioVenta | currency: 'MXN' }} </td>
                             </tr>
                         </ng-container>
                     </tbody>

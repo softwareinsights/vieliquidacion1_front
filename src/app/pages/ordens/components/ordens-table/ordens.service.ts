@@ -24,6 +24,18 @@ export class OrdensService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}orden`;
        }
+       
+       findByIdVehiculoreparando = ( id ) : Observable<OrdensResponseInterface> => {
+           return this._http.get(`${this.endPoint}/vehiculoreparando/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       findByIdEstado = ( id ) : Observable<OrdensResponseInterface> => {
+           return this._http.get(`${this.endPoint}/estado/${id}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
        all = () : Observable<OrdensResponseInterface> => {
            return this._http.get(this.endPoint, this.options)
                .map((response: Response) => response.json())

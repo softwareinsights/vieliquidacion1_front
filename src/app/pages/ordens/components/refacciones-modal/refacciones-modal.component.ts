@@ -13,20 +13,20 @@ import { DialogService } from 'ng2-bootstrap-modal/dist/dialog.service';
   ]
 })
 export class RefaccionesModalComponent extends DialogComponent<RefaccionsInterface, any> implements OnInit {
-  public refacciones: RefaccionsInterface[];
+  refacciones: RefaccionsInterface[];
   constructor(
     private refaccionesService: RefaccionsService,
     dialogService: DialogService
   ) { 
-    super(dialogService)
+    super(dialogService);
   }
 
   ngOnInit() {
-    this.getAllRefacciones()
+    this.getAllRefacciones();
   }
   confirm( refaccion ) {
-    this.result = refaccion
-    this.close()
+    this.result = refaccion;
+    this.close();
   }
   getAllRefacciones() {
     this.refaccionesService.all()

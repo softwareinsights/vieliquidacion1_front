@@ -2,7 +2,8 @@
     <div class='row'>
         <ba-card title='Listado' baCardClass='with-scroll' class='data-table-container'>
             <div class='panel panel-default'>
-                <table class='table table-striped' [mfData]='data | modulo_Modulo_idsi_moduloDataFilter : filterQuery1' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
+                <div class="panel-heading" *ngIf="backpage"><h2>Información de Permisos</h2></div>
+                <table class='table table-striped' [mfData]='data | modulo_si_modulo_idsi_moduloDataFilter : filterQuery1' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
                     <thead>
                         <tr>
                             <th colspan='12' class='text-left'>
@@ -16,10 +17,10 @@
                                 <mfDefaultSorter by='acceso'>Acceso</mfDefaultSorter>
                             </th>
                             <th style='width: 7%'>
-                                <mfDefaultSorter by='si_rol_Rol_idsi_rol'>Rol</mfDefaultSorter>
+                                <mfDefaultSorter by='si_rol_si_rol_idsi_rol'>Rol</mfDefaultSorter>
                             </th>
                             <th style='width: 7%'>
-                                <mfDefaultSorter by='si_modulo_Modulo_idsi_modulo'>Módulo</mfDefaultSorter>
+                                <mfDefaultSorter by='si_modulo_si_modulo_idsi_modulo'>Módulo</mfDefaultSorter>
                             </th>
                             <th style='width: 7%'>
                                 <mfDefaultSorter by='readable'>Lectura</mfDefaultSorter>
@@ -54,8 +55,8 @@
                                 <button title='Eliminar Registro' (click)='onDeleteConfirm($event, item)' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
                             </td>
                             <td>{{ item.acceso ? 'Si' : 'No' }}</td>
-                            <td>{{ item.si_rol_Rol_idsi_rol }}</td>
-                            <td>{{ item.si_modulo_Modulo_idsi_modulo }}</td>
+                            <td>{{ item.si_rol_si_rol_idsi_rol }}</td>
+                            <td>{{ item.si_modulo_si_modulo_idsi_modulo }}</td>
                             <td>{{ item.readable ? 'Si' : 'No' }}</td>
                             <td>{{ item.writeable ? 'Si' : 'No' }}</td>
                             <td>{{ item.updateable ? 'Si' : 'No' }}</td>
@@ -78,8 +79,11 @@
         </ba-card>
     </div>
     <div class='row'>
-        <div class='col-sm-6'>
+        <div class='col-sm-2'>
             <button (click)='addModalShow()' class='btn btn-success'><i class='fa fa-plus'></i> Agregar</button>
+        </div>
+        <div class='col-sm-2' *ngIf="backpage">
+            <button (click)='backPage()' class='btn btn-primary'><i class='fa fa-arrow-left'></i> Regresar</button>
         </div>
     </div>
 </div>

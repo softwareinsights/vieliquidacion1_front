@@ -7,6 +7,7 @@ export interface PermisotaxisInterface {
    liquidez?: number;
    liquidezDom?: number;
    propietario?: number;
+   vehiculo_idvehiculo?: number;
    baja?: boolean;
    created_by?: number;
    created_at?: string;

@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: [('./tallers-add-modal.component.scss')],
   templateUrl: './tallers-add-modal.component.html'
 })
-export class TallersAddModalComponent extends DialogComponent<TallersInterface, any> implements OnInit {
+export class TallersAddModalComponent extends DialogComponent<TallersInterface, any> implements OnInit, TallersInterface {
 
   nombre: string;
   direccion: string;

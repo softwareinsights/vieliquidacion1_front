@@ -19,7 +19,7 @@ export class Si_reportesEditModalComponent extends DialogComponent<Si_reportesIn
   nombre: string;
   consulta: string;
   campos: string;
-  Modulo_idsi_modulo: number;
+  si_modulo_idsi_modulo: number;
   pfd: boolean;
   excel: boolean;
   print: boolean;
@@ -32,7 +32,7 @@ export class Si_reportesEditModalComponent extends DialogComponent<Si_reportesIn
   nombreAC: AbstractControl;
   consultaAC: AbstractControl;
   camposAC: AbstractControl;
-  Modulo_idsi_moduloAC: AbstractControl;
+  si_modulo_idsi_moduloAC: AbstractControl;
   pfdAC: AbstractControl;
   excelAC: AbstractControl;
   printAC: AbstractControl;
@@ -49,7 +49,7 @@ export class Si_reportesEditModalComponent extends DialogComponent<Si_reportesIn
     'nombreAC' : ['',Validators.compose([Validators.maxLength(45)])],
     'consultaAC' : ['',Validators.compose([Validators.required,Validators.maxLength(400)])],
     'camposAC' : ['',Validators.compose([Validators.required,Validators.maxLength(140)])],
-    'Modulo_idsi_moduloAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
+    'si_modulo_idsi_moduloAC' : ['',Validators.compose([Validators.required,Validators.maxLength(4)])],
     'pfdAC' : [''],
     'excelAC' : [''],
     'printAC' : [''],
@@ -57,7 +57,7 @@ export class Si_reportesEditModalComponent extends DialogComponent<Si_reportesIn
   this.nombreAC = this.form.controls['nombreAC'];
   this.consultaAC = this.form.controls['consultaAC'];
   this.camposAC = this.form.controls['camposAC'];
-  this.Modulo_idsi_moduloAC = this.form.controls['Modulo_idsi_moduloAC'];
+  this.si_modulo_idsi_moduloAC = this.form.controls['si_modulo_idsi_moduloAC'];
   this.pfdAC = this.form.controls['pfdAC'];
   this.excelAC = this.form.controls['excelAC'];
   this.printAC = this.form.controls['printAC'];
@@ -102,7 +102,7 @@ export class Si_reportesEditModalComponent extends DialogComponent<Si_reportesIn
                   nombre: this.nombre,
                   consulta: this.consulta,
                   campos: this.campos,
-                  Modulo_idsi_modulo: this.Modulo_idsi_modulo,
+                  si_modulo_idsi_modulo: this.si_modulo_idsi_modulo,
                   pfd: this.pfd,
                   excel: this.excel,
                   print: this.print,
