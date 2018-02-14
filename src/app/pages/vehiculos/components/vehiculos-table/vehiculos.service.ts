@@ -39,6 +39,11 @@ export class VehiculosService {
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
+       allDisponibles= () : Observable<VehiculosResponseInterface> => {
+        return this._http.get(`${this.endPoint}/disponibles`, this.options)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
        findById = ( id ) : Observable<VehiculosResponseInterface> => {
            return this._http.get(`${this.endPoint}/${id}`, this.options)
                .map((response: Response) => response.json())

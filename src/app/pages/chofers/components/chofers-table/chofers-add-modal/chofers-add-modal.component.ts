@@ -21,8 +21,6 @@ export class ChofersAddModalComponent extends DialogComponent<ChofersInterface, 
 
   licencia: string;
   fianza: number;
-  estado_idestado: number;
-  estado_idestado_fianza: number;
   chofer: number;
   aval1: number;
   aval2: number;
@@ -37,8 +35,6 @@ export class ChofersAddModalComponent extends DialogComponent<ChofersInterface, 
   submitted: boolean = false;
   licenciaAC: AbstractControl;
   fianzaAC: AbstractControl;
-  estado_idestadoAC: AbstractControl;
-  estado_idestado_fianzaAC: AbstractControl;
   choferAC: AbstractControl;
   aval1AC: AbstractControl;
   aval2AC: AbstractControl;
@@ -60,8 +56,6 @@ export class ChofersAddModalComponent extends DialogComponent<ChofersInterface, 
     this.form = fb.group({
     'licenciaAC' : ['',Validators.compose([Validators.maxLength(40)])],
     'fianzaAC' : ['',Validators.compose([Validators.maxLength(11)])],
-    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
-    'estado_idestado_fianzaAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'choferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'aval1AC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'aval2AC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
@@ -72,8 +66,6 @@ export class ChofersAddModalComponent extends DialogComponent<ChofersInterface, 
     });
     this.licenciaAC = this.form.controls['licenciaAC'];
     this.fianzaAC = this.form.controls['fianzaAC'];
-    this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
-    this.estado_idestado_fianzaAC = this.form.controls['estado_idestado_fianzaAC'];
     this.choferAC = this.form.controls['choferAC'];
     this.aval1AC = this.form.controls['aval1AC'];
     this.aval2AC = this.form.controls['aval2AC'];
@@ -141,8 +133,8 @@ export class ChofersAddModalComponent extends DialogComponent<ChofersInterface, 
         .insert({
                   licencia: this.licencia,
                   fianza: this.fianza,
-                  estado_idestado: this.estado_idestado,
-                  estado_idestado_fianza: this.estado_idestado_fianza,
+                  estado_idestado: 19,
+                  estado_idestado_fianza: 9,
                   chofer: this.chofer,
                   aval1: this.aval1,
                   aval2: this.aval2,

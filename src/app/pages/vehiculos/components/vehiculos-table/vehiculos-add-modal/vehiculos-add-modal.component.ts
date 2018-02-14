@@ -26,7 +26,6 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
   serieMotor: string;
   placa: string;
   kilometraje: number;
-  estado_idestado: number;
   poliza: string;
   polizaTipo: string;
   color: string;
@@ -43,7 +42,6 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
   serieMotorAC: AbstractControl;
   placaAC: AbstractControl;
   kilometrajeAC: AbstractControl;
-  estado_idestadoAC: AbstractControl;
   polizaAC: AbstractControl;
   polizaTipoAC: AbstractControl;
   colorAC: AbstractControl;
@@ -67,7 +65,6 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
     'serieMotorAC' : ['',Validators.compose([Validators.maxLength(40)])],
     'placaAC' : ['',Validators.compose([Validators.maxLength(10)])],
     'kilometrajeAC' : ['',Validators.compose([Validators.maxLength(11)])],
-    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'polizaAC' : ['',Validators.compose([Validators.maxLength(15)])],
     'polizaTipoAC' : ['',Validators.compose([Validators.maxLength(15)])],
     'colorAC' : ['',Validators.compose([Validators.maxLength(20)])],
@@ -80,7 +77,6 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
     this.serieMotorAC = this.form.controls['serieMotorAC'];
     this.placaAC = this.form.controls['placaAC'];
     this.kilometrajeAC = this.form.controls['kilometrajeAC'];
-    this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
     this.polizaAC = this.form.controls['polizaAC'];
     this.polizaTipoAC = this.form.controls['polizaTipoAC'];
     this.colorAC = this.form.controls['colorAC'];
@@ -150,7 +146,7 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
                   serieMotor: this.serieMotor,
                   placa: this.placa,
                   kilometraje: this.kilometraje,
-                  estado_idestado: this.estado_idestado,
+                  estado_idestado: 19,
                   poliza: this.poliza,
                   polizaTipo: this.polizaTipo,
                   color: this.color,

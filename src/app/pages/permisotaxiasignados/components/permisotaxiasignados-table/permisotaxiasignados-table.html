@@ -49,6 +49,7 @@
                     <tbody>
                         <tr *ngFor='let item of mf.data;  let i = index'>
                             <td>
+                                <button *ngIf="item.estado_estado_idestado == 'ACTIVO-ALERTAMANTENIMIENTO'" title='Enviar a Mantenimiento' (click)='insertEnviotallerMantenimiento(item)' class='btn btn-sm btn-warning'><i class='fa fa-car'></i></button>
                                 <button *ngIf="item.estado_estado_idestado !== 'ASIGNADO-CORRALÓN'" title='Agregar Corralones' (click)='insertCorralon(item)' class='btn btn-sm btn-danger'><i class='fa fa-thumbs-down'></i> Enviar a Corralón</button>
                                 <button title='Ver Corralones' (click)='viewCorralon(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Envios a Corralón</button>
                                 <button *ngIf="item.estado_estado_idestado !== 'ASIGNADO-REPARANDO'" title='Agregar Envios Taller' (click)='insertEnviotaller(item)' class='btn btn-sm btn-success'><i class='fa fa-car'></i> Enviar a Taller</button>
