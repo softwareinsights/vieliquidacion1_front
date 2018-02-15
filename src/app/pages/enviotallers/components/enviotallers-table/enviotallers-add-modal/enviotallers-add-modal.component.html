@@ -20,7 +20,7 @@
             <div class="form-group row" [ngClass]="{'has-error': (!mantenimiento_idmantenimientoAC.valid && mantenimiento_idmantenimientoAC.touched), 'has-success': (mantenimiento_idmantenimientoAC.valid && mantenimiento_idmantenimientoAC.touched)}">
               <label for="inputmantenimiento_idmantenimientoAC" class="col-sm-3 form-control-label">Mantenimientos</label>
               <div class="col-sm-7">
-               <select [(ngModel)]="mantenimiento_idmantenimiento" [formControl]="mantenimiento_idmantenimientoAC" class="form-control" id="inputmantenimiento_idmantenimientoAC" required>
+               <select [(ngModel)]="mantenimiento_idmantenimiento" [formControl]="mantenimiento_idmantenimientoAC" class="form-control" id="inputmantenimiento_idmantenimientoAC">
                  <option value="{{item.idmantenimiento}}" *ngFor="let item of _mantenimiento">{{item.idmantenimiento}}</option>
                </select>
               </div>

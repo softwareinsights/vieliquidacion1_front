@@ -1,3 +1,4 @@
+import { RefaccionesModalComponent } from './components/refacciones-modal/refacciones-modal.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,7 +12,6 @@ import { routing } from './ordens.routing';
 import { OrdensComponent } from './ordens.component';
 import { OrdensService } from './components/ordens-table/ordens.service';
 import { OrdensTableComponent } from './components/ordens-table/ordens-table.component';
-import { RefaccionesModalComponent } from './components/refacciones-modal/refacciones-modal.component';
 
 @NgModule({
   imports: [

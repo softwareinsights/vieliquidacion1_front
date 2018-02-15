@@ -27,6 +27,18 @@ export const PAGES_MENU = [
         }
     },
     {
+        path: 'liquidacions',
+        data: {
+        menu: {
+            title: 'general.menu.liquidacions',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+        }
+        }
+    },
+    {
         path: 'chofers',
         data: {
         menu: {

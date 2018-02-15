@@ -81,6 +81,7 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
   refacciones: any[] = [];
 
 
+
   constructor(
     private service: OrdensService,
     private estadosService: EstadosService,
@@ -101,13 +102,13 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
     'refaccionCantidadAC': [''],
     'refaccionPrecioAC': [''],
 
-    'manoObraAC' : ['',Validators.compose([Validators.maxLength(11)])],
-    'subtotalAC' : ['',Validators.compose([Validators.maxLength(11)])],
-    'totalAC' : ['',Validators.compose([Validators.maxLength(11)])],
-    'anticipoAC' : ['',Validators.compose([Validators.maxLength(11)])],
-    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
-    'descripcionAC' : ['',Validators.compose([Validators.maxLength(200)])],
-    'vehiculoreparando_idvehiculoreparandoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
+    'manoObraAC' : ['', Validators.compose([Validators.maxLength(11)])],
+    'subtotalAC' : ['', Validators.compose([Validators.maxLength(11)])],
+    'totalAC' : ['', Validators.compose([Validators.maxLength(11)])],
+    'anticipoAC' : ['', Validators.compose([Validators.maxLength(11)])],
+    'estado_idestadoAC' : ['', Validators.compose([Validators.required, Validators.maxLength(3)])],
+    'descripcionAC' : ['', Validators.compose([Validators.maxLength(200)])],
+    'vehiculoreparando_idvehiculoreparandoAC' : ['', Validators.compose([Validators.required,Validators.maxLength(11)])],
     'orden_has_refaccionAC' : [''],
     });
     this.fechaAC = this.form.controls['fechaAC'];
@@ -147,7 +148,10 @@ export class OrdensAddModalComponent extends DialogComponent<OrdensInterface, an
   }
 
   showRefaccionesModal() {
-    this.dialogService.addDialog( RefaccionesModalComponent)
+    const refaccions: RefaccionsInterface = {
+    };
+
+    this.dialogService.addDialog( RefaccionesModalComponent, refaccions )
       .subscribe( refaccion => {
           console.log("refaccion", refaccion);
         if ( refaccion ) {

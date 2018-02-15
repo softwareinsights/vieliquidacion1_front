@@ -7,8 +7,10 @@ import { NgaModule } from '../../theme/nga.module';
 import { Dashboard } from './dashboard.component';
 import { routing }       from './dashboard.routing';
 
+import { Feed } from './feed';
 import { PieChart } from './pieChart';
 import { PieChartService } from './pieChart/pieChart.service';
+import { FeedService } from './feed/feed.service';
 
 @NgModule({
   imports: [
@@ -20,10 +22,13 @@ import { PieChartService } from './pieChart/pieChart.service';
   ],
   declarations: [
     PieChart,
-    Dashboard
+    Dashboard,
+    Feed,
   ],
   providers: [
-    PieChartService
+    PieChartService,
+    FeedService,
   ]
 })
 export class DashboardModule {}
+

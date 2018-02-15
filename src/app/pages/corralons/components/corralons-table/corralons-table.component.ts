@@ -77,7 +77,7 @@ export class CorralonsTableComponent implements OnInit {
                 // Update a chofer
                 const chofer: ChofersInterface = {
                   idchofer: data.result.idchofer,
-                  estado_idestado: 5 // ACTIVO
+                  estado_idestado: 19 // ACTIVO
                 }
                 this.chofersService
                 .update(chofer)

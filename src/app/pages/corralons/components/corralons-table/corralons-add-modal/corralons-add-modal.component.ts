@@ -40,7 +40,6 @@ export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterfa
   infraccionNumeroAC: AbstractControl;
   corralonNombreAC: AbstractControl;
   motivoAC: AbstractControl;
-  estado_idestadoAC: AbstractControl;
   permisotaxiasignado_idpermisotaxiasignadoAC: AbstractControl;
 
   constructor(
@@ -61,7 +60,6 @@ export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterfa
     'infraccionNumeroAC' : ['',Validators.compose([Validators.maxLength(11)])],
     'corralonNombreAC' : ['',Validators.compose([Validators.maxLength(45)])],
     'motivoAC' : ['',Validators.compose([Validators.maxLength(150)])],
-    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'permisotaxiasignado_idpermisotaxiasignadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     });
     this.fechaAC = this.form.controls['fechaAC'];
@@ -71,7 +69,6 @@ export class CorralonsAddModalComponent extends DialogComponent<CorralonsInterfa
     this.infraccionNumeroAC = this.form.controls['infraccionNumeroAC'];
     this.corralonNombreAC = this.form.controls['corralonNombreAC'];
     this.motivoAC = this.form.controls['motivoAC'];
-    this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
     this.permisotaxiasignado_idpermisotaxiasignadoAC = this.form.controls['permisotaxiasignado_idpermisotaxiasignadoAC'];
     
     // FECHA Y HORA ACTUAL

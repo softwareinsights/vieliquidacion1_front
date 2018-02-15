@@ -9,10 +9,11 @@
 
     <div class="pie-chart-item">
       <div class="description">
-        <div><strong>{{ chart.nombre }}</strong></div>
+        <div><small>Nombre:</small> <strong>{{ chart.nombre }}</strong></div>
+        <br>
         <div><small>Deuda Liquidación:</small> <strong>$ {{ chart.deudaliquidacion }}</strong></div>
-        <div><small>Deuda Fianza:</small> <strong>$ {{ chart.deudafianza }}</strong></div>
-        <div><small>Licencia:</small> <strong>{{ chart.licencia }}</strong></div>
+        <br>
+        <div><small>Fianza Pagada:</small> <strong>$ {{ chart.fianza - chart.deudafianza }}</strong></div>
       </div>
       <i class="chart-icon i-money"></i>
     </div>

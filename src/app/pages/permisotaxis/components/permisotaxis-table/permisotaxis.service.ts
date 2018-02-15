@@ -24,6 +24,11 @@ export class PermisotaxisService {
         this.options = new RequestOptions({ headers: this.headers });
         this.endPoint = `${this._configuration.ServerWithApiUrl}permisotaxi`;
        }
+       findLiquidacionByIdInThisDayAtThisHour = ( id ) : Observable<PermisotaxisResponseInterface> => {
+           return this._http.get(`${this.endPoint}/this-day/${id}/this-hour`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
        
        findLiquidacionByIdInThisDay = ( id ) : Observable<PermisotaxisResponseInterface> => {
            return this._http.get(`${this.endPoint}/this-day/${id}`, this.options)
@@ -51,6 +56,13 @@ export class PermisotaxisService {
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
+       
+       allDisponibles = () : Observable<PermisotaxisResponseInterface> => {
+           return this._http.get(this.endPoint, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+       
        findById = ( id ) : Observable<PermisotaxisResponseInterface> => {
            return this._http.get(`${this.endPoint}/${id}`, this.options)
                .map((response: Response) => response.json())

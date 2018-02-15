@@ -53,7 +53,7 @@ export class EnviotallersEditModalComponent extends DialogComponent<Enviotallers
   super(dialogService);
   this.form = fb.group({
     'fechaAC' : [''],
-    'mantenimiento_idmantenimientoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(25)])],
+    'mantenimiento_idmantenimientoAC' : [''],
     'horaAC' : [''],
     'motivoAC' : ['',Validators.compose([Validators.maxLength(80)])],
     'permisotaxiasignado_idpermisotaxiasignadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],

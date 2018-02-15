@@ -25,6 +25,19 @@ export class LiquidacionsService {
         this.endPoint = `${this._configuration.ServerWithApiUrl}liquidacion`;
        }
        
+
+        liquidacionFromIdchoferFecha = ( data ) : Observable<LiquidacionsResponseInterface> => {
+
+            // MODIFICO LA FECHA PARA REEMPLAZAR - POR _ Y NO FALLE AL LLAMAR ENDPOINT, EN ENDPOINT VUELVO A ARMAR CON -
+
+            const newFecha = data.fecha.split('-');
+            const fecha = newFecha[0] + "_" + newFecha[1] + "_" + newFecha[2];
+            
+           return this._http.get(`${this.endPoint}/liquidacion-from-idchofer/${data.chofer_idchofer}/fecha/${fecha}`, this.options)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
        allAdeudandoFromIdChofer = ( id ) : Observable<LiquidacionsResponseInterface> => {
            return this._http.get(`${this.endPoint}/adeudando-from-idchofer/${id}`, this.options)
                .map((response: Response) => response.json())

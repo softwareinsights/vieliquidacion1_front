@@ -24,7 +24,6 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
   _chofer: string[] = [];
   _permisotaxi: string[] = [];
 
-  estado_idestado: number;
   fecha: string;
   hora: string;
   chofer_idchofer: number;
@@ -34,7 +33,6 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
   data: any;
   form: FormGroup;
   submitted: boolean = false;
-  estado_idestadoAC: AbstractControl;
   fechaAC: AbstractControl;
   horaAC: AbstractControl;
   chofer_idchoferAC: AbstractControl;
@@ -53,13 +51,11 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
   ) {
     super(dialogService);
     this.form = fb.group({
-    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'fechaAC' : [''],
     'horaAC' : [''],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'permisotaxi_idpermisotaxiAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     });
-    this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
     this.fechaAC = this.form.controls['fechaAC'];
     this.horaAC = this.form.controls['horaAC'];
     this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
@@ -138,7 +134,7 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
   }
 
 
-  // AGREGA LIQUIDACIÓN DESPUES DE CREAR PERMISOTAXIASIGNADO
+  // AGREGA LIQUIDACIÓN DESPUÉS DE CREAR PERMISOTAXIASIGNADO
   postLiquidacion(data) {
       this.liquidacionsService.insert(data)
       .subscribe(
@@ -147,6 +143,41 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
               this.confirm();
           });
   }
+
+   // UPDATE LIQUIDACIÓN ACTUAL DESPUÉS DE CREAR PERMISOTAXIASIGNADO
+  updateLiquidacion(data, nuevaLiquidacion) {
+      this.liquidacionsService.update(data)
+      .subscribe(
+          (result: any) => {
+
+              // CREAR NUEVA LIQUIDACIÓN EN ESTE DÍA A CHOFER CON MONTO A PARTIR DE HORA ACTUAL
+              this.postLiquidacion(nuevaLiquidacion);
+
+              this.data = result;
+              this.confirm();
+          });
+  }
+
+  liquidacionFromIdchoferFecha(data, nuevaLiquidacion) {
+      // OBTENER EL REGISTRO DE LIQUIDACION DEL DIA ACTUAL ADEUDANDO DE CHOFER
+
+
+      this.liquidacionsService.liquidacionFromIdchoferFecha(data)
+      .subscribe(
+          (result: any) => {
+
+               // CERRAR MONTO ADEUDANDO CON LA HORA ACTUAL
+                this.updateLiquidacion({
+                    fecha: data.fecha,
+                    saldoactual: data.saldoactual,
+                    h_corte: this.hora,
+                    idliquidacion: result.idliquidacion,
+                }, nuevaLiquidacion);
+
+          });
+  }
+
+
 
 
   confirm() {
@@ -158,7 +189,7 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
     if (this.form.valid) {
       this.service
         .insert({
-                  estado_idestado: this.estado_idestado,
+                  estado_idestado: 12,
                   fecha: this.fecha,
                   hora: this.hora,
                   chofer_idchofer: this.chofer_idchofer,
@@ -167,22 +198,35 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
         .subscribe(
             (data: any) => {
               if (data.success) {
-                this.permisotaxisService.findLiquidacionByIdInThisDay(this.permisotaxi_idpermisotaxi)
+                this.permisotaxisService.findLiquidacionByIdInThisDayAtThisHour(this.permisotaxi_idpermisotaxi)
                     .subscribe(
                         (_data: any) => {
                         if (_data.success) {
                             
-                            this.postLiquidacion({
+
+                            // CERRAR MONTO A PAGAR CON HORA ACTUAL A LIQUIDACIÓN ACTUAL A CHOFER
+                            // ENVÍA LOS DATOS DENTRO DE PARAMETRO DE NUEVALIQUIDACION PARA POSTERIOR 
+                            // A UPDATE CREA REGISTRO DE LIQUIDACIÓN
+                            this.liquidacionFromIdchoferFecha({
                                 fecha: this.fecha,
-                                saldoanterior: _data.result.liquidacion,
-                                saldoactual: _data.result.liquidacion,
-                                montopagado: 0,
-                                bonificado: 0,
-                                h_corte: this.hora,
-                                permisotaxiasignado_idpermisotaxiasignado: data.result.insertId,
                                 chofer_idchofer: this.chofer_idchofer,
-                                estado_idestado: 9 // ADEUDANDO
-                            });
+                                saldoactual: _data.result.liquidezDown,
+                                }, 
+                                {
+                                    fecha: this.fecha,
+                                    saldoanterior: _data.result.liquidezUp,
+                                    saldoactual: _data.result.liquidezUp,
+                                    montopagado: 0,
+                                    bonificado: 0,
+                                    h_corte: '00:00:00',
+                                    permisotaxiasignado_idpermisotaxiasignado: data.result.insertId,
+                                    chofer_idchofer: this.chofer_idchofer,
+                                    estado_idestado: 9, // ADEUDANDO
+                                });
+
+
+
+
                         }
                     });
 

@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 import { OrdensService } from './ordens.service';
 import { OrdensAddModalComponent } from './ordens-add-modal/ordens-add-modal.component';
 import { OrdensEditModalComponent } from './ordens-edit-modal/ordens-edit-modal.component';
+import { Orden_has_refaccionsInterface } from './../../../orden_has_refaccions/components/orden_has_refaccions-table/orden_has_refaccions.interface';
+import { Orden_has_refaccionsAddModalComponent } from './../../../orden_has_refaccions/components/orden_has_refaccions-table/orden_has_refaccions-add-modal/orden_has_refaccions-add-modal.component';
+
 @Component({
 selector: 'ordens-table',
 templateUrl: './ordens-table.html',
@@ -74,6 +77,27 @@ export class OrdensTableComponent implements OnInit {
     }
     backPage() {
         window.history.back();
+    } 
+    insertOrden_has_refaccion(ordens: OrdensInterface) {
+      const orden_has_refaccion: Orden_has_refaccionsInterface = {
+        orden_idorden: ordens.idorden
+      }
+      const disposable = this.dialogService.addDialog(Orden_has_refaccionsAddModalComponent, orden_has_refaccion)
+      .subscribe( data => {
+          if (data) {
+          this.orden_has_refaccionShowToast(data);
+          }
+      });
+    }
+    orden_has_refaccionShowToast(result) {
+        if (result.success) {
+            this.toastrService.success(result.message);
+        } else {
+            this.toastrService.error(result.message);
+        }
+    }
+    viewOrden_has_refaccion(ordens: OrdensInterface) {
+      this.router.navigate([`/pages/orden_has_refaccions/orden/${ordens.idorden}`]);
     }
     addModalShow() {
       const disposable = this.dialogService.addDialog(OrdensAddModalComponent)

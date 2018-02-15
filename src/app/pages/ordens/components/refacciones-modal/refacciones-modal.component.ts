@@ -7,10 +7,7 @@ import { DialogService } from 'ng2-bootstrap-modal/dist/dialog.service';
 @Component({
   selector: 'app-refacciones-modal',
   templateUrl: './refacciones-modal.component.html',
-  styleUrls: ['./refacciones-modal.component.scss'],
-  providers: [
-    RefaccionsService
-  ]
+  styleUrls: ['./refacciones-modal.component.scss']
 })
 export class RefaccionesModalComponent extends DialogComponent<RefaccionsInterface, any> implements OnInit {
   refacciones: RefaccionsInterface[];
@@ -33,8 +30,8 @@ export class RefaccionesModalComponent extends DialogComponent<RefaccionsInterfa
       .subscribe( res =>
         this.refacciones = res.success
           ? res.result
-          : null)
-  }
+          : null);
+    }
 
 
 }

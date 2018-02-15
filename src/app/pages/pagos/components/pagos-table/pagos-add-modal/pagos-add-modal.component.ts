@@ -1,3 +1,4 @@
+import { LiquidacionsAddModalComponent } from './../../../../liquidacions/components/liquidacions-table/liquidacions-add-modal/liquidacions-add-modal.component';
 import { PagoliquidacionsService } from './../../../../pagoliquidacions/components/pagoliquidacions-table/pagoliquidacions.service';
 import { LiquidacionsService } from './../../../../liquidacions/components/liquidacions-table/liquidacions.service';
 import { ChofersResponseInterface } from './../../../../chofers/components/chofers-table/chofers-response.interface';
@@ -30,7 +31,6 @@ import { PagobonificacionsService } from './../../../../pagobonificacions/compon
 export class PagosAddModalComponent extends DialogComponent<PagosInterface, any> implements OnInit, PagosInterface {
   _estado: string[] = [];
   _chofer: string[] = [];
-  _bonificacion: string[] = [];
   _liquidacion: string[] = [];
 
   cantidadRecibida: number;
@@ -47,7 +47,6 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
   foliofianza: string;
   fianza: number;
   chofer_idchofer: number;
-  pagobonificacion: any[];
   pagoliquidacion: any[];
 
   modalHeader: string;
@@ -68,15 +67,12 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
   foliofianzaAC: AbstractControl;
   fianzaAC: AbstractControl;
   chofer_idchoferAC: AbstractControl;
-  pagobonificacionAC: AbstractControl;
   pagoliquidacionAC: AbstractControl;
 
   constructor(
     private service: PagosService,
     private estadosService: EstadosService,
     private chofersService: ChofersService,
-    private bonificacionsService: BonificacionsService,
-    private pagobonificacionsService: PagobonificacionsService,
     private liquidacionsService: LiquidacionsService,
     private pagoliquidacionsService: PagoliquidacionsService,
     private pagofianzasService: PagofianzasService,
@@ -101,7 +97,6 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
     'foliofianzaAC' : ['',Validators.compose([Validators.maxLength(30)])],
     'fianzaAC' : [''],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
-    'pagobonificacionAC' : [''],
     'pagoliquidacionAC' : [''],
     });
     this.cantidadRecibidaAC = this.form.controls['cantidadRecibidaAC'];
@@ -118,13 +113,12 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
     this.foliofianzaAC = this.form.controls['foliofianzaAC'];
     this.fianzaAC = this.form.controls['fianzaAC'];
     this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
-    this.pagobonificacionAC = this.form.controls['pagobonificacionAC'];
     this.pagoliquidacionAC = this.form.controls['pagoliquidacionAC'];
   }
   ngOnInit() {
       this.getEstado();
       this.getChofer();
-      this.getBonificacion();
+      
       this.getLiquidacion();
   }
   estadoAddModalShow() {
@@ -159,22 +153,6 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
           this.toastrService.error(result.message);
       }
   }
-  bonificacionAddModalShow() {
-      const disposable = this.dialogService.addDialog(BonificacionsAddModalComponent)
-      .subscribe( data => {
-          if (data) {
-          this.bonificacionShowToast(data);
-          }
-      });
-  }
-  bonificacionShowToast(result) {
-      if (result.success) {
-          this.toastrService.success(result.message);
-          this.getBonificacion();
-      } else {
-          this.toastrService.error(result.message);
-      }
-  }
   getEstado() {
       this.estadosService.all()
       .subscribe(
@@ -187,23 +165,26 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
           (data: any) => this._chofer = data.result,
       );
   }
-  getBonificacion() {
-      this.bonificacionsService.all()
-      .subscribe(
-          (data: any) => this._bonificacion = data.result,
-      );
+
+
+
+
+  liquidacionAddModalShow() {
+      const disposable = this.dialogService.addDialog(LiquidacionsAddModalComponent)
+      .subscribe( data => {
+          if (data) {
+          this.liquidacionShowToast(data);
+          }
+      });
   }
-  postPagobonificacion(data) {
-      this.pagobonificacionsService.insert(data)
-      .subscribe(
-          (result: any) => {
-              this.data = result;
-              this.confirm();
-          });
+  liquidacionShowToast(result) {
+      if (result.success) {
+          this.toastrService.success(result.message);
+          this.getLiquidacion();
+      } else {
+          this.toastrService.error(result.message);
+      }
   }
-
-
-
 
   getLiquidacion() {
       // MÉTODO ALLADEUDANDOFROMIDCHOFER
@@ -294,12 +275,8 @@ export class PagosAddModalComponent extends DialogComponent<PagosInterface, any>
         .subscribe(
             (data: any) => {
               if (data.success) {
-                  this.pagobonificacion.forEach(element => {
-                      this.postPagobonificacion({
-                          pago_idpago: data.result.insertId,
-                          bonificacion_idbonificacion: +element,
-                      });
-                  });
+
+
 
 
                   // REVISAR QUE ESTÉ CORRECTAMENTE FUNCIONANDO******

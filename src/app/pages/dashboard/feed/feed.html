@@ -1,0 +1,35 @@
+<div class="feed-messages-container">
+  <div class="feed-message" *ngFor="let message of feed" (click)="expandMessage(message)">
+    <div class="message-icon">
+      <img src="./assets/img/theme/no-photo.png" class="photo-icon" >
+      <span class="sub-photo-icon" [ngClass]="message.type"></span>
+    </div>
+    <div class="text-block text-message">
+      <div class="message-header">
+        <span class="author">Chofer <strong>{{ message.nombre }} </strong></span>
+      </div>
+      <div class="message-content line-clamp" [ngClass]="{'line-clamp-2' : !message.expanded}">
+        <span *ngIf="message.preview">
+          <i class="fa fa-down"></i>
+        </span>
+      </div>
+      <div >
+        <div class="post-time">
+          Deuda Liquidación: <strong>{{ message.deudaliquidacion }}</strong>
+        </div>
+        <div class="ago-time">
+          Fianza Pagada: {{ message.fianza - message.deudafianza }}
+        </div>
+      </div>
+      <div class="message-time" [ngClass]="{'hidden': !message.expanded}" >
+          <br>
+        <div class="post-time">
+          Permiso: <strong>{{ message.numero }}</strong>
+        </div>
+        <div class="ago-time">
+          Licencia: {{ message.licencia }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  

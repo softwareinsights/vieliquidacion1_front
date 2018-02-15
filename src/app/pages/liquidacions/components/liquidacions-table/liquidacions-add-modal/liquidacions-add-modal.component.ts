@@ -27,7 +27,6 @@ export class LiquidacionsAddModalComponent extends DialogComponent<LiquidacionsI
   saldoactual: number;
   montopagado: number;
   bonificado: number;
-  h_corte: string;
   permisotaxiasignado_idpermisotaxiasignado: number;
   chofer_idchofer: number;
   estado_idestado: number;
@@ -41,10 +40,8 @@ export class LiquidacionsAddModalComponent extends DialogComponent<LiquidacionsI
   saldoactualAC: AbstractControl;
   montopagadoAC: AbstractControl;
   bonificadoAC: AbstractControl;
-  h_corteAC: AbstractControl;
   permisotaxiasignado_idpermisotaxiasignadoAC: AbstractControl;
   chofer_idchoferAC: AbstractControl;
-  estado_idestadoAC: AbstractControl;
 
   constructor(
     private service: LiquidacionsService,
@@ -63,20 +60,16 @@ export class LiquidacionsAddModalComponent extends DialogComponent<LiquidacionsI
     'saldoactualAC' : [''],
     'montopagadoAC' : [''],
     'bonificadoAC' : [''],
-    'h_corteAC' : [''],
     'permisotaxiasignado_idpermisotaxiasignadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
-    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     });
     this.fechaAC = this.form.controls['fechaAC'];
     this.saldoanteriorAC = this.form.controls['saldoanteriorAC'];
     this.saldoactualAC = this.form.controls['saldoactualAC'];
     this.montopagadoAC = this.form.controls['montopagadoAC'];
     this.bonificadoAC = this.form.controls['bonificadoAC'];
-    this.h_corteAC = this.form.controls['h_corteAC'];
     this.permisotaxiasignado_idpermisotaxiasignadoAC = this.form.controls['permisotaxiasignado_idpermisotaxiasignadoAC'];
     this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
-    this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
   }
   ngOnInit() {
       this.getPermisotaxiasignado();
@@ -163,10 +156,10 @@ export class LiquidacionsAddModalComponent extends DialogComponent<LiquidacionsI
                   saldoactual: this.saldoactual,
                   montopagado: this.montopagado,
                   bonificado: this.bonificado,
-                  h_corte: this.h_corte,
+                  h_corte: '00:00:00',
                   permisotaxiasignado_idpermisotaxiasignado: this.permisotaxiasignado_idpermisotaxiasignado,
                   chofer_idchofer: this.chofer_idchofer,
-                  estado_idestado: this.estado_idestado,
+                  estado_idestado: 9, // ADEUDANDO
         })
         .subscribe(
             (data: any) => {
