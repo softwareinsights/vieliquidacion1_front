@@ -121,13 +121,13 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
       );
   }
   getChofer() {
-      this.chofersService.all()
+      this.chofersService.allDisponibles()
       .subscribe(
           (data: any) => this._chofer = data.result,
       );
   }
   getPermisotaxi() {
-      this.permisotaxisService.all()
+      this.permisotaxisService.allDisponibles()
       .subscribe(
           (data: any) => this._permisotaxi = data.result,
       );

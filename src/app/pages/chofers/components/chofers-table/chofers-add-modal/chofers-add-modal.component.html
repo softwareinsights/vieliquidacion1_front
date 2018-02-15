@@ -23,28 +23,6 @@
                 <input [(ngModel)]="fianza" [formControl]="fianzaAC" type="number" maxlength='11' class="form-control" id="inputfianzaAC" placeholder="Fianza" >
               </div>
             </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!estado_idestadoAC.valid && estado_idestadoAC.touched), 'has-success': (estado_idestadoAC.valid && estado_idestadoAC.touched)}">
-              <label for="inputestado_idestadoAC" class="col-sm-3 form-control-label">Estado</label>
-              <div class="col-sm-7">
-               <select [(ngModel)]="estado_idestado" [formControl]="estado_idestadoAC" class="form-control" id="inputestado_idestadoAC" required>
-                 <option value="{{item.idestado}}" *ngFor="let item of _estado">{{item.nombre}}</option>
-               </select>
-              </div>
-              <div class='col-sm-2'>
-                <button (click)='estadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
-              </div>
-            </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!estado_idestado_fianzaAC.valid && estado_idestado_fianzaAC.touched), 'has-success': (estado_idestado_fianzaAC.valid && estado_idestado_fianzaAC.touched)}">
-              <label for="inputestado_idestado_fianzaAC" class="col-sm-3 form-control-label">Estado Fianza</label>
-              <div class="col-sm-7">
-               <select [(ngModel)]="estado_idestado_fianza" [formControl]="estado_idestado_fianzaAC" class="form-control" id="inputestado_idestado_fianzaAC" required>
-                 <option value="{{item.idestado}}" *ngFor="let item of _estado">{{item.nombre}}</option>
-               </select>
-              </div>
-              <div class='col-sm-2'>
-                <button (click)='estadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
-              </div>
-            </div>
             <div class="form-group row" [ngClass]="{'has-error': (!choferAC.valid && choferAC.touched), 'has-success': (choferAC.valid && choferAC.touched)}">
               <label for="inputchoferAC" class="col-sm-3 form-control-label">Chofer</label>
               <div class="col-sm-7">

@@ -74,7 +74,7 @@
               <label for="inputenviotaller_idenviotallerAC" class="col-sm-3 form-control-label">Envio Taller</label>
               <div class="col-sm-7">
                <select [(ngModel)]="enviotaller_idenviotaller" [formControl]="enviotaller_idenviotallerAC" class="form-control" id="inputenviotaller_idenviotallerAC" >
-                 <option value="{{item.idenviotaller}}" *ngFor="let item of _enviotaller">{{item.motivo}}</option>
+                 <option value="{{item.idenviotaller}}" *ngFor="let item of _enviotaller">{{item.motivo}} {{item.fecha}} {{item.idpermisotaxiasignado}} </option>
                </select>
               </div>
               <div class='col-sm-2'>

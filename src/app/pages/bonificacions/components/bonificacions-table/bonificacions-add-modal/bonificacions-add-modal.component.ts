@@ -22,7 +22,6 @@ export class BonificacionsAddModalComponent extends DialogComponent<Bonificacion
   cantidad: number;
   validado: boolean;
   fecha: string;
-  estado_idestado: number;
   concepto: string;
   chofer_idchofer: number;
 
@@ -33,7 +32,6 @@ export class BonificacionsAddModalComponent extends DialogComponent<Bonificacion
   cantidadAC: AbstractControl;
   validadoAC: AbstractControl;
   fechaAC: AbstractControl;
-  estado_idestadoAC: AbstractControl;
   conceptoAC: AbstractControl;
   chofer_idchoferAC: AbstractControl;
 
@@ -51,14 +49,12 @@ export class BonificacionsAddModalComponent extends DialogComponent<Bonificacion
     'cantidadAC' : [''],
     'validadoAC' : [''],
     'fechaAC' : [''],
-    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'conceptoAC' : ['',Validators.compose([Validators.maxLength(45)])],
     'chofer_idchoferAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     });
     this.cantidadAC = this.form.controls['cantidadAC'];
     this.validadoAC = this.form.controls['validadoAC'];
     this.fechaAC = this.form.controls['fechaAC'];
-    this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
     this.conceptoAC = this.form.controls['conceptoAC'];
     this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
   }
@@ -122,7 +118,7 @@ export class BonificacionsAddModalComponent extends DialogComponent<Bonificacion
                   cantidad: this.cantidad,
                   validado: this.validado,
                   fecha: this.fecha,
-                  estado_idestado: this.estado_idestado,
+                  estado_idestado: 6,
                   concepto: this.concepto,
                   chofer_idchofer: this.chofer_idchofer,
         })

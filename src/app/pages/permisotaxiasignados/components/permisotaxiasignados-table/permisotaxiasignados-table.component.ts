@@ -24,6 +24,7 @@ import { LiquidacionsAddModalComponent } from './../../../liquidacions/component
 import { VehiculoreparandosInterface } from './../../../vehiculoreparandos/components/vehiculoreparandos-table/vehiculoreparandos.interface';
 import { VehiculoreparandosAddModalComponent } from './../../../vehiculoreparandos/components/vehiculoreparandos-table/vehiculoreparandos-add-modal/vehiculoreparandos-add-modal.component';
 
+
 @Component({
 selector: 'permisotaxiasignados-table',
 templateUrl: './permisotaxiasignados-table.html',
@@ -162,10 +163,11 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
           if (data) {
             if (data.success) {
 
+
               // Update a estado de permisotaxiasignado
               const permisotaxiasignado: PermisotaxiasignadosInterface = {
                 idpermisotaxiasignado: permisotaxiasignados.idpermisotaxiasignado,
-                estado_idestado: 18 // CORRALÓN
+                estado_idestado: 23 // SEBAJAACHOFER
               }
 
               this.service
@@ -175,18 +177,18 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
                     this.showToast(data);
               });
 
-              // Update a permisotaxi
+              // Update a estado de permisotaxi
               const permisotaxi: PermisotaxisInterface = {
                 idpermisotaxi: permisotaxiasignados.permisotaxi_idpermisotaxi,
                 estado_idestado: 18 // CORRALON
               }
-              this.permisotaxisService
-              .update(permisotaxi)
+
+              this.service
+              .update(permisotaxiasignado)
               .subscribe(
                   (data: any) => {
                     this.showToast(data);
               });
-
 
               // Update a chofer
               const chofer: ChofersInterface = {
@@ -227,7 +229,7 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
               // Update a estado de permisotaxiasignado
               const permisotaxiasignado: PermisotaxiasignadosInterface = {
                 idpermisotaxiasignado: permisotaxiasignados.idpermisotaxiasignado,
-                estado_idestado: 24 // ENVIADOATALLER
+                estado_idestado: 23 // SEBAJAACHOFER
               }
 
               this.service
@@ -237,14 +239,15 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
                     this.showToast(data);
               });
 
-      
-              // Update a permisotaxi
+              
+              // Update a estado de permisotaxi
               const permisotaxi: PermisotaxisInterface = {
                 idpermisotaxi: permisotaxiasignados.permisotaxi_idpermisotaxi,
-                estado_idestado: 24 // ENVIADOATALLER
+                estado_idestado: 15 // TALLER
               }
-              this.permisotaxisService
-              .update(permisotaxi)
+
+              this.service
+              .update(permisotaxiasignado)
               .subscribe(
                   (data: any) => {
                     this.showToast(data);
@@ -267,6 +270,69 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
           }
       });
     }
+
+
+
+
+
+
+    insertEnviotallerMantenimiento(permisotaxiasignados: PermisotaxiasignadosInterface) {
+      const enviotaller: EnviotallersInterface = {
+        permisotaxiasignado_idpermisotaxiasignado: permisotaxiasignados.idpermisotaxiasignado,
+        motivo: 'Mantenimiento'
+      }
+      const disposable = this.dialogService.addDialog(EnviotallersAddModalComponent, enviotaller)
+      .subscribe( data => {
+          if (data) {
+            if (data.success) {
+
+              // Update a estado de permisotaxiasignado
+              const permisotaxiasignado: PermisotaxiasignadosInterface = {
+                idpermisotaxiasignado: permisotaxiasignados.idpermisotaxiasignado,
+                estado_idestado: 23 // SEBAJAACHOFER
+              }
+
+              this.service
+              .update(permisotaxiasignado)
+              .subscribe(
+                  (data: any) => {
+                    this.showToast(data);
+              });
+
+              // Update a estado de permisotaxi
+              const permisotaxi: PermisotaxisInterface = {
+                idpermisotaxi: permisotaxiasignados.permisotaxi_idpermisotaxi,
+                estado_idestado: 15 // TALLER
+              }
+
+              this.service
+              .update(permisotaxiasignado)
+              .subscribe(
+                  (data: any) => {
+                    this.showToast(data);
+              });
+
+              // Update a chofer
+              const chofer: ChofersInterface = {
+                idchofer: permisotaxiasignados.chofer_idchofer,
+                estado_idestado: 19 // DISPONIBLE
+              }
+              this.chofersService
+              .update(chofer)
+              .subscribe(
+                  (data: any) => {
+                    this.showToast(data);
+              });
+
+            }
+          this.enviotallerShowToast(data);
+          }
+      });
+    }
+
+
+
+
     enviotallerShowToast(result) {
         if (result.success) {
             this.toastrService.success(result.message);
