@@ -3,7 +3,7 @@
         <ba-card title='Listado' baCardClass='with-scroll' class='data-table-container'>
             <div class='panel panel-default'>
                 <div class="panel-heading" *ngIf="backpage"><h2>Información de Vehículos Reparando</h2></div>
-                <table class='table table-striped' [mfData]='data | fechaIngresaDataFilter : filterQuery1 | fechaSalidaDataFilter : filterQuery2 | inventarioDataFilter : filterQuery3 | motivoDataFilter : filterQuery4 | enviotaller_enviotaller_idenviotallerDataFilter : filterQuery5 | mecanico_mecanico_idmecanicoDataFilter : filterQuery6 | permisotaxiasignado_permisotaxiasignado_idpermisotaxiasignadoDataFilter : filterQuery7 | estado_estado_idestadoDataFilter : filterQuery8' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
+                <table class='table table-striped' [mfData]='data | fechaIngresaDataFilter : filterQuery1 | fechaSalidaDataFilter : filterQuery2 | inventarioDataFilter : filterQuery3 | motivoDataFilter : filterQuery4 | enviotaller_enviotaller_idenviotallerDataFilter : filterQuery5 | mecanico_mecanico_idmecanicoDataFilter : filterQuery6 | vehiculo_vehiculo_idvehiculoDataFilter : filterQuery7 | estado_estado_idestadoDataFilter : filterQuery8' #mf='mfDataTable' [mfRowsOnPage]='rowsOnPage' [(mfSortBy)]='sortBy' [(mfSortOrder)]='sortOrder'>
                     <thead>
                         <tr>
                             <th colspan='1' class='text-left'>
@@ -78,7 +78,7 @@
                                 <mfDefaultSorter by='mecanico_mecanico_idmecanico'>Mecánico</mfDefaultSorter>
                             </th>
                             <th style='width: 6%'>
-                                <mfDefaultSorter by='permisotaxiasignado_permisotaxiasignado_idpermisotaxiasignado'>Permiso Taxi</mfDefaultSorter>
+                                <mfDefaultSorter by='vehiculo_vehiculo_idvehiculo'>Vehículo</mfDefaultSorter>
                             </th>
                         </tr>
                     </thead>
@@ -104,7 +104,7 @@
                             <td>{{ item.enviotaller_enviotaller_idenviotaller }}</td>
                             <td>{{ item.taller_taller_idtaller }}</td>
                             <td>{{ item.mecanico_mecanico_idmecanico }}</td>
-                            <td>{{ item.permisotaxiasignado_permisotaxiasignado_idpermisotaxiasignado }}</td>
+                            <td>{{ item.vehiculo_vehiculo_idvehiculo }}</td>
                         </tr>
                     </tbody>
                     <tfoot>

@@ -74,7 +74,7 @@
               <label for="inputenviotaller_idenviotallerAC" class="col-sm-3 form-control-label">Envio Taller</label>
               <div class="col-sm-7">
                <select [(ngModel)]="enviotaller_idenviotaller" [formControl]="enviotaller_idenviotallerAC" class="form-control" id="inputenviotaller_idenviotallerAC" >
-                 <option value="{{item.idenviotaller}}" *ngFor="let item of _enviotaller">{{item.motivo}}</option>
+                 <option value="{{item.idenviotaller}}" *ngFor="let item of _enviotaller">{{item.motivo}} {{item.fecha}} {{item.permisotaxi_permisotaxi_idpermisotaxi}} </option>
                </select>
               </div>
               <div class='col-sm-2'>
@@ -103,15 +103,15 @@
                 <button (click)='mecanicoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
               </div>
             </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched), 'has-success': (permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched)}">
-              <label for="inputpermisotaxiasignado_idpermisotaxiasignadoAC" class="col-sm-3 form-control-label">Permiso Taxi</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!vehiculo_idvehiculoAC.valid && vehiculo_idvehiculoAC.touched), 'has-success': (vehiculo_idvehiculoAC.valid && vehiculo_idvehiculoAC.touched)}">
+              <label for="inputvehiculo_idvehiculoAC" class="col-sm-3 form-control-label">Vehículo </label>
               <div class="col-sm-7">
-               <select [(ngModel)]="permisotaxiasignado_idpermisotaxiasignado" [formControl]="permisotaxiasignado_idpermisotaxiasignadoAC" class="form-control" id="inputpermisotaxiasignado_idpermisotaxiasignadoAC" >
-                 <option value="{{item.idpermisotaxiasignado}}" *ngFor="let item of _permisotaxiasignado">{{item.permisotaxi_permisotaxi_idpermisotaxi}}</option>
+               <select [(ngModel)]="vehiculo_idvehiculo" [formControl]="vehiculo_idvehiculoAC" class="form-control" id="inputvehiculo_idvehiculoAC" >
+                 <option value="{{item.idvehiculo}}" *ngFor="let item of _vehiculo">{{item.vehiculo_idvehiculo}} {{item.vehiculo_vehiculo.modelo}} </option>
                </select>
               </div>
               <div class='col-sm-2'>
-                <button (click)='permisotaxiasignadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
+                <button (click)='vehiculoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
               </div>
             </div>
           </ba-card>

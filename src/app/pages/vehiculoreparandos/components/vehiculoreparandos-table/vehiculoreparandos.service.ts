@@ -46,8 +46,8 @@ export class VehiculoreparandosService {
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }
-       findByIdPermisotaxiasignado = ( id ) : Observable<VehiculoreparandosResponseInterface> => {
-           return this._http.get(`${this.endPoint}/permisotaxiasignado/${id}`, this.options)
+       findByIdVehiculo = ( id ) : Observable<VehiculoreparandosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/vehiculo/${id}`, this.options)
                .map((response: Response) => response.json())
                .catch(this.handleError);
        }

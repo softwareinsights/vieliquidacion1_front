@@ -23,7 +23,6 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
   _vehiculo: string[] = [];
 
   numero: string;
-  estado_idestado: number;
   fechaAlta: string;
   vigencia: string;
   liquidez: number;
@@ -36,7 +35,6 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
   form: FormGroup;
   submitted: boolean = false;
   numeroAC: AbstractControl;
-  estado_idestadoAC: AbstractControl;
   fechaAltaAC: AbstractControl;
   vigenciaAC: AbstractControl;
   liquidezAC: AbstractControl;
@@ -57,7 +55,6 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
     super(dialogService);
     this.form = fb.group({
     'numeroAC' : ['',Validators.compose([Validators.required,Validators.maxLength(45)])],
-    'estado_idestadoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(3)])],
     'fechaAltaAC' : [''],
     'vigenciaAC' : [''],
     'liquidezAC' : ['',Validators.compose([Validators.maxLength(11)])],
@@ -66,7 +63,6 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
     'vehiculo_idvehiculoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     });
     this.numeroAC = this.form.controls['numeroAC'];
-    this.estado_idestadoAC = this.form.controls['estado_idestadoAC'];
     this.fechaAltaAC = this.form.controls['fechaAltaAC'];
     this.vigenciaAC = this.form.controls['vigenciaAC'];
     this.liquidezAC = this.form.controls['liquidezAC'];
@@ -140,7 +136,7 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
       );
   }
   getVehiculo() {
-      this.vehiculosService.all()
+      this.vehiculosService.allDisponibles()
       .subscribe(
           (data: any) => this._vehiculo = data.result,
       );
@@ -155,7 +151,7 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
       this.service
         .insert({
                   numero: this.numero,
-                  estado_idestado: this.estado_idestado,
+                  estado_idestado: 19,
                   fechaAlta: this.fechaAlta,
                   vigencia: this.vigencia,
                   liquidez: this.liquidez,

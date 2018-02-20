@@ -13,8 +13,8 @@ import { TallersService } from './../../../../tallers/components/tallers-table/t
 import { TallersAddModalComponent } from './../../../../tallers/components/tallers-table/tallers-add-modal/tallers-add-modal.component';
 import { MecanicosService } from './../../../../mecanicos/components/mecanicos-table/mecanicos.service';
 import { MecanicosAddModalComponent } from './../../../../mecanicos/components/mecanicos-table/mecanicos-add-modal/mecanicos-add-modal.component';
-import { PermisotaxiasignadosService } from './../../../../permisotaxiasignados/components/permisotaxiasignados-table/permisotaxiasignados.service';
-import { PermisotaxiasignadosAddModalComponent } from './../../../../permisotaxiasignados/components/permisotaxiasignados-table/permisotaxiasignados-add-modal/permisotaxiasignados-add-modal.component';
+import { VehiculosService } from './../../../../vehiculos/components/vehiculos-table/vehiculos.service';
+import { VehiculosAddModalComponent } from './../../../../vehiculos/components/vehiculos-table/vehiculos-add-modal/vehiculos-add-modal.component';
 @Component({
   selector: 'edit-service-modal',
   styleUrls: [('./vehiculoreparandos-edit-modal.component.scss')],
@@ -25,7 +25,7 @@ export class VehiculoreparandosEditModalComponent extends DialogComponent<Vehicu
   _enviotaller: string[] = [];
   _taller: string[] = [];
   _mecanico: string[] = [];
-  _permisotaxiasignado: string[] = [];
+  _vehiculo: string[] = [];
 
   idvehiculoreparando: number;
   fechaIngresa: string;
@@ -40,7 +40,7 @@ export class VehiculoreparandosEditModalComponent extends DialogComponent<Vehicu
   enviotaller_idenviotaller: number;
   taller_idtaller: number;
   mecanico_idmecanico: number;
-  permisotaxiasignado_idpermisotaxiasignado: number;
+  vehiculo_idvehiculo: number;
 
   modalHeader: string;
   data: any;
@@ -59,14 +59,14 @@ export class VehiculoreparandosEditModalComponent extends DialogComponent<Vehicu
   enviotaller_idenviotallerAC: AbstractControl;
   taller_idtallerAC: AbstractControl;
   mecanico_idmecanicoAC: AbstractControl;
-  permisotaxiasignado_idpermisotaxiasignadoAC: AbstractControl;
+  vehiculo_idvehiculoAC: AbstractControl;
   constructor(
       private service: VehiculoreparandosService,
       private estadosService: EstadosService,
       private enviotallersService: EnviotallersService,
       private tallersService: TallersService,
       private mecanicosService: MecanicosService,
-      private permisotaxiasignadosService: PermisotaxiasignadosService,
+      private vehiculosService: VehiculosService,
       fb: FormBuilder,
       private toastrService: ToastrService,
       private authLocalstorage: AuthLocalstorage,
@@ -86,7 +86,7 @@ export class VehiculoreparandosEditModalComponent extends DialogComponent<Vehicu
     'enviotaller_idenviotallerAC' : ['',Validators.compose([Validators.maxLength(11)])],
     'taller_idtallerAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
     'mecanico_idmecanicoAC' : ['',Validators.compose([Validators.required,Validators.maxLength(11)])],
-    'permisotaxiasignado_idpermisotaxiasignadoAC' : ['',Validators.compose([Validators.maxLength(11)])],
+    'vehiculo_idvehiculoAC' : ['',Validators.compose([Validators.maxLength(11)])],
   });
   this.fechaIngresaAC = this.form.controls['fechaIngresaAC'];
   this.horaIngresaAC = this.form.controls['horaIngresaAC'];
@@ -100,14 +100,14 @@ export class VehiculoreparandosEditModalComponent extends DialogComponent<Vehicu
   this.enviotaller_idenviotallerAC = this.form.controls['enviotaller_idenviotallerAC'];
   this.taller_idtallerAC = this.form.controls['taller_idtallerAC'];
   this.mecanico_idmecanicoAC = this.form.controls['mecanico_idmecanicoAC'];
-  this.permisotaxiasignado_idpermisotaxiasignadoAC = this.form.controls['permisotaxiasignado_idpermisotaxiasignadoAC'];
+  this.vehiculo_idvehiculoAC = this.form.controls['vehiculo_idvehiculoAC'];
   }
   ngOnInit() {
       this.getEstado();
       this.getEnviotaller();
       this.getTaller();
       this.getMecanico();
-      this.getPermisotaxiasignado();
+      this.getVehiculo();
   }
 
   estadoAddModalShow() {
@@ -178,19 +178,19 @@ export class VehiculoreparandosEditModalComponent extends DialogComponent<Vehicu
           this.toastrService.error(result.message);
       }
   }
-  permisotaxiasignadoAddModalShow() {
-      const disposable = this.dialogService.addDialog(PermisotaxiasignadosAddModalComponent)
+  vehiculoAddModalShow() {
+      const disposable = this.dialogService.addDialog(VehiculosAddModalComponent)
       .subscribe( data => {
           if (data) {
-          this.permisotaxiasignadoShowToast(data);
+          this.vehiculoShowToast(data);
           }
       })
   }
 
-  permisotaxiasignadoShowToast(result) {
+  vehiculoShowToast(result) {
       if (result.success) {
           this.toastrService.success(result.message);
-          this.getPermisotaxiasignado();
+          this.getVehiculo();
       } else {
           this.toastrService.error(result.message);
       }
@@ -219,10 +219,10 @@ export class VehiculoreparandosEditModalComponent extends DialogComponent<Vehicu
           (data: any) => this._mecanico = data.result,
       );
   }
-  getPermisotaxiasignado() {
-      this.permisotaxiasignadosService.all()
+  getVehiculo() {
+      this.vehiculosService.all()
       .subscribe(
-          (data: any) => this._permisotaxiasignado = data.result,
+          (data: any) => this._vehiculo = data.result,
       );
   }
   confirm() {
@@ -247,7 +247,7 @@ export class VehiculoreparandosEditModalComponent extends DialogComponent<Vehicu
                   enviotaller_idenviotaller: this.enviotaller_idenviotaller,
                   taller_idtaller: this.taller_idtaller,
                   mecanico_idmecanico: this.mecanico_idmecanico,
-                  permisotaxiasignado_idpermisotaxiasignado: this.permisotaxiasignado_idpermisotaxiasignado,
+                  vehiculo_idvehiculo: this.vehiculo_idvehiculo,
               })
               .subscribe(
                   (data: any) => {

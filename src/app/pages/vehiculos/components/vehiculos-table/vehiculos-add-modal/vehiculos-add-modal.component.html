@@ -53,17 +53,6 @@
                 <input [(ngModel)]="kilometraje" [formControl]="kilometrajeAC" type="number" maxlength='11' class="form-control" id="inputkilometrajeAC" placeholder="Kilometraje" >
               </div>
             </div>
-            <div class="form-group row" [ngClass]="{'has-error': (!estado_idestadoAC.valid && estado_idestadoAC.touched), 'has-success': (estado_idestadoAC.valid && estado_idestadoAC.touched)}">
-              <label for="inputestado_idestadoAC" class="col-sm-3 form-control-label">Estado</label>
-              <div class="col-sm-7">
-               <select [(ngModel)]="estado_idestado" [formControl]="estado_idestadoAC" class="form-control" id="inputestado_idestadoAC" required>
-                 <option value="{{item.idestado}}" *ngFor="let item of _estado">{{item.nombre}}</option>
-               </select>
-              </div>
-              <div class='col-sm-2'>
-                <button (click)='estadoAddModalShow()' class='btn btn-primary'><i class='fa fa-plus'></i></button>
-              </div>
-            </div>
             <div class="form-group row" [ngClass]="{'has-error': (!polizaAC.valid && polizaAC.touched), 'has-success': (polizaAC.valid && polizaAC.touched)}">
               <label for="inputpolizaAC" class="col-sm-3 form-control-label">Póliza</label>
               <div class="col-sm-9">
