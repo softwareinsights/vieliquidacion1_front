@@ -270,6 +270,11 @@ export class ChofersTableComponent implements OnInit {
         this.toastrService.error(result.message);
       }
     }
+
+    verBitacora(chofers: ChofersInterface) {
+      this.router.navigate([`/pages/reportes/bitacora-pagos-chofer/${chofers.idchofer}`]);
+    }
+
     private getAll(): void {
       this.service
         .all()

@@ -156,6 +156,11 @@ export class PermisotaxisTableComponent implements OnInit {
         this.toastrService.error(result.message);
       }
     }
+
+    verBitacora(permisotaxis: PermisotaxisInterface) {
+      this.router.navigate([`/pages/reportes/bitacora-pagos-permiso/${permisotaxis.idpermisotaxi}`]);
+    }
+
     private getAll(): void {
       this.service
         .all()

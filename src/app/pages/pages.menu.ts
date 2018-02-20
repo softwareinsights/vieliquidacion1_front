@@ -1,7 +1,19 @@
 export const PAGES_MENU = [
 {
     path: 'pages',
-    children: [     
+    children: [  
+    {
+        path: 'reportes',
+        data: {
+        menu: {
+            title: 'general.menu.reportes',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+        }
+        }
+    },   
     {
         path: 'dashboard',
         data: {

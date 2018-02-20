@@ -27,7 +27,7 @@ import { PermisotaxisTableComponent } from './components/permisotaxis-table/perm
   ],
   declarations: [
     PermisotaxisComponent,
-    PermisotaxisTableComponent,
+    PermisotaxisTableComponent
   ],
   entryComponents: [
   ],

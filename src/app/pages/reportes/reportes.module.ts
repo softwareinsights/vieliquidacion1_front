@@ -1,3 +1,9 @@
+import { ChofersBitacoraService } from './components/chofer-bitacora/chofer.service';
+import { ChofersBitacoraComponent } from './components/chofer-bitacora/chofer-bitacora.component';
+import { PermisotaxisBitacoraService } from './components/permisotaxis-bitacora/permisotaxis.service';
+import { PermisotaxisBitacoraComponent } from './components/permisotaxis-bitacora/permisotaxis-bitacora.component';
+
+
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -28,11 +34,15 @@ import { ReportesTableComponent } from './components/reportes-table/reportes-tab
   declarations: [
     ReportesComponent,
     ReportesTableComponent,
+    PermisotaxisBitacoraComponent,
+    ChofersBitacoraComponent
   ],
   entryComponents: [
   ],
   providers: [
-    ReportesService
+    ReportesService,
+    PermisotaxisBitacoraService,
+    ChofersBitacoraService
   ]
 })
 export class ReportesModule {

@@ -46,6 +46,10 @@
                     <tbody>
                         <tr *ngFor='let item of mf.data;  let i = index'>
                             <td>
+                                
+                                
+                                <button title='Ver Bitácora de Pagos' (click)='verBitacora(item)' class='btn btn-sm btn-success'><i class='fa fa-list'></i> Ver Bitácora de Pagos</button>
+                                
                                 <button title='Agregar Asignar Vehículo a Chofer' (click)='insertPermisotaxiasignado(item)' class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Asignar Vehículo a Chofer</button>
                                 <button title='Ver Asignar Vehículo a Chofer' (click)='viewPermisotaxiasignado(item)' class='btn btn-sm btn-warning'><i class='fa fa-eye'></i> Asignar Vehículo a Chofer</button>
                                 <button title='Editar Registro' (click)='editModalShow(item)' class='btn btn-sm btn-info'><i class='fa fa-edit'></i></button>
