@@ -97,7 +97,10 @@ export const routes: Routes = [
     { path: 'permisotaxis/estado/:idestado', loadChildren: './permisotaxis/permisotaxis.module#PermisotaxisModule'},
     { path: 'permisotaxis/persona/:idpersona', loadChildren: './permisotaxis/permisotaxis.module#PermisotaxisModule'},
     { path: 'permisotaxis/vehiculo/:idvehiculo', loadChildren: './permisotaxis/permisotaxis.module#PermisotaxisModule'},
+    { path: 'liquidacions/permisotaxi/:idpermisotaxi', loadChildren: './liquidacions/liquidacions.module#LiquidacionsModule'},
     { path: 'permisotaxiasignados', loadChildren: './permisotaxiasignados/permisotaxiasignados.module#PermisotaxiasignadosModule',
+    
+
         canActivateChild: [AuthGuard] },
     { path: 'permisotaxiasignados/chofer/:idchofer', loadChildren: './permisotaxiasignados/permisotaxiasignados.module#PermisotaxiasignadosModule'},
     { path: 'permisotaxiasignados/estado/:idestado', loadChildren: './permisotaxiasignados/permisotaxiasignados.module#PermisotaxiasignadosModule'},

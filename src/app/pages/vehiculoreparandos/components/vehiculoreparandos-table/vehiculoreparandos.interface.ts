@@ -12,7 +12,7 @@ export interface VehiculoreparandosInterface {
    enviotaller_idenviotaller?: number;
    taller_idtaller?: number;
    mecanico_idmecanico?: number;
-   permisotaxiasignado_idpermisotaxiasignado?: number;
+   vehiculo_idvehiculo?: number;
    baja?: boolean;
    created_by?: number;
    created_at?: string;

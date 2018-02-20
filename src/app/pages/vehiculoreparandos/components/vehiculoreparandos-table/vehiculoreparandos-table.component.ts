@@ -53,9 +53,9 @@ export class VehiculoreparandosTableComponent implements OnInit {
           this.findByIdMecanico(idmecanico);
           this.backpage = true;
         }
-        if (params['idpermisotaxiasignado'] !== undefined) {
-          const idpermisotaxiasignado = +params['idpermisotaxiasignado'];
-          this.findByIdPermisotaxiasignado(idpermisotaxiasignado);
+        if (params['idvehiculo'] !== undefined) {
+          const idvehiculo = +params['idvehiculo'];
+          this.findByIdVehiculo(idvehiculo);
           this.backpage = true;
         }
         if (params['idtaller'] !== undefined) {
@@ -153,9 +153,9 @@ export class VehiculoreparandosTableComponent implements OnInit {
             error => console.log(error),
             () => console.log('Get all Items complete'))
     }
-    private findByIdPermisotaxiasignado(id: number): void {
+    private findByIdVehiculo(id: number): void {
       this.service
-        .findByIdPermisotaxiasignado(id)
+        .findByIdVehiculo(id)
         .subscribe(
             (data: VehiculoreparandosResponseInterface) => {
                 if (data.success) {

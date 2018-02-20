@@ -23,6 +23,7 @@ import { LiquidacionsInterface } from './../../../liquidacions/components/liquid
 import { LiquidacionsAddModalComponent } from './../../../liquidacions/components/liquidacions-table/liquidacions-add-modal/liquidacions-add-modal.component';
 import { VehiculoreparandosInterface } from './../../../vehiculoreparandos/components/vehiculoreparandos-table/vehiculoreparandos.interface';
 import { VehiculoreparandosAddModalComponent } from './../../../vehiculoreparandos/components/vehiculoreparandos-table/vehiculoreparandos-add-modal/vehiculoreparandos-add-modal.component';
+import { Vehiculo_vehiculo_idvehiculoFilterPipe, Permisotaxiasignado_permisotaxiasignado_idpermisotaxiasignadoFilterPipe } from '../../../../theme/pipes';
 
 
 @Component({
@@ -364,9 +365,9 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
     viewLiquidacion(permisotaxiasignados: PermisotaxiasignadosInterface) {
       this.router.navigate([`/pages/liquidacions/permisotaxiasignado/${permisotaxiasignados.idpermisotaxiasignado}`]);
     }
-    insertVehiculoreparando(permisotaxiasignados: PermisotaxiasignadosInterface) {
+    insertVehiculoreparando(vehiculos: VehiculosInterface) {
       const vehiculoreparando: VehiculoreparandosInterface = {
-        permisotaxiasignado_idpermisotaxiasignado: permisotaxiasignados.idpermisotaxiasignado
+        vehiculo_idvehiculo: vehiculos.idvehiculo
       }
       const disposable = this.dialogService.addDialog(VehiculoreparandosAddModalComponent, vehiculoreparando)
       .subscribe( data => {

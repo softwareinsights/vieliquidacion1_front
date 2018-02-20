@@ -36,7 +36,7 @@ export class PermisotaxisTableComponent implements OnInit {
           const idestado = +params['idestado'];
           this.findByIdEstado(idestado);
           this.backpage = true;
-        }
+        }        
         if (params['idpersona'] !== undefined) {
           const idpersona = +params['idpersona'];
           this.findByIdPersona(idpersona);
@@ -117,6 +117,16 @@ export class PermisotaxisTableComponent implements OnInit {
     }
     viewPermisotaxiasignado(permisotaxis: PermisotaxisInterface) {
       this.router.navigate([`/pages/permisotaxiasignados/permisotaxi/${permisotaxis.idpermisotaxi}`]);
+    }
+ liquidacionShowToast(result) {
+      if (result.success) {
+          this.toastrService.success(result.message);
+      } else {
+          this.toastrService.error(result.message);
+      }
+  }
+    viewBitacora(permisotaxis: PermisotaxisInterface) {
+      this.router.navigate([`/pages/liquidacions/permisotaxi/${permisotaxis.idpermisotaxi}`]);
     }
     addModalShow() {
       const disposable = this.dialogService.addDialog(PermisotaxisAddModalComponent)
